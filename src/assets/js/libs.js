@@ -69,12 +69,8 @@ export const sw = {
 			qs(".scripts-area").appendChild(script)
 			
 			script.onload = () => {
-				
 				let style = loadCSS("/vendors/swiper/swiper-bundle.min.css")
-				onloadCSS(style, () => {
-					//console.log('%c Swiper loaded', 'color: #666')
-					resolve(true)
-				})
+				onloadCSS(style, () => resolve(true))
 			}
 		})
 	},
