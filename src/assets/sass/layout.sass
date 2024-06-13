@@ -4,22 +4,29 @@ header
 	display: flex
 	align-items: center
 	gap: 1rem
+	@media(max-width:1024px)
+		gap:2rem
 	a.logo
 		img
 			margin: 10px 0
 	ul.lng
 		display: flex
 		gap: 1rem
+		@media(max-width:1024px)
+			flex-grow: 1
+			justify-content: flex-end
 	nav
 		flex-grow: 1
 		container-type: inline-size
+		@media(max-width:1024px)
+			display: none
 		ul
 			display: flex
 			gap: 10px
 			text-transform: uppercase
 			justify-content: flex-end
 			@container(width < 680px)
-				gap: 5px
+				gap: 0
 			li
 				font-weight: 300
 				&.active
@@ -39,12 +46,19 @@ footer
 		text-decoration: none
 		&:hover
 			text-decoration: underline
+		&.logo img
+			min-width: 164px
 	.columns
 		display: flex
 		gap: 4rem	
 		padding-top: 30px
 		padding-bottom: 2rem
 		font-weight: 300
+		@media(max-width:900px)
+			//flex-direction: column
+			flex-wrap: wrap
+			.column
+				max-width: 220px
 		.column
 			&.first
 				display: flex
@@ -92,12 +106,16 @@ body.article-page
 	article
 		display: flex
 		gap: 1rem
+		container-type: inline-size
+		@media(max-width:1024px)
+			flex-wrap: wrap
 		aside
 			background-color: #fff
 			border-radius: 12px
 			box-shadow:  0 1px 4px 0 rgba(33, 33, 38, 0.16)
 			padding: 20px
 			min-width: 340px
+			max-width: 340px
 			align-self: baseline
 			h3
 				font-weight: 500
