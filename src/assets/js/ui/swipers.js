@@ -4,6 +4,11 @@ export function swipers(){
 
 	// страница article (запись в блоге)
 	article_swiper()
+
+	// home page main swiper
+	home_page_hero_swiper()
+
+	 home_page_tours_swiper()
 }
 
 async function article_swiper(){
@@ -36,4 +41,47 @@ async function article_swiper(){
 
 
 	})
+}
+
+async function home_page_hero_swiper(){
+	const home_swiper = qs('.home.swiper')
+	if(!home_swiper) return
+	await sw.load()
+
+	let options = {
+		pagination: {
+			el: qs(".swiper-pagination", home_swiper),
+		},
+	}
+	new Swiper(home_swiper, options)	
+}
+
+async function home_page_tours_swiper() {
+	const tours_swiper = qs('.swiper-tours .swiper')
+	if(!tours_swiper) return
+
+	await sw.load()
+
+	let options = {
+		
+		navigation: {
+			nextEl: qs(".swiper-tours .next"),
+		},
+		breakpoints:{
+
+			0: {
+				slidesPerView: 1,
+				spaceBetween: 26,
+			},
+			480: {
+				slidesPerView: 2,
+				spaceBetween: 26,
+			},
+			1024: {
+				slidesPerView: 3,
+				spaceBetween: 26,
+			}
+		}
+	}
+	new Swiper(tours_swiper, options)
 }
