@@ -40,7 +40,7 @@
     "webpack-merge": "^4.2.2"
   },
   "dependencies": {
-  	"sass": "^1.60.0",
+    "sass": "^1.60.0",
     "@babel/plugin-proposal-optional-chaining": "^7.21.0"
   }
 }

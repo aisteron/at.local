@@ -5,19 +5,33 @@ header
 	align-items: center
 	gap: 1rem
 	@media(max-width:1024px)
-		gap:2rem
+		gap: 2rem
+	@media(max-width:480px)
+		gap: 2rem
+		padding: 0 1rem
+		a.logo img
+			width: 120px
+			height: 60px
+			margin: 0
 	a.logo
 		img
 			margin: 10px 0
 	ul.lng
 		display: flex
 		gap: 1rem
+		flex-grow: 1
+		justify-content: center
 		@media(max-width:1024px)
 			flex-grow: 1
 			justify-content: flex-end
+		@media(max-width:480px)
+			li
+				img
+					width: 20px
+
 	nav
-		flex-grow: 1
-		container-type: inline-size
+		//flex-grow: 1
+		//container-type: inline-size
 		@media(max-width:1024px)
 			display: none
 		ul
@@ -50,7 +64,7 @@ footer
 			min-width: 164px
 	.columns
 		display: flex
-		gap: 4rem	
+		gap: 4rem
 		padding-top: 30px
 		padding-bottom: 2rem
 		font-weight: 300
@@ -75,7 +89,7 @@ footer
 				display: flex
 				flex-direction: column
 				gap: 14px
-				
+
 			&.cred
 				.head
 					display: inline-block
@@ -99,7 +113,7 @@ footer
 								grid-row: 1
 							&:last-of-type
 								grid-column: 1
-								grid-row: 2					
+								grid-row: 2
 body.article-page
 	article
 		display: flex
@@ -110,7 +124,7 @@ body.article-page
 		aside
 			background-color: #fff
 			border-radius: 12px
-			box-shadow:  0 1px 4px 0 rgba(33, 33, 38, 0.16)
+			box-shadow: 0 1px 4px 0 rgba(33, 33, 38, 0.16)
 			padding: 20px
 			min-width: 340px
 			max-width: 340px
@@ -146,7 +160,7 @@ body.article-page
 		.content
 			background-color: #fff
 			border-radius: 12px
-			box-shadow:  0 1px 4px 0 rgba(33, 33, 38, 0.16)
+			box-shadow: 0 1px 4px 0 rgba(33, 33, 38, 0.16)
 			padding: 30px 33px
 			overflow: hidden
 			@media(max-width:480px)
@@ -156,7 +170,7 @@ body.article-page
 				h1
 					font-size: 1.5rem
 				iframe
-					height: 250px	
+					height: 250px
 			h1
 				margin: 0
 			iframe
@@ -237,7 +251,7 @@ body.about-page
 		.box
 			box-shadow: 0 1px 4px 0 rgba(33, 33, 38, 0.16)
 			border-radius: 12px
-			background-color: #fff	
+			background-color: #fff
 
 			padding: 30px 33px
 			align-self: flex-start
@@ -261,7 +275,7 @@ body.about-page
 
 			&.team
 				grid-column: 2
-				grid-row: 2	
+				grid-row: 2
 				h2
 					color: #2C3959
 				hr
@@ -292,10 +306,17 @@ body.about-page
 						span.role
 							color: #333333
 							font-size: 14px
-							line-height: 140%	
+							line-height: 140%
 body.index-page
+	.home.swiper
+		.swiper-slide img
+			@media(max-width:480px)
+				height: 250px
+				object-fit: cover
 	article
 		@include pw
+		@media(max-width:480px)
+			padding-top: 0
 		.box
 			box-shadow: 0 1px 4px 0 rgba(33, 33, 38, 0.16)
 			border-radius: 12px
@@ -319,7 +340,7 @@ body.index-page
 				margin: 1em 0
 				padding: 0
 			h2
-				margin: 0	
+				margin: 0
 			p
 				font-size: 14px
 				color: #333
@@ -346,5 +367,4 @@ body.index-page
 						height: auto
 			.gallery4
 				img
-					width: calc(50% - 10px)		
-
+					width: calc(50% - 10px)
