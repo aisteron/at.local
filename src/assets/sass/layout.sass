@@ -313,6 +313,26 @@ body.index-page
 			@media(max-width:480px)
 				height: 250px
 				object-fit: cover
+		.pagination-wrapper
+			position: absolute
+			bottom: 10px
+			left: 0
+			right: 0
+			margin-left: auto
+			margin-right: auto
+			height: 20px
+			display: flex
+			align-items: center
+			justify-content: center
+		.swiper-pagination
+			padding-left: 4px
+			padding-right: 4px
+			padding-bottom: 4px
+			width: auto
+			border-radius: 50px
+			background: rgba(217, 217, 217, 0.2)
+			backdrop-filter: blur(4px)
+			position: relative
 	article
 		@include pw
 		@media(max-width:480px)
@@ -368,3 +388,167 @@ body.index-page
 			.gallery4
 				img
 					width: calc(50% - 10px)
+body.blog-page
+	article
+		@include pw
+		h1
+			font-weight: 600
+			font-size: 48px
+			margin: 30px 0
+			@media(max-width:480px)
+				font-size: 1.5rem
+		.grid
+			@media(max-width:480px)
+				margin: 0 -1rem
+			.grid-item
+				width: 273px
+				margin-bottom: 1rem
+				background: #fff
+				position: relative
+				min-height: 3rem
+				border-radius: 12px
+				box-shadow: 0 1px 4px 0 rgba(33, 33, 38, 0.16)
+				transition: all 0.3s cubic-bezier(.25,.8,.25,1)
+				@media(max-width:480px)
+					box-shadow: none
+					border-radius: 0
+					width: 100%
+					margin-bottom: 0
+					border-bottom: 1px solid #DDDDDD
+					display: flex
+					align-items: center
+					gap: 1rem
+					padding: 1rem
+					img
+						border-radius: 4px
+						width: 112px
+						height: 84px
+						object-fit: cover
+						align-self: flex-start
+					.dsc
+						padding: 0
+				&:hover
+					box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)
+
+				img
+					border-top-left-radius: 11px
+					border-top-right-radius: 11px
+				.dsc
+					padding: 1.5rem
+					a
+						color: $green
+						font-weight: 500
+						font-size: 1rem
+						text-decoration: none
+						display: block
+						margin-bottom: 10px
+						&:after
+							content: ''
+							position: absolute
+							inset: 0
+					span
+						font-size: 14px
+						line-height: 130%
+						color: #4E4E4E
+			.grid-item--width2
+				width: 562px
+				@media(max-width: 612px)
+					width: 273px
+				@media(max-width: 480px)
+					width: 100% !important
+body.tours-page
+	article
+		@include pw
+		h1
+			font-weight: 600
+			font-size: 48px
+			margin: 30px 0
+			@media(max-width:480px)
+				font-size: 1.5rem
+		ul
+			display: flex
+			gap: 1rem
+			flex-wrap: wrap
+			//justify-content: space-between
+			li
+				background-color: #fff
+				border-radius: 12px
+				box-shadow: 0 1px 4px 0 rgba(33, 33, 38, 0.16)
+				transition: all 0.3s cubic-bezier(.25,.8,.25,1)
+				position: relative
+				width: 320px
+				.label
+					position: absolute
+					background-color: #ccc
+					border-top-right-radius: 6px
+					border-bottom-right-radius: 6px
+					top: 17px
+					left: -5px
+					padding: 7px 13px
+					width: 117px
+					font-size: 15px
+					font-weight: 500
+					color: #fff
+					text-align: center
+					&.green
+						background-color: #32A95E
+					&.yellow
+						background-color: #EAB600
+					&.red
+						background-color: #F84565
+					& + img
+						border-top-right-radius: 11px
+						border-top-left-radius: 11px
+				.dsc
+					padding: 1rem
+					.country
+						display: block
+						font-weight: 300
+						font-size: 14px
+						color: #4E4E4E
+						margin-bottom: 10px
+						display: block
+					a
+						font-size: 1rem
+						font-weight: 500
+						text-decoration: none
+						color: #000
+						display: block
+						margin-bottom: 12px
+						white-space: nowrap
+						overflow: hidden
+						text-overflow: ellipsis
+					.price
+						display: flex
+						align-items: center
+						gap: 7px
+						margin-bottom: 12px
+						.green
+							color: $green
+							font-weight: 500
+						.duration
+							font-weight: 300
+							font-size: 14px
+							color: #4E4E4E
+							position: relative
+							&::before
+								content: "/"
+								margin-right: 10px
+					.dates
+						display: flex
+						align-items: center
+						gap: 12px
+						.actual
+							font-size: 14px
+							font-weight: 400
+							color: #767676
+							border: 1px solid #C5C5C5
+							border-radius: 6px
+							padding: 6px 14px
+						.plan
+							background-color: #E2E4EC
+							border-radius: 6px
+							color: #7C7C7C
+							font-size: 14px
+							font-weight: normal
+							padding: 6px 16px
