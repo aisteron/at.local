@@ -457,6 +457,66 @@ body.blog-page
 				@media(max-width: 480px)
 					width: 100% !important
 body.tours-page
+	#filter
+		@include pw
+		background-color: #fff
+		display: flex
+		gap: 2rem
+		flex-wrap: wrap
+		@media(max-width:480px)
+			padding: 0
+			gap: 0
+		.group
+			padding: 1rem
+			padding-top: 20px
+			&:first-child
+				padding-right: 3rem
+			&:not(:last-child)
+				border-right: 1px solid #E4E4E4
+				@media(max-width:480px)
+					border: none
+			.head
+				font-size: 1rem
+				font-weight: 500
+				margin-bottom: 1rem
+				display: block
+			ul
+				columns: 2
+				a
+					color: #4E4E4E
+					text-decoration: none
+					&:hover
+						color: $green
+				li
+					//line-height: 180%
+					&:not(:last-child)
+						margin-bottom: 10px
+					label
+						display: flex
+						align-items: center
+						gap: 7px
+						input
+							display: none
+							&:checked
+								& ~ span.s
+									&:after
+										content: ''
+										width: 7px
+										height: 7px
+										position: absolute
+										top: 4px
+										left: 4px
+										background-color: $green
+										border-radius: 2px
+								& ~ a
+									color: $green
+									text-decoration: underline		
+						span.s
+							width: 17px
+							height: 17px
+							border: 1px solid $green
+							border-radius: 4px
+							position: relative
 	article
 		@include pw
 		h1
@@ -465,11 +525,12 @@ body.tours-page
 			margin: 30px 0
 			@media(max-width:480px)
 				font-size: 1.5rem
-		ul
+		ul.tlist
 			display: flex
 			gap: 1rem
 			flex-wrap: wrap
-			//justify-content: space-between
+			@media(max-width:480px)
+				margin-right: -1rem
 			li
 				background-color: #fff
 				border-radius: 12px
@@ -552,3 +613,220 @@ body.tours-page
 							font-size: 14px
 							font-weight: normal
 							padding: 6px 16px
+				@media(max-width:480px) // li
+					width: 100%
+					box-shadow: none
+					display: flex
+					gap: 1rem
+					align-items: center
+					border-bottom-right-radius: 0
+					border-top-right-radius: 0
+					.dsc
+						padding: 0
+						a
+							white-space: normal
+							line-height: 105%
+					img.hero
+						width: 130px
+						height: 153px
+						object-fit: cover
+						border-bottom-left-radius: 6px
+						border-top-right-radius: 0
+body.reviews-page
+	article
+		@include pw
+		h1
+			font-weight: 600
+			font-size: 48px
+			margin: 30px 0
+			@media(max-width:480px)
+				font-size: 1.5rem
+		.select-tour
+			cursor: pointer
+			position: relative
+			display: inline-block
+			&.open
+				&:hover
+					.head
+						box-shadow: none
+				ul.body
+					display: flex
+			.head
+				box-shadow: 0 1px 4px 0 rgba(33, 33, 38, 0.16)
+				transition: all 0.3s cubic-bezier(.25,.8,.25,1)
+				background: #fff
+				display: flex
+				align-items: center
+				width: 322px
+				padding: 1rem 1.5rem
+				color: #636363
+				justify-content: space-between
+				border-radius: 6px
+				&:hover
+					box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)
+			ul.body
+				display: none
+				flex-direction: column
+				gap: 10px
+				background-color: #fff
+				box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)
+				width: 322px
+				position: absolute
+				top: 52px
+				left: 0
+				padding: 10px 0
+				height: 210px
+				overflow-y: auto
+				li
+					padding: 10px 20px
+					cursor: pointer
+					&:hover
+						color: $green
+		section.cnt
+			display: flex
+			gap: 20px
+		ul.reviews-list
+			li
+				box-shadow: 0 1px 4px 0 rgba(33, 33, 38, 0.16)
+				background: #fff
+				border-radius: 12px
+				padding: 33px 38px
+				display: flex
+				gap: 34px
+				.ava
+					display: flex
+					flex-direction: column
+					color: #4E4E4E
+					min-width: 75px
+					align-items: center
+					text-align: center
+					.name
+						font-weight: 500
+						margin-top: 13px
+						margin-bottom: 2px
+					.country
+						font-size: 14px
+				.body
+					.head
+						font-size: 1rem
+						font-weight: 600
+						display: flex
+						justify-content: space-between
+						.date
+							color: $green
+					.cnt
+						font-size: 14px
+						color: #4E4E4E
+						line-height: 140%		
+							
+				.gallery
+					display: flex
+					gap: 24px
+					flex-wrap: wrap
+					img
+						border-radius: 6px
+		form#review
+			box-shadow: 0 1px 4px 0 rgba(33, 33, 38, 0.16)
+			background: #fff
+			border-radius: 12px
+			width: 322px
+			min-width: 322px
+			padding: 1rem 28px
+			>.head
+				text-align: center
+				font-weight: 600
+				border-bottom: 1px solid #E4E4E4
+				padding-bottom: 20px
+				margin-bottom: 22px
+			ul.avlist
+				display: flex
+				justify-content: space-between
+				align-items: center
+				li
+					label
+						cursor: pointer
+						display: flex
+						flex-direction: column
+						gap: 10px
+						justify-content: center	
+			.inputs
+				display: flex
+				flex-direction: column
+				gap: 14px
+				margin-bottom: 20px
+				input
+					border: none
+					background-color: #F0F0F0
+					font-family: 'Inter'
+					padding: 14px 17px
+					border-radius: 6px
+					font-weight: 500
+					font-size: 1rem
+					&::placeholder
+						font-family: inherit
+						color: #8A8A8A
+					&:focus
+						outline: none
+						background-color: darken(#F0F0F0, 5%)
+			.tas
+				display: flex
+				flex-direction: column
+				gap: 20px
+				textarea
+					resize: none
+					font-family: 'Inter'
+					font-weight: 500
+					height: 134px
+					padding: 1rem
+					font-size: 1rem
+					border-radius: 6px
+					background-color: #F5F5F5
+					border: none
+					&:focus
+						outline: none
+						background-color: darken(#F5F5F5, 5%)
+
+			.files
+				margin-top: 1.5rem
+				.head
+					color: #4E4E4E
+					font-weight: 500
+					display: block
+					margin-bottom: 10px
+				.comment
+					display: block
+					font-size: 14px
+					color: #4E4E4E
+					margin-bottom: 5px
+				label
+					display: block
+					margin: 1rem 0
+					input[type="file"]
+						display: none
+					span
+						display: inline-block
+						font-size: 14px
+						background-color: #F5F5F5	
+						padding: 6px 20px
+						cursor: pointer
+						border-radius: 6px
+						&:hover
+							background-color: darken(#f5f5f5, 5%)
+				.gallery
+					display: flex
+					gap: 8px
+					img
+						border-radius: 6px
+			button[type="submit"]
+				border: none
+				background-color: $green
+				color: #fff
+				font-size: 18px
+				font-weight: 500
+				padding: 14px 0
+				width: 100%
+				border-radius: 12px
+				cursor: pointer
+				margin-bottom: 10px
+				&:focus, &:active, &:hover
+					background-color: darken($green, 5%)

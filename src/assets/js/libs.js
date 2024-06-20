@@ -1,8 +1,9 @@
 import "regenerator-runtime/runtime.js";
-
+Node.prototype.listen = Node.prototype.addEventListener;
 export let doc=document,
     qsa=(s,o=doc)=>o?.querySelectorAll(s),
     qs=(s,o=doc)=>o?.querySelector(s);
+
 
 export function loadCSS(n,e,o,d){"use strict";var t=window.document.createElement("link"),i=e||window.document.getElementsByTagName("script")[0],l=window.document.styleSheets;return t.rel="stylesheet",t.href=n,t.media="only x",d&&(t.onload=d),i.parentNode.insertBefore(t,i),t.onloadcssdefined=function(n){for(var e,o=0;o<l.length;o++)l[o].href&&l[o].href===t.href&&(e=!0);e?n():setTimeout(function(){t.onloadcssdefined(n)})},t.onloadcssdefined(function(){t.media=o||"all"}),t}
 
@@ -86,4 +87,32 @@ export function runMetrika(number){
 	(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 	ym(number, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true });
 
+}
+
+export const fancy = {
+	async load(){
+		return new Promise((resolve) => {
+
+			if(!qs('.reviews-list li')) resolve(false)
+
+			if(qs('[fancy]')) resolve(true)
+
+			let script = document.createElement("script")
+			script.src = "/vendors/fancy/fancybox.umd.js"
+			script.setAttribute('fancy', '')
+			qs(".scripts-area").appendChild(script)
+
+
+			script.onload = () => {
+				let style = loadCSS("/vendors/fancy/fancybox.css")
+				onloadCSS(style, _ => resolve(true))
+			}
+
+		})
+	},
+	init(){
+		Fancybox.bind("[data-fancybox]", {
+			// Your custom options
+		});
+	}
 }
