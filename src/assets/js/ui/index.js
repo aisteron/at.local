@@ -13,6 +13,8 @@ export async function Ui(){
 
 	// выпадающий список туров на странице отзывов
 	reviews_page_dropdown_list()
+	// разворачивание комментария
+	reviews_page_collapse_review()
 
 	
 }
@@ -71,4 +73,14 @@ function reviews_page_dropdown_list(){
 	
 	select.listen("click", () => select.classList.toggle('open'))
 	
+}
+function reviews_page_collapse_review(){
+	const buttons = qsa('.reviews-list button.collapse')
+	if(!buttons) return
+
+	buttons.forEach(button => {
+		button.listen("click", e => {
+			e.target.closest('li').classList.toggle('closed')
+		})
+	})
 }
