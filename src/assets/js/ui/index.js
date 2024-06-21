@@ -16,6 +16,9 @@ export async function Ui(){
 	// разворачивание комментария
 	reviews_page_collapse_review()
 
+	// страница тура. выпадающий список с датами у формы
+	tour_page_form_dropdown()
+
 	
 }
 
@@ -83,4 +86,9 @@ function reviews_page_collapse_review(){
 			e.target.closest('li').classList.toggle('closed')
 		})
 	})
+}
+
+function tour_page_form_dropdown() {
+	let dd = qs('.tour-page form .date .select .head')
+	dd.listen("click", e => dd.closest('.select').classList.toggle('open'))
 }

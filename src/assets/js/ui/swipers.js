@@ -7,8 +7,10 @@ export function swipers(){
 
 	// home page main swiper
 	home_page_hero_swiper()
+	home_page_tours_swiper()
 
-	 home_page_tours_swiper()
+	// страница тура. эксперт
+	tour_page_expert()
 }
 
 async function article_swiper(){
@@ -84,4 +86,20 @@ async function home_page_tours_swiper() {
 		}
 	}
 	new Swiper(tours_swiper, options)
+}
+
+async function tour_page_expert(){
+	const swiper = qs('.tour-page .swiper.expert')
+	if(!swiper) return
+
+	await sw.load()
+
+	const options = {
+		navigation: {
+			nextEl: qs('.next', swiper.closest('.left')),
+			prevEl: qs('.prev', swiper.closest('.left')),
+		},
+	}
+
+	new Swiper(swiper,options)
 }
