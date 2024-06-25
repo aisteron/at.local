@@ -965,7 +965,7 @@ body.tour-page
 			display: flex
 			gap: 1rem	
 			#content
-				.cnt
+				>.cnt
 					border-radius: 12px
 					box-shadow: 0 1px 4px 0 rgba(33, 33, 38, 0.16)
 					background: #fff
@@ -1247,4 +1247,287 @@ body.tour-page
 								align-items: center
 								justify-content: center
 								gap: 10px
+		section#program
+			>.head
+				margin-bottom: 1rem
+				h3
+					font-weight: 600
+					color: $green
+					font-size: 1.5rem
+				.row
+					display: flex
+					align-items: center
+					justify-content: space-between
+					.email, .expand
+						display: flex
+						align-items: center
+						gap: 1rem
+						cursor: pointer
+
+			>.body
+				ul
+					li
+						box-shadow: 0 1px 4px 0 rgba(33, 33, 38, 0.16)
+						background: #fff
+						border-radius: 12px
+						&:not(:last-child)
+							margin-bottom: 1rem
+						&.open
+							>.head
+								border-bottom: 1px solid #eee
+								svg
+									transform: rotate(180deg)
+								img
+									border-bottom-right-radius: 0	
+							>.body
+								display: block	
+						.head
+							display: flex
+							align-items: center
+							gap: 28px
+							cursor: pointer
+							&:hover
+								background-color: #fafafa
+								border-top-left-radius: 12px	
+									
+							.name
+								padding-left: 33px
+								flex-grow: 1
+								font-size: 1.5rem
+								font-weight: 600
+							img
+								border-top-right-radius: 12px
+								border-bottom-right-radius: 12px
+						.body
+							display: none
+							padding: 1.5rem 2rem
+							font-size: 14px
+							line-height: 140%		
+							.gallery
+								display: flex
+								gap: 1rem
+								flex-wrap: wrap
+								img
+									border-radius: 6px
+		section#dates
+			.year
+				box-shadow: 0 1px 4px 0 rgba(33, 33, 38, 0.16)
+				background: #fff
+				border-radius: 12px
+				padding: 1.5rem 2rem
+				&:not(:last-child)
+					margin-bottom: 1rem
+				>.head
+					padding-bottom: 28px
+					margin-bottom: 28px
+					border-bottom: 1px solid #E4E4E4
+					h3
+						font-size: 1.5rem
+						color: $green
+						margin-top: 0
+					.comment
+						font-size: 1rem
+						color: #4E4E4E
+						font-weight: 500
+				ul.body
+					>li
+						display: flex
+						align-items: center
+						gap: 53px
+						&:not(:last-child)
+							padding-bottom: 28px
+							margin-bottom: 28px
+							border-bottom: 1px solid #E4E4E4
+						.month
+							font-weight: 600
+							font-size: 20px
+							text-transform: uppercase
+						ul
+							columns: 3
+							gap: 2rem
+							li
+								line-height: 160%
+								color: #4E4E4E
+		section#inclusion
+			display: flex
+			flex-direction: column
+			gap: 1rem
+			.included, .not-included
+				box-shadow: 0 1px 4px 0 rgba(33, 33, 38, 0.16)
+				background: #fff
+				border-radius: 12px	
+				padding: 37px 35px
+				h3
+					font-size: 1.5rem
+					font-weight: 600
+					margin-top: 0
+				ul
+					padding-left: 2rem	
+					li
+						font-size: 14px
+						color: #4E4E4E
+						position: relative
+						&:not(:last-child)
+							margin-bottom: 1rem
+						&:before
+							position: absolute
+							left: -2rem
+							top: -3px
+			.included
+				h3
+					color: $green
+				ul
+					li
+						&:before
+							content: url(/assets/img/pages/tour/inclusion/green_circle.svg)
+
+			.not-included
+				h3
+					color: #FF0303
+				ul
+					li
+						&:before
+							content: url(/assets/img/pages/tour/inclusion/red_cross.svg)
+		section#hotels
+			h3
+				color: $green
+				font-size: 1.5rem
+				font-weight: 600
+			ul
+				li
+					box-shadow: 0 1px 4px 0 rgba(33, 33, 38, 0.16)
+					background: #fff
+					border-radius: 12px
+					&:not(:last-child)
+						margin-bottom: 1rem
+					>.head
+						display: flex
+						align-items: center
+						gap: 22px
+						cursor: pointer
+						&:hover
+							background-color: #fafafa
+							border-radius: 12px
+						img
+							border-top-right-radius: 6px
+							border-bottom-right-radius: 6px
+						.name
+							flex-grow: 1
+							display: flex
+							flex-direction: column
+							gap: 5px
+							padding-left: 2rem
+							>span
+								font-weight: 600
+								font-size: 1rem
+							span.dsc
+								font-size: 14px
+								color: #4E4E4E
+								font-weight: normal
+					>.body
+						display: none			
+		section#reviews
+			h3
+				color: $green
+				font-size: 1.5rem
+				font-weight: 600
+			ul
+				box-shadow: 0 1px 4px 0 rgba(33, 33, 38, 0.16)
+				background: #fff
+				border-radius: 12px
+				display: flex
+				flex-direction: column
+				gap: 2rem
+				padding: 38px 30px
+
+				li
+					display: flex
+					justify-content: space-between
+					gap: 36px
+					.ava
+						display: flex
+						flex-direction: column
+						justify-content: center
+						align-items: center
+						text-align: center
+						gap: 13px
+						width: 69px
+						max-width: 69px
+						align-self: baseline
+						img
+							min-width: 69px
+							border-radius: 100%
+					.cnt
+						font-size: 14px
+						color: #4E4E4E
+						line-height: 140%
+						>:first-child
+							margin-top: 0
+		section#faq
+			h3
+				color: $green
+				font-size: 1.5rem
+				font-weight: 600
+			ul
+				li
+					box-shadow: 0 1px 4px 0 rgba(33, 33, 38, 0.16)
+					background: #fff
+					border-radius: 12px
+					&:not(:last-child)
+						margin-bottom: 1rem
+					&.open
+						.head
+							padding-bottom: 1rem
+						.body
+							display: block
+					.head
+						display: flex
+						justify-content: space-between
+						align-items: center
+						font-size: 1.5rem
+						font-weight: 600
+						padding: 38px 30px
+						border-bottom: 1px solid #E4E4E4
+						svg
+							min-width: 12px
+					.body
+						display: none
+						padding: 1rem 30px 
+						>:first-child
+							margin-top: 0
+		section#gallery
+			h3
+				color: $green
+				font-size: 1.5rem
+				font-weight: 600
+			.list
+				display: flex
+				gap: 1rem
+				flex-wrap: wrap
+				img
+					border-radius: 6px
+				a
+					&:last-child
+						position: relative
+						&:before
+							content: attr(data-count)
+							position: absolute
+							z-index: 2
+							color: #fff
+							font-size: 48px
+							font-weight: 600
+							top: 50%
+							left: 50%
+							transform: translate(-50%, -50%)
+
+						&:after
+							content: ''
+							background-color: #0000008f
+							position: absolute
+							inset: 0
+							border-radius: 6px
+							
+							
+					
+
 

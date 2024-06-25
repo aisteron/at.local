@@ -113,6 +113,7 @@ export const fancy = {
 	init(){
 		Fancybox.bind("[data-fancybox]", {
 			// Your custom options
+			hideScrollbar: false
 		});
 	}
 }
