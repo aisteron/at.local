@@ -888,7 +888,7 @@ body.tour-page
 			.share
 				display: flex
 				align-items: center
-				gap: 1rem		
+				gap: 1rem
 		.top-gallery
 			display: grid
 			grid-template-columns: 516px 307px 307px
@@ -903,14 +903,14 @@ body.tour-page
 				&:nth-of-type(2)
 					grid-column: 2
 					grid-row: 1
-				&:nth-of-type(3)	
+				&:nth-of-type(3)
 					grid-column: 2
 					grid-row: 2
 				&:nth-of-type(4)
 					grid-column: 3
 					grid-row: 1
 					img
-						border-top-right-radius: 40px		
+						border-top-right-radius: 40px
 				&:nth-of-type(5)
 					grid-column: 3
 					grid-row: 2
@@ -932,10 +932,13 @@ body.tour-page
 						left: 50%
 						transform: translate(-50%, -50%)
 					img
-						border-bottom-right-radius: 40px		
+						border-bottom-right-radius: 40px
 		ul.floating-anchors
 			display: flex
 			justify-content: space-between
+			position: sticky
+			top: 1rem
+			z-index: 10
 			li
 				&.all
 					position: relative
@@ -963,7 +966,7 @@ body.tour-page
 						background-color: #eee
 		section#cnt
 			display: flex
-			gap: 1rem	
+			gap: 1rem
 			#content
 				>.cnt
 					border-radius: 12px
@@ -1032,7 +1035,7 @@ body.tour-page
 									display: block
 									margin-bottom: 21px
 								img
-									margin: 0 auto	
+									margin: 0 auto
 						.arrows
 							display: flex
 							gap: 164px
@@ -1044,7 +1047,7 @@ body.tour-page
 								cursor: pointer
 							.prev
 								transform: rotate(180deg)
-							.swiper-button-disabled	
+							.swiper-button-disabled
 								opacity: 0.5
 					img.group
 						border-top-right-radius: 12px
@@ -1057,6 +1060,8 @@ body.tour-page
 					border-radius: 12px
 					box-shadow: 0 1px 4px 0 rgba(33, 33, 38, 0.16)
 					background: #fff
+					position: sticky
+					top: 4rem
 					>.header
 						display: flex
 						justify-content: space-between
@@ -1074,7 +1079,7 @@ body.tour-page
 							font-size: 15px
 							background-color: #f84565
 							border-radius: 8px
-							padding: 7px 12px	
+							padding: 7px 12px
 					>.date
 						>.header
 							font-weight: 600
@@ -1084,7 +1089,7 @@ body.tour-page
 							margin-bottom: 20px
 							margin-top: 1rem
 						.wrap
-							border: 1px solid #C5C5C5	
+							border: 1px solid #C5C5C5
 							border-radius: 8px
 							padding: 1rem
 							padding-bottom: 10px
@@ -1111,7 +1116,7 @@ body.tour-page
 										background-color: transparent
 									&::-webkit-scrollbar-thumb
 										background-color: #D9D9D9
-										border-radius: 4px	
+										border-radius: 4px
 									li
 										padding: 10px 1rem
 										padding-bottom: 5px
@@ -1145,7 +1150,7 @@ body.tour-page
 										text-align: center
 										width: 30px
 										border: none
-										font-family: "Inter"		
+										font-family: "Inter"
 										font-weight: 600
 										height: 36px
 										font-size: 1rem
@@ -1186,9 +1191,9 @@ body.tour-page
 						li
 							display: flex
 							align-items: center
-							gap: 1rem	
+							gap: 1rem
 							justify-content: center
-							&:not(:last-child)	
+							&:not(:last-child)
 								margin-bottom: 12px
 					button[type="submit"]
 						width: 100%
@@ -1205,12 +1210,14 @@ body.tour-page
 						&:hover
 							background-color: darken($green,5%)
 						&:focus
-							outline: none	
+							outline: none
 				.questions
 					border-radius: 12px
 					box-shadow: 0 1px 4px 0 rgba(33, 33, 38, 0.16)
 					background: #fff
 					padding: 2rem 1.5rem
+					position: sticky
+					top: 520px
 					>.head
 						font-weight: 600
 						display: block
@@ -1278,9 +1285,9 @@ body.tour-page
 								svg
 									transform: rotate(180deg)
 								img
-									border-bottom-right-radius: 0	
+									border-bottom-right-radius: 0
 							>.body
-								display: block	
+								display: block
 						.head
 							display: flex
 							align-items: center
@@ -1288,8 +1295,8 @@ body.tour-page
 							cursor: pointer
 							&:hover
 								background-color: #fafafa
-								border-top-left-radius: 12px	
-									
+								border-top-left-radius: 12px
+
 							.name
 								padding-left: 33px
 								flex-grow: 1
@@ -1302,7 +1309,7 @@ body.tour-page
 							display: none
 							padding: 1.5rem 2rem
 							font-size: 14px
-							line-height: 140%		
+							line-height: 140%
 							.gallery
 								display: flex
 								gap: 1rem
@@ -1355,14 +1362,14 @@ body.tour-page
 			.included, .not-included
 				box-shadow: 0 1px 4px 0 rgba(33, 33, 38, 0.16)
 				background: #fff
-				border-radius: 12px	
+				border-radius: 12px
 				padding: 37px 35px
 				h3
 					font-size: 1.5rem
 					font-weight: 600
 					margin-top: 0
 				ul
-					padding-left: 2rem	
+					padding-left: 2rem
 					li
 						font-size: 14px
 						color: #4E4E4E
@@ -1425,7 +1432,7 @@ body.tour-page
 								color: #4E4E4E
 								font-weight: normal
 					>.body
-						display: none			
+						display: none
 		section#reviews
 			h3
 				color: $green
@@ -1492,7 +1499,7 @@ body.tour-page
 							min-width: 12px
 					.body
 						display: none
-						padding: 1rem 30px 
+						padding: 1rem 30px
 						>:first-child
 							margin-top: 0
 		section#gallery
@@ -1526,8 +1533,45 @@ body.tour-page
 							position: absolute
 							inset: 0
 							border-radius: 6px
-							
-							
-					
-
-
+		section#why
+			width: 1100px
+			h3
+				color: $green
+				font-size: 1.5rem
+				font-weight: 600
+			.body
+				box-shadow: 0 1px 4px 0 rgba(33, 33, 38, 0.16)
+				background: #fff
+				border-radius: 12px
+				img.bg
+					border-top-right-radius: 12px
+					border-top-left-radius: 12px
+				ul
+					padding: 2rem
+					padding-left: 3rem
+					li
+						position: relative
+						font-size: 14px
+						color: #4E4E4E
+						line-height: 140%
+						&:not(:last-child)
+							margin-bottom: 1rem
+						&:before
+							content: url(http://localhost:7071/assets/img/pages/tour/inclusion/green_circle.svg)
+							position: absolute
+							left: -2.2rem
+		section#tg
+			h3
+				color: $green
+				font-size: 1.5rem
+				font-weight: 600
+			.body
+				box-shadow: 0 1px 4px 0 rgba(33, 33, 38, 0.16)
+				background: #fff
+				border-radius: 12px
+				display: flex
+				align-items: center
+				justify-content: space-between
+				font-size: 1.5rem
+				font-weight: 600
+				padding: 2rem
