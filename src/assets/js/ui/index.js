@@ -18,6 +18,8 @@ export async function Ui(){
 
 	// страница тура. выпадающий список с датами у формы
 	tour_page_form_dropdown()
+	
+	tour_page_transfer_elements()
 
 	
 }
@@ -91,4 +93,33 @@ function reviews_page_collapse_review(){
 function tour_page_form_dropdown() {
 	let dd = qs('.tour-page form .date .select .head')
 	dd.listen("click", e => dd.closest('.select').classList.toggle('open'))
+}
+
+function tour_page_transfer_elements(){
+	let script = document.createElement('script')
+	script.src = "/vendors/transfer-elements.min.js"
+	qs('.scripts-area').appendChild(script)
+
+	script.onload = () => {
+
+		new TransferElements(
+			{
+				sourceElement: qs('aside form'),
+				breakpoints: {
+					1010: {
+						targetElement: qs("#content")
+					}
+				}
+			},
+			{
+				sourceElement: qs('aside .questions'),
+				breakpoints: {
+					1010: {
+						targetElement: qs("#content"),
+						targetPosition: 5
+					}
+				}
+			}
+		);
+	}
 }

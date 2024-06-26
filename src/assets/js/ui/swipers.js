@@ -11,6 +11,9 @@ export function swipers(){
 
 	// страница тура. эксперт
 	tour_page_expert()
+
+	// home page mobile swiper
+	home_page_mobile_gallery()
 }
 
 async function article_swiper(){
@@ -102,4 +105,12 @@ async function tour_page_expert(){
 	}
 
 	new Swiper(swiper,options)
+}
+
+async function home_page_mobile_gallery(){
+	const swiper = qs("#mobile_gallery .swiper")
+	if(!swiper) return
+
+	await sw.load()
+	new Swiper(swiper, {});
 }
