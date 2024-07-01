@@ -1,0 +1,97 @@
+dialog#tourOrderPopup()
+	.head
+		span Заявка
+		button.close
+			<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M2 20L0 18L8 10L0 2L2 0L10 8L18 0L20 2L12 10L20 18L18 20L10 12L2 20Z" fill="#32A95E" />
+			</svg>
+	form.body(method="dialog")
+		span.title Киты, вулканы, медведи
+		.columns
+			.column.first
+				.select
+					.head
+						span.date
+							span 19.02.2024 - 27.02.2024
+							<svg width="12" height="9" viewBox="0 0 12 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M6 8.3751L0 2.3751L1.4 0.975098L6 5.5751L10.6 0.975098L12 2.3751L6 8.3751Z" fill="#1C1B1F" />
+							</svg>
+						.dsc
+							span.seats 5 мест
+							span.price 139 000 ₽
+					ul.body
+						li
+							span 19.02.2024 - 27.02.2024
+							.dsc
+								span.seats 5 мест
+								span.price 139 000 ₽
+						li.disabled
+							span 19.02.2024 - 27.02.2024
+							.dsc
+								span.seats 0 мест
+								span.price 139 000 ₽
+				.count.mt1
+					.row.adult
+						span.t Взрослых
+						.counter
+							button.down(type="button")
+								<svg width="14" height="2" viewBox="0 0 14 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M0 2V0H14V2H0Z" fill="#32A95E" />
+								</svg>
+							input(type="number" value="1")
+							button.up(type="button")
+								<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M6 8H0V6H6V0H8V6H14V8H8V14H6V8Z" fill="#32A95E" />
+								</svg>
+					.row.child
+						span.t Детей
+						.counter
+							button.down(type="button")
+								<svg width="14" height="2" viewBox="0 0 14 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M0 2V0H14V2H0Z" fill="#32A95E" />
+								</svg>
+							input(type="number" value="0")
+							button.up(type="button")
+								<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M6 8H0V6H6V0H8V6H14V8H8V14H6V8Z" fill="#32A95E" />
+								</svg>
+			.column.fields
+				input(type="text" placeholder="Ваше имя" name="username")
+				input(type="text" placeholder="Ваша электронная почта" name="email")
+				label.ncb
+					span Нужен звонок менеджера
+					input(type="checkbox" checked)
+					span.c
+					span.l Да
+				.mask
+					.flags
+						.head
+							.f
+								<svg width="23" height="19" viewBox="0 0 23 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M0 3C0 1.34315 1.34315 0 3 0H20C21.6569 0 23 1.34315 23 3V6.33333H0V3Z" fill="white" />
+									<path d="M0 6.33333H23V12.6668H0V6.33333Z" fill="#038AD7" />
+									<path d="M0 12.6668H23V15.9998C23 17.6567 21.6569 18.9998 20 18.9998H3C1.34315 18.9998 0 17.6567 0 15.9998V12.6668Z" fill="#D7030F" />
+								</svg>
+							<svg width="11" height="6" viewBox="0 0 11 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M10.7958 0.197888C10.6598 0.065926 10.4987 0 10.3124 0H0.687552C0.501235 0 0.340164 0.065926 0.204076 0.197888C0.0679876 0.329995 0 0.486182 0 0.66674C0 0.847261 0.0679876 1.00345 0.204076 1.13545L5.01652 5.80197C5.15276 5.93393 5.31383 6 5.5 6C5.68617 6 5.84739 5.93393 5.98336 5.80197L10.7958 1.13541C10.9317 1.00345 11 0.847261 11 0.666703C11 0.486182 10.9317 0.329995 10.7958 0.197888Z" fill="#8A8A8A" />
+							</svg>
+						ul.body
+							li.pl
+								<svg width="23" height="19" viewBox="0 0 23 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M0 3C0 1.34315 1.34315 0 3 0H20C21.6569 0 23 1.34315 23 3V10H0V3Z" fill="white" />
+									<path d="M0 10H23V16C23 17.6569 21.6569 19 20 19H3C1.34315 19 0 17.6569 0 16V10Z" fill="#D7030F" />
+								</svg>
+					input(type="text" placeholder="+7 (___) __ - __ - __")
+
+				img(src="/assets/img/icons/captcha.jpg")
+
+			.column.ta
+				textarea(placeholder="Ваш вопрос или комментарий для менеджера тура")
+				button(type="submit") Отправить
+
+
+
+
+
+
+

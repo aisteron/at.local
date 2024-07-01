@@ -21,6 +21,9 @@ export async function Ui(){
 	
 	tour_page_transfer_elements()
 
+	// открываем форму заказа
+	tour_page_open_dialog()
+
 	
 }
 
@@ -122,4 +125,16 @@ function tour_page_transfer_elements(){
 			}
 		);
 	}
+}
+
+function tour_page_open_dialog(){
+	qs('form#aside_order')?.listen("submit", e=> e.preventDefault())
+	qs('form#aside_order button[type="submit"]')?.listen("click", e => {
+		qs('#tourOrderPopup')?.showModal()
+	})
+
+	// close
+	qs('#tourOrderPopup button.close')?.listen("click", e => {
+		qs('#tourOrderPopup').close()
+	})
 }
