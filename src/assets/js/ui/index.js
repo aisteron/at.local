@@ -95,10 +95,12 @@ function reviews_page_collapse_review(){
 
 function tour_page_form_dropdown() {
 	let dd = qs('.tour-page form .date .select .head')
-	dd.listen("click", e => dd.closest('.select').classList.toggle('open'))
+	dd?.listen("click", e => dd.closest('.select').classList.toggle('open'))
 }
 
 function tour_page_transfer_elements(){
+	if(!qs('.tour-page')) return
+	
 	let script = document.createElement('script')
 	script.src = "/vendors/transfer-elements.min.js"
 	qs('.scripts-area').appendChild(script)
