@@ -896,6 +896,42 @@ body.tour-page
 				display: flex
 				align-items: center
 				gap: 1rem
+				.fav
+					cursor: pointer
+				.wrap
+					position: relative
+					&:hover, &.open
+						.button
+							background-color: #ccc
+					&.open
+						ul.body
+							display: block
+					.button
+						padding: 7px
+						border-radius: 50%
+						cursor: pointer						
+						svg
+							min-width: 18px
+					ul.body
+						display: none
+						box-shadow: 0 1px 4px 0 rgba(33, 33, 38, 0.16)
+						background: #fff
+						border-radius: 12px
+						padding: 19px 22px
+						position: absolute
+						top: 36px
+						left: 0
+						z-index: 10
+						width: 210px
+						line-height: 180%
+						a
+							color: #000
+							text-decoration: none
+							&:hover
+								text-decoration: underline
+						input
+							display: none		
+						
 		#mobile_gallery
 			margin: 1rem -1rem
 			.swiper
