@@ -260,6 +260,8 @@ dialog#tourOrderPopup
 	form.body
 		padding: 1.5rem
 		padding-top: 10px
+		max-height: 70vh
+		overflow-y: auto
 		span.title
 			font-weight: 600
 			font-size: 20px
@@ -290,6 +292,37 @@ dialog#tourOrderPopup
 								margin: 10px 0	
 						ul.body
 							display: none
+							flex-direction: column
+							gap: 1rem
+							padding: 1rem 0
+							max-height: 230px
+							overflow-y: auto
+							li
+								cursor: pointer
+								>*
+									pointer-events: none
+								&:hover
+									background-color: #eee
+								&.disabled
+									opacity: 0.5
+									cursor: not-allowed
+									&:hover
+										background-color: #fff	
+								.dsc
+									display: flex
+									gap: 1rem
+									align-items: center
+									font-size: 14px
+									color: #4E4E4E
+									font-weight: 300
+
+						&.open  // .select
+							.head
+								border-bottom: 1px solid #c5c5c5
+								svg
+									transform: rotate(180deg)
+							ul.body
+								display: flex
 					.count
 						.row
 							display: flex
@@ -326,6 +359,11 @@ dialog#tourOrderPopup
 									background: transparent
 									border: 1px solid $green
 									border-radius: 4px
+									cursor: pointer
+									&:hover, &:focus
+										background-color: #d6eedf82
+									>*
+										pointer-events: none
 				&.fields
 					display: flex
 					flex-direction: column
