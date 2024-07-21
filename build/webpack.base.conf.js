@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
+const Critical = require('critical-css-webpack-plugin')
 
 // Main const
 // see more: https://github.com/vedees/webpack-template/blob/master/README.md#main-const
@@ -144,9 +145,32 @@ module.exports = {
     // Automatic creation any html pages (Don't forget to RERUN dev server)
     // see more: https://github.com/vedees/webpack-template/blob/master/README.md#create-another-html-files
     // best way to create pages: https://github.com/vedees/webpack-template/blob/master/README.md#third-method-best
-    ...PAGES.map(page => new HtmlWebpackPlugin({
-      template: `${PAGES_DIR}/${page}`,
-      filename: `./${page.replace(/\.pug/,'.html')}`
-    }))
+    ...PAGES.map(page => 
+		{
+			return new HtmlWebpackPlugin({
+      	template: `${PAGES_DIR}/${page}`,
+      	filename: `./${page.replace(/\.pug/,'.html')}`
+    	})
+		}
+	),
+
+	// ...PAGES.map(page => 
+	// 	{
+	// 		let filename = page.replace(/\.pug/,'')
+
+	// 	return new Critical({
+	// 		base: PATHS.dist,
+	// 		src: `./${filename}.html`,
+	// 		target: { css: PATHS.dist+`/assets/css/${filename}.crit.css`},
+	// 		inline: false,
+	// 		extract: true,
+	// 		width: 393,
+	// 		height: 873,
+  //   	})
+	// 	}
+	// ),
+
+
   ],
+	
 }
