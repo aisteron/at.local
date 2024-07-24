@@ -1,10 +1,14 @@
 import { qs, qsa } from "../libs"
 
 export const Dialog = {
-	init(){
+	async init(){
 		this.open()
 		this.select_date(),
 		this.pick_count()
+		this.open_select_flag()
+		await this.load_inputmask_plugin()
+		this.apply_inputmask()
+		
 	},
 
 	open(){
@@ -67,6 +71,68 @@ export const Dialog = {
 			})
 		})
 		
+	},
+
+	open_select_flag(){
+		
+		let flag = qs('#tourOrderPopup .mask .head .f')
+
+		flag?.listen("click", e => {
+			e.target.closest(".mask").classList.toggle("open")
+		})
+
+		// select flag
+
+		qsa('#tourOrderPopup .mask ul.body li').forEach(el => {
+
+			el.listen("click", e => {
+
+				// flag
+				
+				let flag = qs('svg', e.target).cloneNode(true)
+				let head = qs('#tourOrderPopup .mask .head')
+
+				qs('.f svg.f', head).remove()
+
+				qs('.f', head).insertBefore(flag, qs('.triangle', head))
+				qs('.f svg', head).classList.add('f')
+
+				// rule
+
+				let rule = qs('span', e.target).innerHTML
+				var im = new Inputmask(rule.replaceAll("_",9))
+				let i = qs('#tourOrderPopup .mask .head input')
+				i.value = ''
+				i.setAttribute('placeholder', rule)
+				im.mask(i);
+
+				qs('#tourOrderPopup .mask').classList.remove('open')
+
+
+			})
+		})
+	},
+
+	async load_inputmask_plugin(){
+		return new Promise(resolve => {
+			if(qs('[im]')) resolve()
+			let script = document.createElement('script')
+			script.src="/vendors/inputmask.min.js"
+			script.setAttribute("im",'')
+			qs('.scripts-area').appendChild(script)
+			script.onload = () => resolve()
+		})
+		
+	},
+
+	apply_inputmask(){
+		
+		// default 'RU' init
+		let i = qs('#tourOrderPopup .mask .head input')
+		var im = new Inputmask("+7 (999) - 999 - 99 - 99");
+		im.mask(i);
+
+
 	}
 
 }
