@@ -1,6 +1,18 @@
+block variables
+section#edit
+	a.edit(href="/manager/?a=resource/update&id=1" taget="_blank") Редактировать
+	ul
+		li DB = [^qt^]
+		li Queries = [^q^]
+		li App = [^p^]
+		li Src = [^s^]
+		li Total = [^t^]
 header
-	a.logo(href="/")
-		img(src="/assets/img/icons/logo.svg" width="197" height="78")
+	if title === 'Index'
+		img.logo(src="/assets/img/icons/logo.svg" width="197" height="78")
+	else
+		a(href="/")
+			img.logo(src="/assets/img/icons/logo.svg" width="197" height="78")
 	ul.lng
 		li
 			img(src="/assets/img/icons/lng/ru.svg" width="30" height="30")
