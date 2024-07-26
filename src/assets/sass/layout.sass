@@ -13,6 +13,8 @@ section#edit
 	ul
 		display: flex
 		gap: 1rem
+		li
+			min-width: fit-content
 	a
 		color: #fff
 		text-decoration: underline
@@ -24,17 +26,16 @@ header
 	display: flex
 	align-items: center
 	gap: 1rem
+	.logo
+		margin: 10px 0
 	@media(max-width:1024px)
 		gap: 2rem
 	@media(max-width:480px)
 		gap: 2rem
 		padding: 0 1rem
-		a.logo img
+		.logo
 			width: 120px
 			height: 60px
-			margin: 0
-	.logo
-		margin: 10px 0
 	ul.lng
 		display: flex
 		gap: 1rem
@@ -47,6 +48,7 @@ header
 			li
 				img
 					width: 20px
+					min-width: 20px
 
 	nav
 		@media(max-width:1024px)
@@ -283,6 +285,7 @@ body.about-page
 				margin: 0 -1rem
 				img
 					border-radius: 0
+					object-fit: cover
 		.box
 			box-shadow: 0 1px 4px 0 rgba(33, 33, 38, 0.16)
 			border-radius: 12px
@@ -293,8 +296,10 @@ body.about-page
 			@media(max-width:480px)
 				padding: 1rem
 				margin: 0 -1rem
-				margin-bottom: 1rem
+				//margin-bottom: 1rem
 				border-radius: 0
+				&.about
+					margin-top: -1rem
 			&.about
 				grid-column: 1
 				grid-row: 2
@@ -571,10 +576,12 @@ body.tours-page
 			li
 				background-color: #fff
 				border-radius: 12px
-				box-shadow: 0 1px 4px 0 rgba(33, 33, 38, 0.16)
 				transition: all 0.3s cubic-bezier(.25,.8,.25,1)
 				position: relative
+				box-shadow: 0 1px 4px 0 rgba(33, 33, 38, 0.16)
 				width: 320px
+				&:hover
+					box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)
 				.label
 					position: absolute
 					background-color: #ccc
@@ -594,9 +601,9 @@ body.tours-page
 						background-color: #EAB600
 					&.red
 						background-color: #F84565
-					& + img
-						border-top-right-radius: 11px
-						border-top-left-radius: 11px
+				img.hero
+					border-top-right-radius: 11px
+					border-top-left-radius: 11px
 				.dsc
 					padding: 1rem
 					.country
@@ -616,6 +623,10 @@ body.tours-page
 						white-space: nowrap
 						overflow: hidden
 						text-overflow: ellipsis
+						&:after
+							content: ''
+							position: absolute
+							inset: 0
 					.price
 						display: flex
 						align-items: center
