@@ -3,14 +3,15 @@ block variables
 
 doctype html
 html(lang='ru')
-  head
-    meta(charset='utf-8')
-    title #{title}
-    meta(name="viewport" content="width=device-width, initial-scale=1")
-    block head
+	head
+		meta(charset='utf-8')
+		title #{title}
+		meta(name="viewport" content="width=device-width, initial-scale=1")
+		script(type="text/javascript" src="/vendors/masonry.pkgd.min.js")
+		block head
 
-  body(class=pageClass)
-    .wrapper
-      include ../../ui/header
-      include ./content
-      include ../../ui/footer
+	body(class=pageClass)
+		.wrapper
+			include ../../ui/header
+			include ./content
+			include ../../ui/footer

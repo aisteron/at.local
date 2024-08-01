@@ -117,3 +117,29 @@ export const fancy = {
 		});
 	}
 }
+
+
+
+export async function Fetch(action, data, path){
+
+	data = JSON.stringify(data)
+
+	let host = process.env.NODE_ENV == 'development' ? 'http://at.ashaev.by':''
+	let body = `action=${action}&data=${data}`
+
+	
+	
+	let response = await fetch(host+path, {
+		method: 'POST',
+		headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+		body: body
+	});
+
+	if(!response.ok){
+		throw new Error('Ошибка сервера')
+	}
+
+	return await response.json();
+
+
+}
