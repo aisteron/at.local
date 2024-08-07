@@ -935,6 +935,9 @@ body.reviews-page
 				margin-bottom: 10px
 				&:focus, &:active, &:hover
 					background-color: darken($green, 5%)
+				&[disabled]
+					background-color: #ddd
+					cursor: not-allowed	
 body.tour-page
 	article
 		@include pw
@@ -1010,6 +1013,10 @@ body.tour-page
 					bottom: 1rem
 					z-index: 2
 					right: 1rem
+					.digits
+						.current
+							display: inline-block
+							min-width: 10px
 		.top-gallery
 			display: grid
 			grid-template-columns: 516px 307px 307px
@@ -1033,6 +1040,8 @@ body.tour-page
 					&:nth-of-type(5)
 						grid-column: 2/3
 			a
+				&.hidden
+					display: none
 				&:nth-of-type(1)
 					grid-column: 1
 					grid-row: 1/3
@@ -1315,10 +1324,11 @@ body.tour-page
 					box-shadow: 0 1px 4px 0 rgba(33, 33, 38, 0.16)
 					background: #fff
 					padding: 30px 32px
-					height: 255px
 					position: relative
 					overflow: hidden
 					&.collapsed
+						height: 255px
+
 						&:after
 							z-index: 1
 							content: ''
@@ -1328,6 +1338,9 @@ body.tour-page
 							left: 0
 							width: 100%
 							background: linear-gradient(180deg, rgba(255, 255, 255, 0.56) 0%, #fff 54.71%)
+						.expand
+							svg
+								transform: rotate(0deg)	
 					h1
 						font-size: 48px
 						font-weight: 600
@@ -1345,6 +1358,10 @@ body.tour-page
 						color: $green
 						z-index: 2
 						cursor: pointer
+						svg
+							transform: rotate(180deg)
+						>*
+							pointer-events: none
 				.video
 					position: relative
 					//width: 100%

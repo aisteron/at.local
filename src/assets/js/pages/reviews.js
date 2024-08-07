@@ -123,7 +123,7 @@ export const Reviews = {
 			let reader = new FileReader();
 			reader.readAsDataURL(file)
 			reader.onload = function() {
-				this.ava = reader.result
+				Reviews.ava = file
 				qs('svg', label)?.remove()
 				qs('.custom_ava_blob', label)?.remove()
 				
@@ -166,23 +166,52 @@ export const Reviews = {
 		})
 	},
 	send_to_server(){
-		const formData = new FormData();
-			
+		
 		const f = qs('form#review')
 		
-		f.listen("submit", e => {
+		f.listen("submit", async e => {
 			e.preventDefault();
+			let formData = new FormData();
+			qs('button[type=submit]').disabled = true
+			qs('button[type=submit]').innerHTML = 'Загрузка...'
+
+			formData.append('action', 'review_receive');
+
 			formData.append('name', qs('[name="name"]',f).value);
 			formData.append('surname', qs('[name="surname"]',f).value);
 			formData.append('tourname', qs('[name="tourname"]',f).value);
 			formData.append('emoji', qs('[name="emoji"]',f).value);
 			formData.append('guide', qs('[name="guide"]',f).value);
 			formData.append('future', qs('[name="future"]',f).value);
-			formData.append('ava', qs('[name="future"]',f).value);
+			
+			let ava_cls = qs('.avlist input[name=ava]:checked').closest('li').classList.value
+			formData.append('ava', Reviews.ava ? Reviews.ava : ava_cls)
+			
+			Reviews.gallery.size
+				&& Array.from(Reviews.gallery).forEach((el, i) => formData.append(`gallery-${i}`, el))
 			
 			//for (var p of formData) { console.log(p);}
-			console.log(qs('.avlist input[checked]'))
 			
+
+			let res = await fetch("http://at.ashaev.by/api",{
+				method: 'POST',
+				body: formData
+			})
+
+			res = await res.json()
+
+			if(res.success){
+				new Snackbar(res.message?res.message:'✅ Успешно отправлено ')
+				f.reset()
+				Reviews.gallery = new Set([])
+				qs('#review .files .gallery').innerHTML = ''
+
+			} else {
+				new Snackbar(res.message?res.message:'❌ Что-то пошло не так(')
+			}
+
+			qs('button[type=submit]', f).disabled = false
+			qs('button[type=submit]').innerHTML = 'Отправить'
 
 		})
 
