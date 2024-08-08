@@ -12,6 +12,8 @@ export const Tour = {
 
 		this.top_gallery_mobile_lazy() // ленивая загрузка для мобильной галереи
 		this.expand_content() // разворачивание контента
+
+		this.expand_program() // блок программа тура
 	},
 
 	add_favorite(){
@@ -106,6 +108,23 @@ export const Tour = {
 			let cnt = e.target.closest('.cnt')
 			cnt.classList.toggle('collapsed')
 		})
+	},
+	expand_program(){
+		// раскрыть все дни
+		
+		qs('#program .head .expand')?.listen("click", e => {
+			qsa('#program .body ul li').forEach(el => el.classList.toggle('open'))
+			
+			e.target.classList.toggle('open')
+		})
+
+		// каждый раскрывает свое
+		qsa('#program .body ul li .head').forEach(el => el.listen("click", e => {
+			e.target.closest('li').classList.toggle('open')
+		}))
+
+
 	}
+
 }
 

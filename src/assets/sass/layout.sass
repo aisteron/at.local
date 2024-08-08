@@ -699,7 +699,7 @@ body.reviews-page
 						box-shadow: none
 				ul.body
 					display: flex
-			@media(max-width:480px)		
+			@media(max-width:480px)
 				width: 100%
 				.head, .body
 					width: 100% !important
@@ -781,7 +781,7 @@ body.reviews-page
 					align-items: center
 					text-align: center
 					button.collapse
-						
+
 						background-color: #D9D9D9
 						width: 29px
 						height: 29px
@@ -850,7 +850,7 @@ body.reviews-page
 						gap: 10px
 						justify-content: center
 					.custom_ava_blob
-						border-radius: 50%	
+						border-radius: 50%
 			.inputs
 				display: flex
 				flex-direction: column
@@ -937,7 +937,7 @@ body.reviews-page
 					background-color: darken($green, 5%)
 				&[disabled]
 					background-color: #ddd
-					cursor: not-allowed	
+					cursor: not-allowed
 body.tour-page
 	article
 		@include pw
@@ -972,7 +972,7 @@ body.tour-page
 					.button
 						padding: 7px
 						border-radius: 50%
-						cursor: pointer						
+						cursor: pointer
 						svg
 							min-width: 18px
 					ul.body
@@ -993,8 +993,8 @@ body.tour-page
 							&:hover
 								text-decoration: underline
 						input
-							display: none		
-						
+							display: none
+
 		#mobile_gallery
 			margin: 1rem -1rem
 			.swiper
@@ -1340,7 +1340,7 @@ body.tour-page
 							background: linear-gradient(180deg, rgba(255, 255, 255, 0.56) 0%, #fff 54.71%)
 						.expand
 							svg
-								transform: rotate(0deg)	
+								transform: rotate(0deg)
 					h1
 						font-size: 48px
 						font-weight: 600
@@ -1404,9 +1404,9 @@ body.tour-page
 								.prev
 									transform: rotate(180deg)
 								svg
-									cursor: pointer	
+									cursor: pointer
 								.swiper-button-disabled
-									opacity: 0.5	
+									opacity: 0.5
 							.swiper-slide
 								span.name
 									font-size: 1rem
@@ -1463,8 +1463,18 @@ body.tour-page
 						align-items: center
 						gap: 1rem
 						cursor: pointer
+						&:hover
+							color: $green
+					.expand
+						>*
+							pointer-events: none
+						&.open
+							svg
+								transform: rotate(180deg)
 
 			>.body
+				@media(max-width:480px)
+					margin: 0 -1rem
 				ul
 					li
 						box-shadow: 0 1px 4px 0 rgba(33, 33, 38, 0.16)
@@ -1472,9 +1482,18 @@ body.tour-page
 						border-radius: 12px
 						&:not(:last-child)
 							margin-bottom: 1rem
+						@media(max-width:480px)
+							border-radius: 0
+							box-shadow: none
+							&:not(:last-child)
+								margin-bottom: 0
+								border-bottom: 1px solid #eee
+							.head
+								padding-right: 1rem
 						&.open
 							>.head
 								border-bottom: 1px solid #eee
+								background-color: #fafafa
 								svg
 									transform: rotate(180deg)
 								img
@@ -1489,6 +1508,12 @@ body.tour-page
 							&:hover
 								background-color: #fafafa
 								border-top-left-radius: 12px
+							@media(max-width:480px)
+								height: 92px
+								border-radius: 0
+								box-shadow: none
+								&:hover
+									border-radius: 0
 
 							.name
 								padding-left: 33px
@@ -1497,9 +1522,12 @@ body.tour-page
 								font-weight: 600
 								@media(max-width:480px)
 									font-size: 1rem
+									padding-left: 1rem
 							img
 								border-top-right-radius: 12px
 								border-bottom-right-radius: 12px
+								@media(max-width:480px)
+									display: none
 						.body
 							display: none
 							padding: 1.5rem 2rem
@@ -1512,6 +1540,13 @@ body.tour-page
 								img
 									border-radius: 6px
 		section#dates
+			@media(max-width:480px)
+				margin: 0 -1rem
+				margin-bottom: 1rem
+				.year
+					border-radius: 0
+					box-shadow: none
+					padding: 1rem
 			.year
 				box-shadow: 0 1px 4px 0 rgba(33, 33, 38, 0.16)
 				background: #fff
@@ -1536,6 +1571,8 @@ body.tour-page
 						display: flex
 						align-items: center
 						gap: 53px
+						@media(max-width:480px)
+							gap: 2rem
 						&:not(:last-child)
 							padding-bottom: 28px
 							margin-bottom: 28px
@@ -1547,6 +1584,12 @@ body.tour-page
 						ul
 							columns: 3
 							gap: 2rem
+							@media(max-width:480px)
+								columns: 1
+								gap: 1rem
+								li
+									&:not(:last-child)
+										margin-bottom: 10px
 							li
 								line-height: 160%
 								color: #4E4E4E
@@ -1802,7 +1845,7 @@ body.contacts-page
 			background: #fff
 			padding: 30px 32px
 			color: #2C3959
-			
+
 			p.name
 				font-size: 18px
 			ul
@@ -1812,4 +1855,4 @@ body.contacts-page
 				color: #2C3959
 				font-weight: 500
 				&:hover
-					text-decoration: none	
+					text-decoration: none
