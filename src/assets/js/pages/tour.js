@@ -1,11 +1,14 @@
-import { qs, qsa, sw } from "../libs"
+import { Fetch, qs, qsa, sw } from "../libs"
 
 export const Tour = {
+
 	init(){
 
 		if(!qs('.tour-page')) return
 
-		this.aside_form() //выпадающий список с датами у формы
+		aside_form.init() // форма заказа тура
+
+
 		this.transfer_elements()
 		this.soc_share() // поделиться ссылкой	
 		this.add_favorite() // добавить в избранное
@@ -14,6 +17,8 @@ export const Tour = {
 		this.expand_content() // разворачивание контента
 
 		this.expand_program() // блок программа тура
+
+
 	},
 
 	add_favorite(){
@@ -76,11 +81,8 @@ export const Tour = {
 			);
 		}
 	},
-	aside_form(){
-		let dd = qs('.tour-page form .date .select .head')
-		dd?.listen("click", e => dd.closest('.select').classList.toggle('open'))
-	},
-	
+
+
 	async top_gallery_mobile_lazy(){
 		if(!qs('#mobile_gallery')) return
 
@@ -126,5 +128,135 @@ export const Tour = {
 
 	}
 
+}
+
+
+export const aside_form = {
+
+	schedule: [],
+	cfg:[],
+
+	async init(){
+
+		if(!qs('#aside_order')) return
+
+		this.open()
+		
+		// получить расписание тура и конфиг
+		await this.aside_form_fetch_schedule()
+		await this.aside_form_fetch_tour_config()
+
+		// ближайший тур с кол-вом мест > 0
+
+		let closest_tour = this.schedule.filter(el => new Date(el.start).getTime() - new Date().getTime() > 0 && +el.seats)
+		if(!closest_tour.length){ return console.log('Блишайший тур не обнаружен')}
+		closest_tour = closest_tour[0]
+
+		// делаем его активным в списке
+		qs(`#aside_order li[data-id='${closest_tour.MIGX_id}']`)?.classList.add('active')
+
+
+		// выпадающий список с датами
+
+		let dd = qs('.tour-page form .date .select .head')
+		dd?.listen("click", e => dd.closest('.select').classList.toggle('open'))
+
+		// выбор даты в списке дат
+		qsa('#aside_order li[data-id]').forEach(el => {
+			el.listen("click", e => {
+				if(e.target.classList.contains('disabled')) return
+				let dateid = +e.target.dataset.id
+				let selected = this.schedule.find(el => el.MIGX_id == dateid)
+
+				let cur = this.cfg.currency == "RUB" ? "₽" : this.cfg.currency
+				qs('#aside_order .old_price').innerHTML = selected.old_price.replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+				qs('#aside_order .price').innerHTML = selected.price.replace(/\B(?=(\d{3})+(?!\d))/g, " ")+" "+cur
+
+				if(selected.old_price){
+					let disc = 100-(+selected.price/+selected.old_price)*100
+					qs('#aside_order .discount').innerHTML = `-${Math.ceil(disc)}%`
+					
+				}
+
+				// progress
+
+				let total = this.cfg.group_size
+				let seats = +selected.seats
+				let p = Math.ceil(100-(seats / total)*100)
+				
+				qs('.grad .filled').style.setProperty('--prog', `${p}%`)
+				qs('.range .leave span').innerHTML = seats
+
+
+				// active class for current
+
+				qsa('#aside_order li[data-id]').forEach(el => el.classList.remove('active'))
+				e.target.classList.add('active')
+
+				// select .head
+				let start = new Date(selected.start).toLocaleDateString()
+				let finish = new Date(selected.finish).toLocaleDateString()
+				qs('#aside_order .select .head').dataset.id = selected.MIGX_id
+				qs('#aside_order .select .head span').innerHTML = `${start} - ${finish}`
+
+				
+
+				e.target.closest('.select').classList.remove('open')
+
+
+			})
+		});
+
+		// + - кнопки кол-ва человек в форме
+	
+		let inp = qs('#aside_order .arrows input');
+		[qs('#aside_order button.up'), qs('#aside_order button.down')].forEach(el=> {
+			el.listen("click", e => {
+				let act = e.target.classList.contains('up') ? 'up':'down'
+				if(+inp.value <= +inp.min && act == 'down') return
+				inp.value = act == 'up' ? +inp.value+1 : +inp.value-1
+			})
+		})
+
+	},
+
+	async aside_form_fetch_schedule(){
+		
+		try {
+			var res = await Fetch("get_tour_schedule",{id: +qs('[resid]').getAttribute('resid')},"/api")
+			this.schedule = res
+
+		} catch(e){
+			console.log(e)
+			return new Snackbar('❌ Ошибка ответа сервера')
+		}
+
+		if(res?.success == false){
+			return new Snackbar('⚠️ '+res?.message || '⚠️ Ошибка получения расписания')
+		}
+
+		
+	},
+
+	async aside_form_fetch_tour_config(){
+
+		try {
+			let res = await Fetch("get_tour_cfg",{id: +qs('[resid]').getAttribute('resid')},"/api")
+			this.cfg = res
+		} catch(e){
+			console.log(e)
+			return new Snackbar('❌ Сервер: ошибка получения конфига')
+		}
+	},
+
+	open(){
+		
+		qs('form#aside_order')?.listen("submit", e=> e.preventDefault())
+
+		qs('form#aside_order button[type="submit"]')?.listen("click", e => {
+			qs('#tourOrderPopup')?.showModal()
+		})
+	}
+	
 }
 

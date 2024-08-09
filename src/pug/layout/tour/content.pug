@@ -290,40 +290,40 @@ article
 						span.header Выберите дату тура:
 						.wrap
 							.select
-								.head
-									span 19.02.2024 - 27.02.2024
+								.head(data-id="1")
+									span 19.02.2024 - 24.02.2024
 									<svg width="12" height="9" viewBox="0 0 12 9" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<path d="M6 8.37461L0 2.37461L1.4 0.974609L6 5.57461L10.6 0.974609L12 2.37461L6 8.37461Z" fill="#1C1B1F" />
 									</svg>
 								ul.body
-									li
-										span.date 19.02.2024 - 27.02.2024
+									li.active(data-id="1")
+										span.date 19.02.2024 - 24.02.2024
 										span.leave 8 мест
-									li.disabled
-										span.date 19.02.2024 - 27.02.2024
+									li.disabled(data-id="2")
+										span.date 20.02.2024 - 25.02.2024
 										span.leave 0 мест
-									li.active
-										span.date 19.02.2024 - 27.02.2024
+									li(data-id="3")
+										span.date 21.02.2024 - 26.02.2024
 										span.leave 1 место
-									li
-										span.date 19.02.2024 - 27.02.2024
+									li(data-id="4")
+										span.date 22.02.2024 - 27.02.2024
 										span.leave 1 место
 							.counter
 								label Участников
 								.arrows
-									button.up(type="button")
+									button.down(type="button")
 										<svg width="14" height="2" viewBox="0 0 14 2" fill="none" xmlns="http://www.w3.org/2000/svg">
 											<path d="M0 2V0H14V2H0Z" fill="#32A95E" />
 										</svg>
 									input(type="number" min="1" value="1")
-									button.down(type="button")
+									button.up(type="button")
 										<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
 											<path d="M6 8H0V6H6V0H8V6H14V8H8V14H6V8Z" fill="#32A95E" />
 										</svg>
 					.range
 						.grad
 							.filled(style="--prog: 70%;")
-						.leave Осталось 8 из 24 мест
+						.leave Осталось <span>8</span> из 24 мест
 					ul.messages
 						li
 							span Гарантия проведения

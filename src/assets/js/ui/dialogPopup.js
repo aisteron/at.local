@@ -2,7 +2,7 @@ import { qs, qsa } from "../libs"
 
 export const Dialog = {
 	async init(){
-		this.open()
+		this.close()
 		this.select_date(),
 		this.pick_count()
 		this.open_select_flag()
@@ -11,15 +11,10 @@ export const Dialog = {
 		
 	},
 
-	open(){
 
-		qs('form#aside_order')?.listen("submit", e=> e.preventDefault())
+	close(){
 
-		qs('form#aside_order button[type="submit"]')?.listen("click", e => {
-			qs('#tourOrderPopup')?.showModal()
-		})
 
-		// close
 		qs('#tourOrderPopup button.close')?.listen("click", e => {
 			qs('#tourOrderPopup').close()
 		})
