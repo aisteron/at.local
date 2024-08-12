@@ -279,6 +279,7 @@ dialog#tourOrderPopup
 					.select
 						border-bottom: 1px solid #C5C5C5
 						cursor: pointer
+						position: relative
 						&:hover
 							> .head
 								background-color: #fafafa
@@ -302,6 +303,11 @@ dialog#tourOrderPopup
 							padding: 1rem 0
 							max-height: 230px
 							overflow-y: auto
+							position: absolute
+							top: 58px
+							background-color: #fff
+							z-index: 2
+							width: 277px
 							li
 								cursor: pointer
 								>*
@@ -328,6 +334,7 @@ dialog#tourOrderPopup
 									transform: rotate(180deg)
 							ul.body
 								display: flex
+
 					.count
 						.row
 							display: flex
@@ -505,3 +512,6 @@ dialog#tourOrderPopup
 							background-color: darken($green, 5%)
 						&:focus
 							outline: none
+						&[disabled]
+							background-color: #ccc	
+							cursor: not-allowed

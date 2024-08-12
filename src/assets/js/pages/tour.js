@@ -250,11 +250,25 @@ export const aside_form = {
 	},
 
 	open(){
-		
+
 		qs('form#aside_order')?.listen("submit", e=> e.preventDefault())
 
 		qs('form#aside_order button[type="submit"]')?.listen("click", e => {
 			qs('#tourOrderPopup')?.showModal()
+
+			// актуализация выбранной даты в попап
+
+			let tour = this.schedule.find(el => el.MIGX_id == +qs('.head[data-id]').dataset.id)
+
+			const dogFound = new CustomEvent("update_for_dialog", {
+				detail: {
+					tour: tour,
+					count: +qs('.arrows input').value,
+					cur: this.cfg.currency == "RUB" ? "₽" : this.cfg.currency
+				},
+			});
+
+			document.dispatchEvent(dogFound);
 		})
 	}
 	

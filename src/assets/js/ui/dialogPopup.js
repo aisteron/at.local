@@ -1,4 +1,4 @@
-import { qs, qsa } from "../libs"
+import { Fetch, declension, qs, qsa } from "../libs"
 
 export const Dialog = {
 	async init(){
@@ -8,6 +8,8 @@ export const Dialog = {
 		this.open_select_flag()
 		await this.load_inputmask_plugin()
 		this.apply_inputmask()
+		this.listeners()
+		this.to_server()
 		
 	},
 
@@ -128,6 +130,96 @@ export const Dialog = {
 		im.mask(i);
 
 
+	},
+
+	listeners(){
+
+		// выбранная дата из формы
+
+		document.addEventListener("update_for_dialog",e => {
+
+			let o = e.detail
+			// tour
+			// count
+			// cur
+
+			let start = new Date(o.tour.start).toLocaleDateString()
+			let finish = new Date(o.tour.finish).toLocaleDateString()
+			let d = declension("место", "мест", "места", o.tour.seats)
+			let p = o.tour.price.replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+			
+			qs('#tourOrderPopup .select .head .date span').innerHTML = `${start} - ${finish}`
+			qs('#tourOrderPopup .select .head .dsc .seats').innerHTML = `${o.tour.seats} ${d}`
+			qs('#tourOrderPopup .select .head .dsc .price').innerHTML = `${p} ${o.cur}`
+
+			qs('#tourOrderPopup .row.adult input').value = o.count
+
+
+
+		})
+	},
+
+	to_server(){
+		const submit_button = qs('#tourOrderPopup button[type="submit"]')
+		
+		// валидация recaptcha
+		qs('#tourOrderPopup form').listen("submit", e => {
+			e.preventDefault()
+
+			submit_button.disabled = true
+
+			grecaptcha.ready(function() {
+				grecaptcha.execute('6LfOzCQqAAAAANhlY6U8kN9xmEGmhxE88WQQ3Q7_', {action: 'submit'})
+				.then(async function(token) {
+						// Add your logic to submit to your backend server here.
+						let res = await Fetch("verify_recaptcha", {token:token}, '/api')
+						if(res.score < 0.5) return new Snackbar("Ошибка проверки recaptcha. Пожалуйста, попробуйте позже");
+						
+						send(res)
+				});
+			});
+
+		})
+
+	
+		async function send(){
+
+			let obj = {
+				action: 'order_receive',
+				name: qs('#tourOrderPopup [name="username"]').value,
+				email: qs('#tourOrderPopup [name="email"]').value,
+				phone: qs('#tourOrderPopup [inputmode]').value,
+				adult: qs('#tourOrderPopup .row.adult input').value,
+				child: qs('#tourOrderPopup .row.child input').value,
+				tour_name: qs('#tourOrderPopup span.title').innerHTML,
+				tour_date: qs('#tourOrderPopup .select .head .date span').innerHTML,
+				seats: qs('#tourOrderPopup .select .head .dsc .seats').innerHTML,
+				price: qs('#tourOrderPopup .select .head .dsc .price').innerHTML,
+				ncb: qs('#tourOrderPopup .ncb input').checked,
+				comment: qs('#tourOrderPopup textarea').value
+			}
+			
+
+			try {
+				var res = await Fetch('order_receive', obj, '/api')
+			} catch(e){
+				console.log(e)
+				return new Snackbar('❌ Сервер: ошибка отправки')
+			}
+			
+			if(!res?.success){
+				return new Snackbar('❌ Клиент: ошибка отправки заказа')
+			}
+			
+			submit_button.disabled = false
+			
+			new Snackbar('✅ Успешно отправлено')
+			qs('#tourOrderPopup form').reset()
+			
+		}
 	}
+
+
+
 
 }

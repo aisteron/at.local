@@ -76,8 +76,8 @@ dialog#tourOrderPopup()
 									<path d="M6 8H0V6H6V0H8V6H14V8H8V14H6V8Z" fill="#32A95E" />
 								</svg>
 			.column.fields
-				input(type="text" placeholder="Ваше имя" name="username")
-				input(type="text" placeholder="Ваша электронная почта" name="email")
+				input(type="text" placeholder="Ваше имя" name="username" required)
+				input(type="text" placeholder="Ваша электронная почта" name="email" required)
 				label.ncb
 					span Нужен звонок менеджера
 					input(type="checkbox" checked)
@@ -98,7 +98,7 @@ dialog#tourOrderPopup()
 							<svg class="triangle" width="11" height="6" viewBox="0 0 11 6" fill="none" xmlns="http://www.w3.org/2000/svg">
 								<path d="M10.7958 0.197888C10.6598 0.065926 10.4987 0 10.3124 0H0.687552C0.501235 0 0.340164 0.065926 0.204076 0.197888C0.0679876 0.329995 0 0.486182 0 0.66674C0 0.847261 0.0679876 1.00345 0.204076 1.13545L5.01652 5.80197C5.15276 5.93393 5.31383 6 5.5 6C5.68617 6 5.84739 5.93393 5.98336 5.80197L10.7958 1.13541C10.9317 1.00345 11 0.847261 11 0.666703C11 0.486182 10.9317 0.329995 10.7958 0.197888Z" fill="#8A8A8A" />
 							</svg>
-						input(type="text" placeholder="+7 (___) - ___ - __ - __")
+						input(type="text" placeholder="+7 (___) - ___ - __ - __" required)
 					ul.body
 						li.ru
 							<svg width="23" height="19" viewBox="0 0 23 19" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -129,7 +129,7 @@ dialog#tourOrderPopup()
 							span +375 __ ___ __ __
 				
 
-				img(src="/assets/img/icons/captcha.jpg")
+				//- img(src="/assets/img/icons/captcha.jpg")
 
 			.column.ta
 				textarea(placeholder="Ваш вопрос или комментарий для менеджера тура")
