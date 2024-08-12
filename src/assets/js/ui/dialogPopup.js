@@ -1,3 +1,4 @@
+import { GKEY } from "../../../../deploy/recaptcha"
 import { Fetch, declension, qs, qsa } from "../libs"
 
 export const Dialog = {
@@ -169,7 +170,7 @@ export const Dialog = {
 			submit_button.disabled = true
 
 			grecaptcha.ready(function() {
-				grecaptcha.execute('6LfOzCQqAAAAANhlY6U8kN9xmEGmhxE88WQQ3Q7_', {action: 'submit'})
+				grecaptcha.execute(GKEY.public, {action: 'submit'})
 				.then(async function(token) {
 						// Add your logic to submit to your backend server here.
 						let res = await Fetch("verify_recaptcha", {token:token}, '/api')
