@@ -18,6 +18,8 @@ export const Tour = {
 
 		this.expand_program() // блок программа тура
 
+		this.expand_hotels() // блок проживания (гостиницы)
+
 
 	},
 
@@ -126,6 +128,13 @@ export const Tour = {
 		}))
 
 
+	},
+	expand_hotels(){
+		qsa('#hotels ul li .head').forEach(el =>{
+			el.listen("click", e => {
+				e.target.closest('li').classList.toggle('open')
+			})
+		})
 	}
 
 }

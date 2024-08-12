@@ -1647,6 +1647,14 @@ body.tour-page
 					box-shadow: 0 1px 4px 0 rgba(33, 33, 38, 0.16)
 					background: #fff
 					border-radius: 12px
+					&.open
+						.head
+							background-color: #fafafa
+							border-top-left-radius: 12px
+							img
+								border-bottom-right-radius: 0px
+						.body
+							display: block
 					&:not(:last-child)
 						margin-bottom: 1rem
 					>.head
@@ -1654,9 +1662,12 @@ body.tour-page
 						align-items: center
 						gap: 22px
 						cursor: pointer
+						>*
+							pointer-events: none
 						&:hover
 							background-color: #fafafa
 							border-radius: 12px
+
 						@media(max-width:480px)
 							gap: 0
 							width: 95%
@@ -1686,6 +1697,10 @@ body.tour-page
 								font-weight: normal
 					>.body
 						display: none
+						padding: 1rem
+						padding-left: 2rem
+						font-size: 14px
+						line-height: 150%
 		section#reviews
 			h3
 				color: $green
