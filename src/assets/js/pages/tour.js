@@ -20,6 +20,8 @@ export const Tour = {
 
 		this.expand_hotels() // блок проживания (гостиницы)
 
+		this.expand_faq() // блок часто задаваемых вопросов
+
 
 	},
 
@@ -132,6 +134,16 @@ export const Tour = {
 	expand_hotels(){
 		qsa('#hotels ul li .head').forEach(el =>{
 			el.listen("click", e => {
+				e.target.closest('li').classList.toggle('open')
+			})
+		})
+	},
+	expand_faq(){
+		let items = qsa('#faq li .head')
+		if(!items) return
+
+		items.forEach(el => {
+			el.listen("click",e => {
 				e.target.closest('li').classList.toggle('open')
 			})
 		})

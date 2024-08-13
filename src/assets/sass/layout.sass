@@ -1638,19 +1638,34 @@ body.tour-page
 						&:before
 							content: url(/assets/img/pages/tour/inclusion/red_cross.svg)
 		section#hotels
+			@media(max-width:480px)
+				margin: 0 -1rem
+				.body
+					padding-left: 1rem !important
+				h3
+					margin-left: 1rem
+				>ul
+					>li
+						border-radius: 0
 			h3
 				color: $green
 				font-size: 1.5rem
 				font-weight: 600
-			ul
-				li
+			>ul
+				>li
 					box-shadow: 0 1px 4px 0 rgba(33, 33, 38, 0.16)
 					background: #fff
 					border-radius: 12px
 					&.open
 						.head
-							background-color: #fafafa
+							background-color: #32a95e12
 							border-top-left-radius: 12px
+							border-top-right-radius: 12px
+							border-bottom-left-radius: 0px
+							border-bottom-right-radius: 0px
+							&:hover
+								border-bottom-left-radius: 0px
+								border-bottom-right-radius: 0px
 							img
 								border-bottom-right-radius: 0px
 						.body
@@ -1665,12 +1680,13 @@ body.tour-page
 						>*
 							pointer-events: none
 						&:hover
-							background-color: #fafafa
+							background-color: #32a95e12
 							border-radius: 12px
 
 						@media(max-width:480px)
-							gap: 0
-							width: 95%
+							gap: 1rem
+							padding-right: 1rem
+							//width: 95%
 						svg
 							min-width: 12px
 						img
@@ -1701,6 +1717,48 @@ body.tour-page
 						padding-left: 2rem
 						font-size: 14px
 						line-height: 150%
+						ul.gal
+							display: flex
+							justify-content: space-between
+							@media(max-width:825px)
+								flex-wrap: wrap
+								gap: 1rem
+								justify-content: flex-start
+							li
+								img
+									border-radius: 6px
+								&.hidden
+									display: none
+								&.last
+									a
+										position: relative
+										&:before
+											content: attr(data-counter)
+											position: absolute
+											z-index: 2
+											color: #fff
+											font-size: 48px
+											font-weight: 600
+											top: 50%
+											left: 50%
+											transform: translate(-50%, -50%)
+										&:after
+											content: ''
+											background: rgba(0, 50, 14, 0.5)
+											position: absolute
+											inset: 0
+											border-radius: 6px
+			.hotels-swiper
+				max-width: 80vw
+				position: relative
+				.swiper
+					margin-bottom: 2rem
+				.swiper-slide
+					img
+						border-radius: 6px
+				.swiper-pagination
+					bottom: -28px
+
 		section#reviews
 			h3
 				color: $green
@@ -1752,7 +1810,9 @@ body.tour-page
 						margin-bottom: 1rem
 					&.open
 						.head
-							padding-bottom: 1rem
+							//padding-bottom: 1rem
+							svg
+								transform: rotate(180deg)
 						.body
 							display: block
 					.head
@@ -1763,8 +1823,12 @@ body.tour-page
 						font-weight: 600
 						padding: 38px 30px
 						border-bottom: 1px solid #E4E4E4
+						@media(max-width: 480px)
+							font-size: 1.2rem
+							gap: 10px
 						svg
 							min-width: 12px
+							transition: all 0.3s ease
 					.body
 						display: none
 						padding: 1rem 30px

@@ -12,6 +12,9 @@ export function swipers(){
 	// страница тура. эксперт
 	tour_page_expert()
 
+	// страница тура. отели. мобильная версия
+	tour_page_hotels()
+
 }
 
 async function article_swiper(){
@@ -103,4 +106,23 @@ async function tour_page_expert(){
 	}
 
 	new Swiper(swiper,options)
+}
+
+
+async function tour_page_hotels(){
+	if(!qs('.hotels-swiper')) return
+	await sw.load()
+	
+	qsa('.hotels-swiper .swiper').forEach(el => {
+
+		const opts = {
+				pagination: {
+					el: qs(".swiper-pagination", el.parentNode),
+				},
+			}
+
+		new Swiper(el,opts)	
+
+	})
+
 }
