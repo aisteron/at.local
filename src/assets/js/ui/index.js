@@ -28,7 +28,7 @@ const masonry = {
 
 	async init(){
 		
-		
+		if(!qs('.blog-page')) return
 		//await new Promise(resolve => setTimeout(resolve, 1000))
 		//await this.load_imagesLoadedPlugin()
 		
