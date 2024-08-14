@@ -36,6 +36,7 @@ $dark: #2C3959
 html
 	box-sizing: border-box
 	scrollbar-gutter: stable
+	scroll-behavior: smooth
 *, *:before, *:after
 	box-sizing: inherit
 
@@ -240,6 +241,9 @@ dialog#tourOrderPopup
 	box-shadow: 0 1px 4px 0 rgba(33, 33, 38, 0.16)
 	background: #fff
 	border-radius: 12px
+	@media(max-width:480px)
+		margin-top: -8rem
+		width: 100vw
 	>.head
 		display: flex
 		align-items: center
@@ -493,6 +497,8 @@ dialog#tourOrderPopup
 						padding: 1.5rem
 						border: none
 						color: #4e4e4e
+						@media(max-width:480px)
+							min-height: 90px
 						&::placeholder
 							color: #8A8A8A
 							font-family: inherit

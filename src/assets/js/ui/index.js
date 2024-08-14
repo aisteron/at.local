@@ -26,17 +26,50 @@ export async function Ui(){
 const masonry = {
 
 
-	init(){
+	async init(){
+		
+		
+		//await new Promise(resolve => setTimeout(resolve, 1000))
+		//await this.load_imagesLoadedPlugin()
+		
+		imagesLoaded( qs('.grid'), async function( instance ) {
+
+			console.log('all images are loaded');
+			//await masonry.load()
+			masonry.run()
+		});
+		
+
+		
+	},
+	async load(){
+		return new Promise(resolve => {
+			let script = document.createElement('script')
+			script.src = '/vendors/masonry.pkgd.min.js'
+			script.setAttribute('msn','')
+			qs('.scripts-area').appendChild(script)
+			script.onload = () => resolve(true)
+		})
+	},
+	async load_imagesLoadedPlugin(){
+		return new Promise(resolve => {
+			let script = document.createElement('script')
+			script.src = '/vendors/imagesloaded.pkgd.min.js'
+			script.setAttribute('ilp','')
+			qs('.scripts-area').appendChild(script)
+			script.onload = () => resolve(true)
+		})
+	}, 
+	run(){
 		let grid_wrapper = qs('.blog-page .grid')
-		
-		if(grid_wrapper && window.innerWidth > 480){
-			new Masonry( grid_wrapper, {
-				itemSelector: '.grid-item',
-				columnWidth: 273,
-				gutter: 16
-			});
-		
-		}
+		if(!grid_wrapper || window.innerWidth <= 480) return
+
+		new Masonry( grid_wrapper, {
+			itemSelector: '.grid-item',
+			columnWidth: 273,
+			gutter: 16
+		});
+
 	}
 }
 
