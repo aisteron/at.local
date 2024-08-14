@@ -1,5 +1,6 @@
+block variables
 - var chevron = '<svg width="12" height="9" viewBox="0 0 12 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 8.37461L0 2.37461L1.4 0.974609L6 5.57461L10.6 0.974609L12 2.37461L6 8.37461Z" fill="#807F81" /></svg>'
-- var is_mobile = false
+
 section#hotels.mb1
 	h3 Места размещения в туре
 	ul
@@ -13,6 +14,15 @@ section#hotels.mb1
 			.body
 				p Заезды по воскресеньям. Двухместное размещение в уютных светлых номерах семейного отеля, со всеми удобствами. Есть трехместные, просторные семейные номера для пар с детьми или заездов с друзьями. На территории отеля имеется бесплатный термальный бассейн.
 				if is_mobile
+					.hotels-swiper
+						.swiper
+							.swiper-wrapper
+								.swiper-slide
+									img(src="/assets/img/pages/tour/hotels/gal/01m.jpg" loading="lazy" height="230")
+								.swiper-slide
+									img(src="/assets/img/pages/tour/hotels/gal/02m.jpg" loading="lazy" height="230")
+						.swiper-pagination
+				else		
 					ul.gal
 						li
 							a(href="/assets/img/pages/tour/hotels/gal/01b.jpg" data-fancybox="hotel-gallery-1")
@@ -26,15 +36,8 @@ section#hotels.mb1
 						li.hidden
 							a(href="/assets/img/pages/tour/hotels/gal/01b.jpg" data-fancybox="hotel-gallery-1")
 								img(src="/assets/img/pages/tour/hotels/gal/01m.jpg" width="235" height="167" loading="lazy")
-				else
-					.hotels-swiper
-						.swiper
-							.swiper-wrapper
-								.swiper-slide
-									img(src="/assets/img/pages/tour/hotels/gal/01m.jpg" loading="lazy" height="230")
-								.swiper-slide
-									img(src="/assets/img/pages/tour/hotels/gal/02m.jpg" loading="lazy" height="230")
-						.swiper-pagination
+				
+					
 		li
 			.head
 				.name

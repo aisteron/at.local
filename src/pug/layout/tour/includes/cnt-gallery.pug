@@ -1,0 +1,31 @@
+block variables
+
+section#gallery.mb1
+	h3 Галерея
+	if is_mobile
+		.cnt-swiper
+			.swiper
+				.swiper-wrapper
+					.swiper-slide
+						img(src="/assets/img/pages/tour/gallery/01m.jpg" loading="lazy")
+					.swiper-slide
+						img(src="/assets/img/pages/tour/gallery/02m.jpg" loading="lazy")
+			.swiper-pagination
+	else
+		.list
+			a(href="/assets/img/pages/tour/gallery/01b.jpg" data-fancybox="cnt-gallery")
+				img(src="/assets/img/pages/tour/gallery/01m.jpg")
+			a(href="/assets/img/pages/tour/gallery/02b.jpg" data-fancybox="cnt-gallery")
+				img(src="/assets/img/pages/tour/gallery/02m.jpg")
+			a(href="/assets/img/pages/tour/gallery/03b.jpg" data-fancybox="cnt-gallery")
+				img(src="/assets/img/pages/tour/gallery/03m.jpg")
+			a(href="/assets/img/pages/tour/gallery/04b.jpg" data-fancybox="cnt-gallery")
+				img(src="/assets/img/pages/tour/gallery/04m.jpg")
+			a(href="/assets/img/pages/tour/gallery/05b.jpg" data-fancybox="cnt-gallery")
+				img(src="/assets/img/pages/tour/gallery/05m.jpg")
+			a(href="/assets/img/pages/tour/gallery/06b.jpg" data-fancybox="cnt-gallery")
+				img(src="/assets/img/pages/tour/gallery/06m.jpg")
+			a(href="/assets/img/pages/tour/gallery/07b.jpg" data-fancybox="cnt-gallery")
+				img(src="/assets/img/pages/tour/gallery/07m.jpg")
+			a(href="/assets/img/pages/tour/gallery/08b.jpg" data-fancybox="cnt-gallery" data-count="+55")
+				img(src="/assets/img/pages/tour/gallery/08m.jpg")

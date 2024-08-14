@@ -15,6 +15,9 @@ export function swipers(){
 	// страница тура. отели. мобильная версия
 	tour_page_hotels()
 
+	// страница тура. контентная галерея . мобильная версия
+	tour_page_cnt_gallery()
+
 }
 
 async function article_swiper(){
@@ -116,13 +119,29 @@ async function tour_page_hotels(){
 	qsa('.hotels-swiper .swiper').forEach(el => {
 
 		const opts = {
-				pagination: {
-					el: qs(".swiper-pagination", el.parentNode),
-				},
+			spaceBetween: 16,
+			pagination: {
+				el: qs(".swiper-pagination", el.parentNode),
+			},
 			}
 
 		new Swiper(el,opts)	
 
 	})
 
+}
+
+async function tour_page_cnt_gallery(){
+	const cnt_swiper = qs('.cnt-swiper')
+	if(!cnt_swiper) return
+	await sw.load()
+	
+	const opts = {
+		spaceBetween: 16,
+		pagination: {
+			el: qs(".swiper-pagination", cnt_swiper),
+		},
+	}
+
+new Swiper(qs('.swiper', cnt_swiper),opts)
 }

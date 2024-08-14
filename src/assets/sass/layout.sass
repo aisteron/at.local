@@ -1840,11 +1840,18 @@ body.tour-page
 				font-size: 1.5rem
 				font-weight: 600
 			.list
-				display: flex
+				//display: flex
 				gap: 1rem
 				flex-wrap: wrap
+				display: grid
+				grid-template-columns: 1fr 1fr 1fr 1fr
+				@media(max-width: 830px)
+					grid-template-columns: 1fr 1fr 1fr
+					gap: 1%
 				img
 					border-radius: 6px
+					width: 100%
+					object-fit: cover
 				a
 					&:last-child
 						position: relative
@@ -1858,6 +1865,8 @@ body.tour-page
 							top: 50%
 							left: 50%
 							transform: translate(-50%, -50%)
+							@media(max-width:480px)
+								font-size: 2rem
 
 						&:after
 							content: ''
@@ -1865,6 +1874,16 @@ body.tour-page
 							position: absolute
 							inset: 0
 							border-radius: 6px
+			.cnt-swiper
+				position: relative
+				margin-bottom: 2.5rem
+				.swiper-pagination
+					margin-bottom: -33px
+				.swiper-slide
+					img
+						width: 100%
+						border-radius: 6px
+
 		section#why
 			width: 1100px
 			@media(max-width:1060px)
@@ -1911,6 +1930,11 @@ body.tour-page
 				font-size: 1.5rem
 				font-weight: 600
 				padding: 2rem
+				@media(max-width:480px)
+					flex-direction: column
+					text-align: center
+					font-size: 1rem
+					gap: 2rem
 body.contacts-page
 	article
 		@include pw
