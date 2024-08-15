@@ -41,6 +41,14 @@ header
 		gap: 1rem
 		flex-grow: 1
 		justify-content: center
+		li
+			border: 1px solid transparent
+			border-radius: 50%
+			cursor: pointer
+			&.active
+				border-color: $green
+			>*
+				pointer-events: none
 		@media(max-width:1024px)
 			flex-grow: 1
 			justify-content: flex-end
@@ -524,6 +532,9 @@ body.tours-page
 				display: block
 			ul
 				columns: 2
+				// li
+				// 	display: flex
+				// 	gap:10px
 				a
 					color: #4E4E4E
 					text-decoration: none
@@ -654,6 +665,8 @@ body.tours-page
 							border: 1px solid #C5C5C5
 							border-radius: 6px
 							padding: 6px 14px
+							@media(max-width:480px)
+								padding: 6px 8px
 						.plan
 							background-color: #E2E4EC
 							border-radius: 6px
@@ -661,6 +674,8 @@ body.tours-page
 							font-size: 14px
 							font-weight: normal
 							padding: 6px 16px
+							@media(max-width:480px)
+								padding: 6px 8px
 				@media(max-width:480px) // li
 					width: 100%
 					box-shadow: none
@@ -1587,6 +1602,7 @@ body.tour-page
 							font-weight: 600
 							font-size: 20px
 							text-transform: uppercase
+							min-width: 110px
 						ul
 							columns: 3
 							gap: 2rem
@@ -1856,7 +1872,9 @@ body.tour-page
 					width: 100%
 					object-fit: cover
 				a
-					&:last-child
+					&.hidden
+						display: none
+					&[data-count]
 						position: relative
 						&:before
 							content: attr(data-count)

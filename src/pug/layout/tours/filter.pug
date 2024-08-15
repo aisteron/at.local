@@ -1,52 +1,23 @@
 #filter
 	.group
-		span.head Страны
-		ul
-			li
-				label
-					input(type="checkbox")
-					span.s
-					a(href="#") Россия
-			li
-				label
-					input(type="checkbox")
-					span.s
-					a(href="#") Мексика
-			li
-				label
-					input(type="checkbox")
-					span.s
-					a(href="#") Индонезия
-			li
-				label
-					input(type="checkbox")
-					span.s
-					a(href="#") Нидерланды́
-			li
-				label
-					input(type="checkbox")
-					span.s
-					a(href="#") Индонезия		
-			li
-				label
-					input(type="checkbox")
-					span.s
-					a(href="#") Индонезия		
-	.group
 		span.head События
 		ul
 			li
 				label
-					input(type="checkbox")
+					input(type="checkbox" data-tag="new_year" checked data-title="Туры на Новый год")
 					span.s
-					a(href="#") Туры на Новый год
+					a(href="новый-год") Новый год
+	.group
+		span.head Страны
+		ul
 			li
 				label
-					input(type="checkbox")
+					input(type="checkbox" data-tag="ru" data-title="Туры в Россию")
 					span.s
-					a(href="#") Туры на лето
+					a(href="россия") Россия
 			li
 				label
-					input(type="checkbox")
+					input(type="checkbox" data-tag="nm" data-title="")
 					span.s
-					a(href="#") Туры в Африку
+					a(href="намибия") Намибия
+
