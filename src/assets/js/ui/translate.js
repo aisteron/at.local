@@ -12,14 +12,30 @@ export function translate(){
 	qsa('[data-lang]').forEach(el => {
 		
 		el.listen("click", e => {
+
 			let lng = e.target.dataset.lang
 
-			document.cookie = `googtrans=/ru/${lng}`;
-			if(lng == 'ru') document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+			lng == 'ru'
+				? removeC()
+				:(removeC(), Cookies.set('googtrans', `/ru/${lng}`,{path:"/", domain:"."+document.domain}))
+					
 			window.location.reload();
 
 		})
 	})
+}
+
+function removeC(){
+
+	let clang = getCookieValue('googtrans')
+	let c = clang?.split("/")[2]
+
+	Cookies.remove('googtrans',{path:"/", domain:"."+document.domain})
+	Cookies.remove('googtrans',{path:"/", domain:".ashaev.by"})
+	Cookies.remove('googtrans', `/ru/${c}`,{path:"/", domain:".ashaev.by"})
+
+	Cookies.remove('googtrans',{path:"/", domain:".adventuretime.pro"})
+	Cookies.remove('googtrans', `/ru/${c}`,{path:"/", domain:".adventuretime.pro"})
 }
 
 function getCookieValue(name) {
