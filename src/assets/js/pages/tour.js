@@ -22,6 +22,8 @@ export const Tour = {
 
 		this.expand_faq() // блок часто задаваемых вопросов
 
+		this.send_pdf()
+
 
 	},
 
@@ -146,6 +148,40 @@ export const Tour = {
 			el.listen("click",e => {
 				e.target.closest('li').classList.toggle('open')
 			})
+		})
+	},
+
+	send_pdf(){
+		let em = qs('#program .row .email span')
+		let m = em.closest('.email')
+		if(!em) return
+
+		em.listen("click", e => {
+			m.classList.toggle('open')
+		})
+
+		document.listen("click",e =>{
+			if(e.target == em) return
+			if(qs('form', m).contains(e.target)) return
+			
+			m.classList.remove('open')
+		})
+
+		// send
+		qs('form',m).listen("submit", async e => {
+			e.preventDefault()
+			let obj = {
+				action: "pdf_email_receive",
+				email: qs('input', m).value
+			}
+			
+			try{
+				var res = await Fetch("pdf_email_receive", obj, '/api')
+			} catch(e){
+				console.log(e)
+				return new Snackbar("Что-то пошло не так")
+			}
+			
 		})
 	}
 

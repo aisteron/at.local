@@ -1487,6 +1487,60 @@ body.tour-page
 						cursor: pointer
 						&:hover
 							color: $green
+							svg
+								path
+									fill: $green
+					.email
+						position: relative
+						form
+							display: none
+							position: absolute
+							top: 24px
+							left: 0
+							//display: flex
+							gap: 13px
+							background-color: #fff
+							box-shadow: 0 1px 4px 0 rgba(33,33,38,.16)
+							border-radius: 12px
+							padding: 13px
+							input
+								font-size: 1rem
+								font-family: Inter
+								background-color: #F0F0F0
+								border: none
+								border-radius: 6px
+								width: 180px
+								padding: 4px
+								padding-left: 16px
+								&:focus
+									border: none
+									outline: none
+									background-color: darken(#F0F0F0, 5%)
+								&::placeholder
+									font-size: inherit
+									font-family: inherit
+									padding-left: 0px
+							button
+								background-color: $green
+								color: #fff
+								font-family: Inter
+								font-size: 18px
+								font-weight: 500
+								border: none
+								border-radius: 6px
+								padding: 12px 26px
+								cursor: pointer
+								&:hover
+									background-color: darken($green, 5%)		
+						&.open
+							color: $green
+							svg
+								path
+									fill: $green
+							form
+								display: flex
+
+
 					.expand
 						>*
 							pointer-events: none
