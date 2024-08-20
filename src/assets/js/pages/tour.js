@@ -10,7 +10,7 @@ export const Tour = {
 
 
 		this.transfer_elements()
-		this.soc_share() // поделиться ссылкой	
+		
 		this.add_favorite() // добавить в избранное
 
 		this.top_gallery_mobile_lazy() // ленивая загрузка для мобильной галереи
@@ -23,6 +23,9 @@ export const Tour = {
 		this.expand_faq() // блок часто задаваемых вопросов
 
 		this.send_pdf()
+
+		this.rating()
+
 
 
 	},
@@ -53,11 +56,6 @@ export const Tour = {
 
 		})
 
-	},
-	soc_share(){
-		qs('.tour-page .share .wrap .button')?.listen("click",e => {
-			e.target.closest('.wrap').classList.toggle('open')
-		})
 	},
 	transfer_elements(){
 		let script = document.createElement('script')
@@ -169,20 +167,60 @@ export const Tour = {
 
 		// send
 		qs('form',m).listen("submit", async e => {
+
 			e.preventDefault()
+			qs('button', m).disabled = true
 			let obj = {
 				action: "pdf_email_receive",
-				email: qs('input', m).value
+				email: qs('input', m).value,
+				resid: +qs('[resid]').getAttribute('resid')
 			}
 			
-			try{
+			try {
 				var res = await Fetch("pdf_email_receive", obj, '/api')
 			} catch(e){
 				console.log(e)
-				return new Snackbar("Что-то пошло не так")
+				new Snackbar("Что-то пошло не так")
 			}
+
+			qs('button', m).disabled = false
+			if(!res) return
+
+			if(res?.success){
+				new Snackbar("✅ Успех! Проверьте, пожалуйста, свою почту")
+				qs('form',m).reset()
+				m.classList.remove("open")
+
+			}
+
+
 			
 		})
+	},
+	
+	rating(){
+		// copy url in share button
+		let link = qs('.rating .share li.copy')
+		if(link){
+			link.listen("click", _ => {
+				navigator.clipboard.writeText(window.location.href)
+				new Snackbar("✅ Ссылка скопирована!")
+			})
+			
+		}
+
+		// открыть попап
+
+		qs('.tour-page .share .wrap .button')?.listen("click",e => {
+			e.target.closest('.wrap').classList.toggle('open')
+		})
+
+		document.listen("click", e => {
+			if(e.target == qs('.tour-page .share .wrap .button')) return
+			if(qs('.tour-page .share .wrap .body').contains(e.target)) return
+			qs('.tour-page .share .wrap').classList.remove('open')
+		})
+
 	}
 
 }

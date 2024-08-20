@@ -57,6 +57,7 @@ header
 				img
 					width: 20px
 					min-width: 20px
+					height: 20px
 
 	nav
 		@media(max-width:1024px)
@@ -965,6 +966,9 @@ body.tour-page
 			margin: 1.5rem 0
 			flex-wrap: wrap
 			gap: 1rem
+			@media(max-width:480px)
+				margin: 0
+				gap: 0.5rem
 			div.stars
 				display: flex
 				align-items: center
@@ -990,6 +994,8 @@ body.tour-page
 						padding: 7px
 						border-radius: 50%
 						cursor: pointer
+						>*
+							pointer-events: none
 						svg
 							min-width: 18px
 					ul.body
@@ -1004,6 +1010,11 @@ body.tour-page
 						z-index: 10
 						width: 210px
 						line-height: 180%
+						li
+							&.copy
+								cursor: pointer
+								&:hover
+									color: $green
 						a
 							color: #000
 							text-decoration: none
@@ -1015,6 +1026,10 @@ body.tour-page
 		#mobile_gallery
 			margin: 1rem -1rem
 			.swiper
+				height: 300px
+				.swiper-slide
+					img
+						object-fit: cover
 				.count
 					box-shadow: inset 0 0 1px 0 rgba(0, 0, 0, 0.49)
 					background: #fff
@@ -1530,6 +1545,14 @@ body.tour-page
 								border-radius: 6px
 								padding: 12px 26px
 								cursor: pointer
+								&[disabled]
+									background-color: #eee
+									color: #ccc
+									cursor: not-allowed
+									&:hover
+										background-color: #eee
+
+
 								&:hover
 									background-color: darken($green, 5%)		
 						&.open
@@ -1570,6 +1593,7 @@ body.tour-page
 							>.head
 								border-bottom: 1px solid #eee
 								background-color: #fafafa
+								border-radius: 12px
 								svg
 									transform: rotate(180deg)
 								img
@@ -1583,7 +1607,7 @@ body.tour-page
 							cursor: pointer
 							&:hover
 								background-color: #fafafa
-								border-top-left-radius: 12px
+								border-radius: 12px
 							@media(max-width:480px)
 								height: 92px
 								border-radius: 0
@@ -1881,14 +1905,7 @@ body.tour-page
 					background: #fff
 					border-radius: 12px
 					&:not(:last-child)
-						margin-bottom: 1rem
-					&.open
-						.head
-							//padding-bottom: 1rem
-							svg
-								transform: rotate(180deg)
-						.body
-							display: block
+						margin-bottom: 1rem			
 					.head
 						display: flex
 						justify-content: space-between
@@ -1897,6 +1914,10 @@ body.tour-page
 						font-weight: 600
 						padding: 38px 30px
 						border-bottom: 1px solid #E4E4E4
+						cursor: pointer
+						&:hover
+							background-color: #fafafa
+							border-radius: 12px
 						@media(max-width: 480px)
 							font-size: 1.2rem
 							gap: 10px
@@ -1908,6 +1929,14 @@ body.tour-page
 						padding: 1rem 30px
 						>:first-child
 							margin-top: 0
+					&.open
+						.head
+							border-bottom-left-radius: 0
+							border-bottom-right-radius: 0
+						svg
+							transform: rotate(180deg)
+						.body
+							display: block
 		section#gallery
 			h3
 				color: $green
@@ -1961,7 +1990,7 @@ body.tour-page
 						border-radius: 6px
 
 		section#why
-			width: 1100px
+			width: 1140px
 			@media(max-width:1060px)
 				width: 100%
 				img.bg
