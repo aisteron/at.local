@@ -216,6 +216,13 @@ export const Dialog = {
 			
 			new Snackbar('✅ Успешно отправлено')
 			qs('#tourOrderPopup form').reset()
+
+			// кастомный инвент, чтобы метрика в libs.js услышала
+			const catFound = new CustomEvent("tourOrderPopup_send", {
+				detail: { name: "cat"},
+			});
+
+			document.dispatchEvent(catFound)
 			
 		}
 	}

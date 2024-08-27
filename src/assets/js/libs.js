@@ -89,6 +89,55 @@ export function runMetrika(number){
 	(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 	ym(number, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true });
 
+	
+	// слушатели метрики
+
+	// страница тура. aside. отдельно плавающие тг и вацап
+	qsa('.little_float a').forEach(el => {
+		el.listen("click", e => {
+			//e.preventDefault()
+			e.target.classList.value == 'tg'
+			? reach('telegram')
+			: reach('whatsapp')
+		})
+	});
+
+	// страница тура. aside. плавающая форма "на данном этапе могут возникнуть вопросы"
+	[...qsa('#aside_questions a.wa'), ...qsa('#aside_questions a.tg')].forEach(el => {
+		el.listen("click", e => {
+			e.target.classList.value == 'tg'
+			? reach('telegram')
+			: reach('whatsapp')
+		})
+	})
+
+	// страница тура. aside. кнопка "Забронировать"
+	qs('#aside_order button[type="submit"]')?.listen("click", e => reach('knopka_zabronirovat'))
+
+	// страница тура. попап tourOrderPopup
+	qs('#tourOrderPopup button')?.listen("click", e => reach('knopka_otpavit'))
+
+	// страница тура. попап tourOrderPopup. успешно отправленная заявка
+	document.listen("tourOrderPopup_send", e => reach('zayavka'))
+
+
+	// страница тура. программа. ссылка "получить на email"
+	qs('#program .row .email span')?.listen("click", e => reach('knopka_pochta'))
+
+	// страница тура. программа. отправка формы на почту
+	document.listen("email_send", e => reach('otpravil_pochtu'))
+
+
+}
+
+export function reach(target_name){
+
+	try {
+		ym(28209561, 'reachGoal', target_name)
+	} catch(e){
+		console.log(e)
+	}
+	
 }
 
 export const fancy = {

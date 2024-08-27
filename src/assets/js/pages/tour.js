@@ -191,7 +191,16 @@ export const Tour = {
 				qs('form',m).reset()
 				m.classList.remove("open")
 
+				// кастомный инвент, чтобы метрика в libs.js услышала
+				const catFound = new CustomEvent("email_send", {
+					detail: { name: "cat"},
+				});
+
+				document.dispatchEvent(catFound)
+
 			}
+
+			
 
 
 			

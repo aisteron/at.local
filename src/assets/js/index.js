@@ -1,3 +1,4 @@
+import { runMetrika } from "./libs";
 import { Pages } from "./pages";
 import { Ui } from "./ui";
 import { translate } from "./ui/translate";
@@ -9,5 +10,6 @@ function init(){
 	Pages()
 
 	translate()
+	runMetrika(28209561) // и все слушатели
 
 }

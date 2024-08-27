@@ -1351,7 +1351,8 @@ body.tour-page
 						align-items: center
 						justify-content: center
 						gap: 10px
-
+						a.wa >*, a.tg >*
+							pointer-events: none
 		section#cnt
 			display: flex
 			gap: 1rem
@@ -1477,6 +1478,8 @@ body.tour-page
 					position: absolute
 					top: 0
 					right: -72px
+					a >*
+						pointer-events: none
 					@media(max-width:1400px)
 						position: relative
 						width: max-content
