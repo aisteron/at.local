@@ -174,7 +174,7 @@ function mobile_menu_open(){
 
 
 
-	qs('#nav-icon1').listen("click", e => {
+	qs('#nav-icon1')?.listen("click", e => {
 		qs('header nav').classList.toggle('open')
 		e.target.classList.toggle('open')
 	})

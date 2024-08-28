@@ -25,7 +25,7 @@ export const Dialog = {
 
 	select_date(){
 
-		qs('#tourOrderPopup .select .head').listen("click",e  => {
+		qs('#tourOrderPopup .select .head')?.listen("click",e  => {
 			e.target.closest('.select').classList.toggle('open')
 		})
 
