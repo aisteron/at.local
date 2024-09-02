@@ -1351,8 +1351,12 @@ body.tour-page
 						align-items: center
 						justify-content: center
 						gap: 10px
-						a.wa >*, a.tg >*
-							pointer-events: none
+						a.wa
+							>*
+								pointer-events: none
+						a.tg
+							>*
+								pointer-events: none
 		section#cnt
 			display: flex
 			gap: 1rem
@@ -1478,8 +1482,9 @@ body.tour-page
 					position: absolute
 					top: 0
 					right: -72px
-					a >*
-						pointer-events: none
+					a
+						>*
+							pointer-events: none
 					@media(max-width:1400px)
 						position: relative
 						width: max-content
@@ -2070,28 +2075,118 @@ body.contacts-page
 				&:hover
 					text-decoration: none
 body.faq-page
+	background-color: #fff
 	.wrapper
 		width: 785px
 		margin: 0 auto
 		#pages
 			.page
-				height: 1087px
 				padding: 45px
 				&.page1
+					height: 1087px
 					background-image: url(/assets/img/pages/faq/cover.jpg)
 					color: #fff
-					//background-size: cover
+					background-size: cover
 					background-repeat: no-repeat
 					.txt
 						display: flex
 						flex-direction: column
 						gap: 1rem
-				&.page2
+				section#description
 					span.pagetitle
 						font-size: 2rem
 						font-weight: bold
-					.gallery
-						display: flex
-						gap: 1rem
-						img
-							border-radius: 6px
+				section#price
+					h3
+						font-size: 1.5rem
+						color: $green
+					ul
+						li
+							display: flex
+							gap: 32px
+							&:not(:last-child)
+								margin-bottom: 10px
+							span
+								&:nth-of-type(2n)
+									font-weight: bold
+				section#program
+					>h3
+						font-size: 1.5rem
+						color: $green
+					.day
+						h3
+							border-bottom: 1px solid #ccc
+							padding-bottom: 1rem
+						.gallery
+							display: flex
+							gap: 1rem
+							img
+								border-radius: 6px
+				section#inclusion
+					.item
+						h3
+							font-size: 1.5rem
+							font-weight: 600
+						ul
+							padding-left: 1.5rem
+							li
+								position: relative
+								&:not(:last-child)
+									margin-bottom: 10px
+								&:before
+									position: absolute
+									left: -2rem
+									top: 0
+						&.inc
+							h3
+								color: $green
+							ul
+								li
+									&:before
+										content: url(/assets/img/pages/faq/check.svg)
+
+						&.not
+							h3
+								color: #FF0303
+							ul
+								li
+									&:before
+										content: url(/assets/img/pages/faq/cancel.svg)
+				section#hotels
+					h3
+						font-size: 1.5rem
+						color: $green
+					.item
+						.name
+							font-weight: 500
+							margin-bottom: 0
+						.dsc
+							color: #4E4E4E
+							margin-top: 10px
+							font-size: 14px
+							border-bottom: 1px solid #ccc
+							padding-bottom: 1rem
+						.txt
+							font-size: 14px
+							.gallery
+								display: flex
+								gap: 1rem
+								flex-wrap: wrap
+								img
+									border-radius: 6px
+				section#reviews
+					h3
+						font-size: 1.5rem
+						color: $green
+					.list
+						.item
+							display: flex
+							gap: 1rem
+							.ava
+								display: flex
+								flex-direction: column
+								gap: 10px
+								align-items: center
+								min-width: 80px
+								img
+									min-width: 69px

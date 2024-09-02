@@ -185,7 +185,7 @@ export async function Fetch(action, data, path){
 		headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 		body: body
 	});
-
+	
 	if(!response.ok){
 		throw new Error('Ошибка сервера')
 	}

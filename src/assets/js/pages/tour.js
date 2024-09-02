@@ -179,7 +179,10 @@ export const Tour = {
 			try {
 				var res = await Fetch("pdf_email_receive", obj, '/api')
 			} catch(e){
-				console.log(e)
+				
+				if(e.message == 'Ошибка сервера'){
+					return new Snackbar('Неверный формат почты')
+				}
 				new Snackbar("Что-то пошло не так")
 			}
 
