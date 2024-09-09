@@ -837,6 +837,20 @@ body.reviews-page
 						color: #4E4E4E
 						line-height: 140%
 
+						ol
+							padding-left: 1rem
+							li
+								padding: 0
+								box-shadow: none
+								position: relative
+								&:before
+									content: '\2022'
+									position: absolute
+									left: -1rem
+								&:not(:last-child)
+									margin-bottom: 8px
+						
+
 				.gallery
 					display: flex
 					gap: 11px
