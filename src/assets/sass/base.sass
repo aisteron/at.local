@@ -127,7 +127,7 @@ $notebook: 100%
 
 		&:nth-child(3)
 			top: 6px
-			transform: rotate(-135deg)		
+			transform: rotate(-135deg)
 nav.bread
 	margin: 20px 0
 	a
@@ -154,7 +154,7 @@ main
 h1.green
 	font-size: 48px
 	color: $green
-	font-weight: 600	
+	font-weight: 600
 .fake-masonry
 	--gap: clamp(1rem,5vmin,1rem)
 	columns: 400px
@@ -163,7 +163,7 @@ h1.green
 	.item
 		break-inside: avoid
 		margin-bottom: var(--gap)
-		
+
 .swiper-tours
 	display: grid
 	column-gap: 1rem
@@ -227,7 +227,7 @@ h1.green
 			color: #000
 			text-decoration: none
 			&:after
-				content: ''	
+				content: ''
 				position: absolute
 				inset: 0
 				border-radius: 12px
@@ -274,7 +274,7 @@ dialog#tourOrderPopup
 			margin-bottom: 1rem
 		.columns
 			display: flex
-			gap: 1rem	
+			gap: 1rem
 			@media(max-width:910px)
 				flex-direction: column
 			.column
@@ -292,14 +292,14 @@ dialog#tourOrderPopup
 								display: flex
 								justify-content: space-between
 								align-items: center
-							.dsc	
+							.dsc
 								display: flex
 								align-items: center
 								gap: 1rem
 								font-weight: 300
 								color: #4E4E4E
 								font-size: 14px
-								margin: 10px 0	
+								margin: 10px 0
 						ul.body
 							display: none
 							flex-direction: column
@@ -322,7 +322,7 @@ dialog#tourOrderPopup
 									opacity: 0.5
 									cursor: not-allowed
 									&:hover
-										background-color: #fff	
+										background-color: #fff
 								.dsc
 									display: flex
 									gap: 1rem
@@ -331,7 +331,7 @@ dialog#tourOrderPopup
 									color: #4E4E4E
 									font-weight: 300
 
-						&.open  // .select
+						&.open	// .select
 							.head
 								border-bottom: 1px solid #c5c5c5
 								svg
@@ -362,8 +362,8 @@ dialog#tourOrderPopup
 									&::-webkit-inner-spin-button
 										-webkit-appearance: none
 										margin: 0
-									font-family: 'Inter'		
-									font-weight: 600
+										font-family: 'Inter'
+										font-weight: 600
 									&:placeholder
 										font-family: inherit
 								button
@@ -394,7 +394,7 @@ dialog#tourOrderPopup
 						font-size: 1rem
 						border-top-right-radius: 6px
 						border-bottom-right-radius: 6px
-						
+
 						&:focus
 							outline: none
 							background-color: darken(#F0F0F0, 5%)
@@ -432,7 +432,7 @@ dialog#tourOrderPopup
 								width: 20px
 								height: 20px
 								border-radius: 4px
-								border: 1px solid $green	
+								border: 1px solid $green
 					.mask
 						background-color: #F0F0F0
 						border-radius: 6px
@@ -453,7 +453,7 @@ dialog#tourOrderPopup
 								svg.f
 									min-width: 23px
 								svg.triangle
-									min-width: 11px	
+									min-width: 11px
 						ul.body
 							display: none
 							position: absolute
@@ -519,5 +519,36 @@ dialog#tourOrderPopup
 						&:focus
 							outline: none
 						&[disabled]
-							background-color: #ccc	
+							background-color: #ccc
 							cursor: not-allowed
+.tooltip
+	position: relative
+	display: inline-block
+	cursor: pointer
+	.tooltiptext
+		font-size: 14px
+		visibility: hidden
+		width: fit-content
+		background-color: #000000a6
+		color: #fff
+		text-align: center
+		border-radius: 6px
+		padding: 5px
+		position: absolute
+		z-index: 1
+		bottom: 150%
+		left: 50%
+		margin-left: -70px
+
+		&::after
+			content: ""
+			position: absolute
+			top: 100%
+			left: 50%
+			margin-left: -5px
+			border-width: 5px
+			border-style: solid
+			border-color: black transparent transparent transparent
+
+	&:hover .tooltiptext
+		visibility: visible
