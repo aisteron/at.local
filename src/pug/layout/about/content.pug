@@ -1,10 +1,19 @@
 include ../../ui/bread.pug
 article.mb1
 	<style scoped>@media(max-width:480px){.hero {height:220px; width: calc(100vw - 17px)}}</style>
-	.hero
-		picture
-			source(media="(max-width:480px)" srcset="/assets/img/pages/about/hero480.avif" type="image/avif")
-			img(src="/assets/img/pages/about/hero.jpg")
+	.hero.swiper
+		.swiper-wrapper
+			.swiper-slide
+				picture
+					source(media="(max-width:480px)" srcset="/assets/img/pages/about/hero480.avif" type="image/avif")
+					img(src="/assets/img/pages/about/hero.jpg")
+			.swiper-slide
+				picture
+					source(media="(max-width:480px)" data-srcset="/assets/img/pages/about/hero2_480.avif" type="image/avif")
+					img(data-src="/assets/img/pages/about/hero2.jpg")
+		.pagination-wrapper
+			.swiper-pagination
+
 	.box.about
 		h1 О нас
 		hr

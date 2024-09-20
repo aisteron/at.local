@@ -26,6 +26,8 @@ export const Tour = {
 
 		this.rating()
 
+		this.floating_anchors() // scroll in View
+
 
 
 	},
@@ -86,6 +88,18 @@ export const Tour = {
 		}
 	},
 
+	floating_anchors(){
+		qsa('ul.floating-anchors li a').forEach(el => {
+			
+			el.listen("click",e => {
+				e.preventDefault()
+				
+				let anchor = e.target.href.split('#')[1]
+				qs(`#${anchor}`).scrollIntoView({block: "center"});
+
+			})
+		})
+	},	
 
 	async top_gallery_mobile_lazy(){
 		if(!qs('#mobile_gallery')) return

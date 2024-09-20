@@ -18,6 +18,9 @@ export function swipers(){
 	// страница тура. контентная галерея . мобильная версия
 	tour_page_cnt_gallery()
 
+	// страница о нас
+	about_page_swiper()
+
 }
 
 async function article_swiper(){
@@ -144,4 +147,27 @@ async function tour_page_cnt_gallery(){
 	}
 
 new Swiper(qs('.swiper', cnt_swiper),opts)
+}
+
+async function about_page_swiper(){
+	let swiper = qs('.about-page .hero.swiper')
+	if(!swiper) return
+
+
+
+	await sw.load()
+	
+	const opts = {
+		spaceBetween: 16,
+		pagination: {
+			el: qs(".swiper-pagination", swiper),
+		},
+	}
+
+	new Swiper(swiper,opts)
+
+	// custom lazy
+	qsa('.swiper-slide [data-srcset]').forEach(el => el.srcset = el.dataset.srcset)
+	qsa('.swiper-slide [data-src]').forEach(el => el.src = el.dataset.src)
+
 }
