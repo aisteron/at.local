@@ -92,10 +92,12 @@ export const Tour = {
 		qsa('ul.floating-anchors li a').forEach(el => {
 			
 			el.listen("click",e => {
-				e.preventDefault()
 				
 				let anchor = e.target.href.split('#')[1]
-				qs(`#${anchor}`).scrollIntoView({block: "center"});
+				
+				anchor && e.preventDefault()
+				
+				qs(`#${anchor}`).scrollIntoView();
 
 			})
 		})
