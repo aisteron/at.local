@@ -193,7 +193,7 @@ export const Reviews = {
 			//for (var p of formData) { console.log(p);}
 			
 
-			let res = await fetch("http://at.ashaev.by/api",{
+			let res = await fetch("https://adventuretime.pro/api",{
 				method: 'POST',
 				body: formData
 			})

@@ -11,6 +11,7 @@ export const Dialog = {
 		this.apply_inputmask()
 		this.listeners()
 		this.to_server()
+		console.log(GKEY)
 		
 	},
 
