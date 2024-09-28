@@ -97,6 +97,11 @@ export const Tour = {
 				
 				anchor && e.preventDefault()
 				
+				// хак для анкора #txt для мобильного вида
+				if(qs('#mobile_gallery') && anchor == 'txt') return qs(`#${anchor}`).scrollIntoView({block:'center'});
+				
+
+
 				qs(`#${anchor}`).scrollIntoView();
 
 			})
