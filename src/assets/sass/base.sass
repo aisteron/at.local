@@ -552,3 +552,72 @@ dialog#tourOrderPopup
 
 	&:hover .tooltiptext
 		visibility: visible
+dialog#modalResponse
+	position: fixed
+	margin: unset
+	top: 50%
+	left: 50%
+	width: 360px
+	z-index: 10
+	transform: translateX(-50%) translateY(-50%)
+	background-color: #fff
+	border-radius: 12px
+	box-shadow: 0 1px 4px 0 rgba(33, 33, 38, 0.16)
+	border: none
+	padding: 24px
+	padding-top: 18px
+	.head
+		display: flex
+		align-items: center
+		justify-content: space-between
+		border-bottom: 1px solid $green
+		font-size: 20px
+		font-weight: 500
+		color: $green
+		margin: 0 -24px
+		padding: 0 24px
+		padding-bottom: 12px
+		button.close
+			width: 24px
+			height: 24px
+			cursor: pointer
+			border: none
+			padding: 4px
+			background: transparent
+			background-position: center center
+			background-repeat: no-repeat
+			background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 20 20'%3e%3cpath fill='%2332A95E' d='m2 20-2-2 8-8-8-8 2-2 8 8 8-8 2 2-8 8 8 8-2 2-8-8-8 8Z'/%3e%3c/svg%3e")
+			&:hover
+				filter: brightness(0) saturate(100%) invert(10%) sepia(84%) saturate(7460%) hue-rotate(13deg) brightness(108%) contrast(122%)
+	.body
+		text-align: center
+		.icon
+			width: 62px
+			height: 62px
+			margin: 1rem auto
+			background-repeat: no-repeat
+			background-size: cover
+			&.success
+				background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='52' height='52' fill='none' viewBox='0 0 52 52'%3e%3cpath fill='%2332A95E' d='m22.217 37.717 18.212-18.213-3.617-3.617-14.595 14.596-7.363-7.362-3.616 3.617 10.979 10.979Zm3.616 13.95c-3.573 0-6.932-.678-10.075-2.035-3.143-1.356-5.877-3.197-8.202-5.522s-4.165-5.059-5.522-8.202C.678 32.765 0 29.407 0 25.833c0-3.573.678-6.932 2.034-10.075 1.357-3.143 3.197-5.877 5.522-8.202s5.06-4.165 8.202-5.522C18.901.678 22.26 0 25.833 0c3.574 0 6.932.678 10.075 2.034 3.143 1.357 5.877 3.197 8.202 5.522s4.166 5.06 5.522 8.202c1.357 3.143 2.035 6.502 2.035 10.075 0 3.574-.678 6.932-2.035 10.075-1.356 3.143-3.197 5.877-5.522 8.202s-5.059 4.166-8.202 5.522c-3.143 1.357-6.501 2.035-10.075 2.035Zm0-5.167c5.77 0 10.657-2.002 14.66-6.006 4.005-4.004 6.007-8.891 6.007-14.66 0-5.77-2.002-10.657-6.006-14.661-4.004-4.004-8.891-6.006-14.66-6.006-5.77 0-10.657 2.002-14.661 6.006-4.004 4.004-6.006 8.89-6.006 14.66s2.002 10.657 6.006 14.66c4.004 4.005 8.89 6.007 14.66 6.007Z'/%3e%3c/svg%3e")
+			&.error
+				background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='52' height='52' fill='none' viewBox='0 0 52 52'%3e%3cpath fill='%23FF0303' d='m16.533 38.75 9.3-9.3 9.3 9.3 3.617-3.617-9.3-9.3 9.3-9.3-3.617-3.616-9.3 9.3-9.3-9.3-3.616 3.616 9.3 9.3-9.3 9.3 3.616 3.617Zm9.3 12.917c-3.573 0-6.932-.678-10.075-2.035-3.143-1.356-5.877-3.197-8.202-5.522s-4.165-5.059-5.522-8.202C.678 32.765 0 29.407 0 25.833c0-3.573.678-6.932 2.034-10.075 1.357-3.143 3.197-5.877 5.522-8.202s5.06-4.165 8.202-5.522C18.901.678 22.26 0 25.833 0c3.574 0 6.932.678 10.075 2.034 3.143 1.357 5.877 3.197 8.202 5.522s4.166 5.06 5.522 8.202c1.357 3.143 2.035 6.502 2.035 10.075 0 3.574-.678 6.932-2.035 10.075-1.356 3.143-3.197 5.877-5.522 8.202s-5.059 4.166-8.202 5.522c-3.143 1.357-6.501 2.035-10.075 2.035Zm0-5.167c5.77 0 10.657-2.002 14.66-6.006 4.005-4.004 6.007-8.891 6.007-14.66 0-5.77-2.002-10.657-6.006-14.661-4.004-4.004-8.891-6.006-14.66-6.006-5.77 0-10.657 2.002-14.661 6.006-4.004 4.004-6.006 8.89-6.006 14.66s2.002 10.657 6.006 14.66c4.004 4.005 8.89 6.007 14.66 6.007Z'/%3e%3c/svg%3e")
+		.header
+			font-size: 20px
+			font-weight: 500
+		.dsc
+			width: 80%
+			margin: 1rem auto
+			a
+				color: $green
+		button.hide
+			background-color: $green
+			font-size: 18px
+			font-weight: 500
+			color: #fff
+			padding: 14px 50px
+			border: none
+			border-radius: 6px
+			cursor: pointer
+			transition: background-color 0.3s ease
+			&:hover
+				background-color: darken($green, 5%)

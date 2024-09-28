@@ -728,6 +728,17 @@ body.reviews-page
 			margin: 30px 0
 			@media(max-width:480px)
 				font-size: 1.5rem
+		span.anchor_to_form
+			color: #fff
+			background-color: $green
+			width: fit-content
+			margin-bottom: 1rem
+			font-size: 18px
+			font-weight: 500
+			border-radius: 12px
+			padding: 14px 28px
+			@media(max-width: 870px)
+				display: block !important
 		.select-tour
 			cursor: pointer
 			position: relative
@@ -1179,6 +1190,32 @@ body.tour-page
 				position: static
 				gap: 20px
 				justify-content: flex-start
+			@media(max-width: 480px)
+				gap: 16px !important
+				position: sticky !important
+				.about
+					order: 1
+				.program
+					order: 2
+				.dates
+					order: 3
+				.conditionals
+					order: 4
+				.faq
+					order: 5
+				.reviews
+					order: 6
+				.hotels
+					order: 7
+				.all
+					order: 8
+					a
+						padding-right: 20px !important
+					svg
+						right: 4px !important
+
+				a
+					padding: 6px 16px !important
 			li
 				&.all
 					position: relative

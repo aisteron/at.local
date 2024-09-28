@@ -11,7 +11,6 @@ export const Dialog = {
 		this.apply_inputmask()
 		this.listeners()
 		this.to_server()
-		console.log(GKEY)
 		
 	},
 
@@ -141,6 +140,7 @@ export const Dialog = {
 		document.addEventListener("update_for_dialog",e => {
 
 			let o = e.detail
+
 			// tour
 			// count
 			// cur
@@ -170,21 +170,29 @@ export const Dialog = {
 
 			submit_button.disabled = true
 
-			grecaptcha.ready(function() {
-				grecaptcha.execute(GKEY.public, {action: 'submit'})
-				.then(async function(token) {
-						// Add your logic to submit to your backend server here.
-						let res = await Fetch("verify_recaptcha", {token:token}, '/api')
-						if(res.score < 0.5) return new Snackbar("Ошибка проверки recaptcha. Пожалуйста, попробуйте позже");
-						
-						send(res)
+			if(process.env.NODE_ENV == 'development'){
+				send()
+			} else {
+				grecaptcha.ready(function() {
+					grecaptcha.execute(GKEY.public, {action: 'submit'})
+					.then(async function(token) {
+							let res = await Fetch("verify_recaptcha", {token:token}, '/api')
+							if(res.score < 0.5) return new Snackbar("Ошибка проверки recaptcha. Пожалуйста, попробуйте позже");
+							
+							send(res)
+					});
 				});
-			});
+
+			}
+
+				
+			
 
 		})
 
 	
 		async function send(){
+
 
 			let obj = {
 				action: 'order_receive',
@@ -215,7 +223,22 @@ export const Dialog = {
 			
 			submit_button.disabled = false
 			
-			new Snackbar('✅ Успешно отправлено')
+			
+			// open modalResponse.js
+
+			let modalObj = {
+				success: true,
+				title: 'Заявка',
+				header: 'Ваша заявка получена',
+				txt: 'Мы свяжемся с вами в ближайшее время'
+			}
+
+			let ev = new CustomEvent("modalResponse_open",{detail:modalObj})
+			document.dispatchEvent(ev)
+
+
+			
+
 			qs('#tourOrderPopup form').reset()
 
 			// кастомный инвент, чтобы метрика в libs.js услышала

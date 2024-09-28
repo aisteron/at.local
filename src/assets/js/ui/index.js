@@ -1,5 +1,6 @@
 import { Fetch, declension, fancy, qs, qsa } from "../libs";
 import { Dialog } from "./dialogPopup";
+import { modalResponse } from "./modalResponse";
 import { swipers } from "./swipers";
 
 export async function Ui(){
@@ -19,6 +20,15 @@ export async function Ui(){
 
 	// диалоговое окно
 	Dialog.init()
+
+	modalResponse()
+
+	// страница тура. кнопка в моб. версии
+	// "оставить отзыв"
+
+	qs('.anchor_to_form')?.listen("click", _ => {
+		qs('form#review').scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+	})
 
 	
 }

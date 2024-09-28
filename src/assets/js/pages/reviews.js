@@ -191,9 +191,11 @@ export const Reviews = {
 				&& Array.from(Reviews.gallery).forEach((el, i) => formData.append(`gallery-${i}`, el))
 			
 			//for (var p of formData) { console.log(p);}
-			
 
-			let res = await fetch("https://adventuretime.pro/api",{
+			process.env.NODE_ENV == 'development' && formData.append('mode', 'dev');
+			
+			let url = process.env.NODE_ENV == 'development' ? 'http://at.ashaev.by/api' : 'https://adventuretime.pro/api'
+			let res = await fetch(url,{
 				method: 'POST',
 				body: formData
 			})
@@ -201,7 +203,19 @@ export const Reviews = {
 			res = await res.json()
 
 			if(res.success){
-				new Snackbar(res.message?res.message:'✅ Успешно отправлено ')
+				
+				//new Snackbar(res.message?res.message:'✅ Успешно отправлено ')
+
+				let modalObj = {
+					success: true,
+					title: 'Отзыв',
+					header: 'Мы получили ваш отзыв',
+					txt: 'Он будет опубликован после проверки'
+				}
+	
+				let ev = new CustomEvent("modalResponse_open",{detail:modalObj})
+				document.dispatchEvent(ev)
+
 				f.reset()
 				Reviews.gallery = new Set([])
 				qs('#review .files .gallery').innerHTML = ''
