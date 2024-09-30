@@ -31,7 +31,7 @@ const buildWebpackConfig = merge(baseWebpackConfig, {
 		),
 
 		new WebpackShellPlugin({
-     onBuildStart:['echo • start deploy on at.ashaev.by'], 
+     onBuildStart:['echo • start deploy on adventuretime.pro'], 
      onBuildEnd:['bash deploy/start.sh']})
 	]
 })

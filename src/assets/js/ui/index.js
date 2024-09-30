@@ -7,6 +7,7 @@ export async function Ui(){
 
 	swipers()
 
+	// фильтрация на странице путешествий
 	filter_tours()
 
 	// страница блога
@@ -112,7 +113,7 @@ async function filter_tours(){
 
 	function draw_tour(g){
 		
-		let host = process.env.NODE_ENV == 'development' ? 'http://at.ashaev.by': ''
+		let host = process.env.NODE_ENV == 'development' ? 'https://adventuretime.pro': ''
 		
 		let str = ``
 		
@@ -136,7 +137,7 @@ async function filter_tours(){
 				date = '___'
 				least = '___'
 			} else {
-				label = `<div class="label yellow"><span>${el?.date?.seats} ${declension("место", "мест","места", el?.date?.seats)}</span></div>`
+				label = `<div class="label ${el?.date?.seats < 9 ? 'red': 'green'}"><span>${el?.date?.seats} ${declension("место", "мест","места", el?.date?.seats)}</span></div>`
 				price = el.date.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") + ' '+el.currency
 
 				start = new Date(el?.date.start)
@@ -173,7 +174,8 @@ async function filter_tours(){
 					</div>
 					<div class="dates">
 						<div class="actual">${date}</div>
-						<div class="plan">${least}</div>
+						
+						${el.least ? `<div class="plan">${least}</div>`: ''}
 					</div>
 				</div>
 

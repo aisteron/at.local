@@ -175,7 +175,7 @@ export async function Fetch(action, data, path){
 
 	data = JSON.stringify(data)
 
-	let host = process.env.NODE_ENV == 'development' ? 'http://at.ashaev.by':''
+	let host = process.env.NODE_ENV == 'development' ? 'https://adventuretime.pro':''
 	let body = `action=${action}&data=${data}`
 	process.env.NODE_ENV == 'development' ? body += `&mode=dev` : ''
 
