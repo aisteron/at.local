@@ -181,8 +181,8 @@ export const Reviews = {
 			formData.append('surname', qs('[name="surname"]',f).value);
 			formData.append('tourname', qs('[name="tourname"]',f).value);
 			formData.append('emoji', qs('[name="emoji"]',f).value);
-			formData.append('guide', qs('[name="guide"]',f).value);
-			formData.append('future', qs('[name="future"]',f).value);
+			//formData.append('guide', qs('[name="guide"]',f)?.value);
+			//formData.append('future', qs('[name="future"]',f)?.value);
 			
 			let ava_cls = qs('.avlist input[name=ava]:checked').closest('li').classList.value
 			formData.append('ava', Reviews.ava ? Reviews.ava : ava_cls)
@@ -194,7 +194,7 @@ export const Reviews = {
 
 			process.env.NODE_ENV == 'development' && formData.append('mode', 'dev');
 			
-			let url = process.env.NODE_ENV == 'development' ? 'http://at.ashaev.by/api' : 'https://adventuretime.pro/api'
+			let url = process.env.NODE_ENV == 'development' ? 'https://adventuretime.pro/api' : '/api'
 			let res = await fetch(url,{
 				method: 'POST',
 				body: formData
