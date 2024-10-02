@@ -85,12 +85,15 @@ const masonry = {
 }
 
 async function filter_tours(){
+	
+	if(!qs('.tours-page')) return
 
 	let checked_inputs = Array.from(qsa('[data-tag]:checked')).map(el => el.dataset.tag)
 	
 	let selected_tags = new Set(checked_inputs || [])
 
 	let res = await Fetch("get_filter_tours",{},"/api")
+	
 	
 	qsa('[data-tag]').forEach(el => {
 		el.listen('change', e => {
