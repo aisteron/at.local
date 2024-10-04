@@ -172,7 +172,7 @@ export const Tour = {
 
 	send_pdf(){
 		let em = qs('#program .row .email span')
-		let m = em.closest('.email')
+		let m = em?.closest('.email')
 		if(!em) return
 
 		em.listen("click", e => {
