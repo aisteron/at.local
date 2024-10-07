@@ -65,7 +65,11 @@ async function home_page_hero_swiper(){
 			el: qs(".swiper-pagination", home_swiper),
 		},
 	}
-	new Swiper(home_swiper, options)	
+	new Swiper(home_swiper, options)
+	
+	// data-src → src
+	qsa('.home.swiper [data-srcset]').forEach(el => el.srcset = el.dataset.srcset)
+	qsa('.home.swiper [data-src]').forEach(el => el.src = el.dataset.src)
 }
 
 async function home_page_tours_swiper() {

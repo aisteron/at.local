@@ -382,10 +382,12 @@ body.about-page
 							line-height: 140%
 body.index-page
 	.home.swiper
-		.swiper-slide img
-			@media(max-width:480px)
-				height: 250px
-				object-fit: cover
+		.swiper-slide:first-of-type
+			img
+				@media(max-width:480px)
+					height: 250px
+					object-fit: cover
+					width: 100%
 		.pagination-wrapper
 			position: absolute
 			bottom: 10px
@@ -1044,7 +1046,7 @@ body.tour-page
 						.button
 							background-color: #ccc
 					&.open
-						ul.body
+						.box
 							display: flex
 					.button
 						padding: 7px
@@ -1054,40 +1056,67 @@ body.tour-page
 							pointer-events: none
 						svg
 							min-width: 18px
-					ul.body
-						display: none
+							transform: translateX(-1px)
+					.box
+						display: none		
 						box-shadow: 0 1px 4px 0 rgba(33, 33, 38, 0.16)
 						background: #fff
 						border-radius: 12px
 						padding: 8px 22px
-						position: absolute
 						top: -4px
 						right: 40px
 						z-index: 10
-						width: 360px
-						line-height: 180%
-
-						flex-direction: row
-						gap: 1rem
-						align-items: center
-						@media(max-width: 840px)
+						width: fit-content
+						flex-direction: column
+						position: absolute
+						z-index: 11
+						@media(max-width: 480px)
+							position: fixed
+							bottom: 0
+							width: 100%
+							top: auto
+							right: 0
+							border-bottom-left-radius: 0
+							border-bottom-right-radius: 0
+							ul.body
+								justify-content: space-between
+								gap: auto
+						.head
+							display: none
 							flex-direction: column
-							width: fit-content
-							align-items: flex-start
-							padding: 22px
+							gap: 12px
+							align-items: center
+							justify-content: center
+							padding-bottom: 1rem
+							border-bottom: 1px solid #ccc
+							margin: 0 -22px
+							margin-bottom: 1rem
+							@media(max-width: 480px)
+								display: flex
+							.drag
+								background-color: #d9d9d9
+								width: 40px
+								height: 5px
+								border-radius: 4px
+					ul.body
+						line-height: 180%
+						font-size: 14px
+						flex-direction: row
+						gap: 1.5rem
+						display: flex
+						margin-top: 0.5rem
 						>*
 							min-width: fit-content
 						li
+							a
+								display: flex
+								align-items: center
+								flex-direction: column
+								justify-content: center
+								gap: 4px
 							svg
 								&:hover
 									opacity: 0.8
-							&.copy
-								cursor: pointer
-								margin-right: 12px
-								line-height: 120%
-								&:hover
-									color: $green
-									text-decoration: underline
 						a
 							color: #000
 							text-decoration: none

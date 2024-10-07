@@ -1,9 +1,18 @@
 .home.swiper
 	.swiper-wrapper
+		//- .swiper-slide
+		//- 	img(src="/assets/img/pages/home/slide/01.jpg")
+		//- .swiper-slide
+		//- 	img(src="/assets/img/pages/home/slide/02.jpg")
+
 		.swiper-slide
-			img(src="/assets/img/pages/home/slide/01.jpg")
+				picture
+					source(media="(max-width:480px)" srcset="/assets/img/pages/home/slide/01_480.webp" type="image/webp")
+					img(src="/assets/img/pages/home/slide/01.jpg")
 		.swiper-slide
-			img(src="/assets/img/pages/home/slide/02.jpg")
+				picture
+					source(media="(max-width:480px)" data-srcset="/assets/img/pages/home/slide/02_480.webp" type="image/webp")
+					img(data-src="/assets/img/pages/home/slide/02.jpg")
 	.pagination-wrapper
 		.swiper-pagination
 article
