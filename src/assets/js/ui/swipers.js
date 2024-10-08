@@ -69,7 +69,7 @@ async function home_page_hero_swiper(){
 	
 	// data-src → src
 	qsa('.home.swiper [data-srcset]').forEach(el => el.srcset = el.dataset.srcset)
-	qsa('.home.swiper [data-src]').forEach(el => el.src = el.dataset.src)
+	qsa('.home.swiper [data-src]').forEach(el => {el.src = el.dataset.src; el.classList.add('h250')})
 }
 
 async function home_page_tours_swiper() {
