@@ -325,7 +325,8 @@ export const aside_form = {
 				let selected = this.schedule.find(el => el.MIGX_id == dateid)
 
 				let cur = this.cfg.currency == "RUB" ? "₽" : this.cfg.currency
-				qs('#aside_order .old_price').innerHTML = selected.old_price.replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+				if(qs('#aside_order .old_price'))
+					qs('#aside_order .old_price').innerHTML = selected.old_price.replace(/\B(?=(\d{3})+(?!\d))/g, " ")
 				qs('#aside_order .price').innerHTML = selected.price.replace(/\B(?=(\d{3})+(?!\d))/g, " ")+" "+cur
 
 				if(selected.old_price){
