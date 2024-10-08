@@ -1026,7 +1026,7 @@ body.tour-page
 				margin: 0
 				gap: 0.5rem
 				.share
-					margin-left: auto
+					//margin-left: auto
 			div.stars
 				display: flex
 				align-items: center
@@ -1042,23 +1042,41 @@ body.tour-page
 					cursor: pointer
 				.wrap
 					position: relative
-					&:hover, &.open
+					@media(hover: hover)
+						&:hover
+							.button
+								background-color: #ccc
+					&.open
 						.button
 							background-color: #ccc
+					@media(max-width: 480px)
+						.under
+							position: fixed
+							inset: 0
+							background-color: #00000047
+							width: 100%
+							height: 100%
+							z-index: 11
 					&.open
+						.under
+							display: block !important
 						.box
 							display: flex
+							@media(max-width: 480px)
+								bottom: 0
+
 					.button
 						padding: 7px
 						border-radius: 50%
 						cursor: pointer
+						min-width: 34px
 						>*
 							pointer-events: none
 						svg
 							min-width: 18px
-							transform: translateX(-1px)
+							//transform: translateX(-1px)
 					.box
-						display: none		
+						display: none
 						box-shadow: 0 1px 4px 0 rgba(33, 33, 38, 0.16)
 						background: #fff
 						border-radius: 12px
@@ -1069,18 +1087,21 @@ body.tour-page
 						width: fit-content
 						flex-direction: column
 						position: absolute
-						z-index: 11
+						z-index: 12
 						@media(max-width: 480px)
+							display: flex
 							position: fixed
-							bottom: 0
+							bottom: -418px
 							width: 100%
 							top: auto
 							right: 0
 							border-bottom-left-radius: 0
 							border-bottom-right-radius: 0
+							transition: all 0.3s ease
 							ul.body
 								justify-content: space-between
 								gap: auto
+
 						.head
 							display: none
 							flex-direction: column
@@ -1127,6 +1148,7 @@ body.tour-page
 
 		#mobile_gallery
 			margin: 1rem -1rem
+			margin-top: 0.5rem
 			.swiper
 				height: 300px
 				.swiper-slide

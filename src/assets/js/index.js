@@ -10,6 +10,6 @@ function init(){
 	Pages()
 
 	translate()
-	runMetrika(28209561) // и все слушатели
+	runMetrika(28209561) // только все слушатели
 
 }

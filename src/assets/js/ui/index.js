@@ -31,10 +31,6 @@ export async function Ui(){
 		qs('form#review').scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
 	})
 
-	// главная страница
-	// swipe-down нижний попап с кнопками поделиться
-	
-
 
 	
 }

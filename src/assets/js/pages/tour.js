@@ -24,7 +24,8 @@ export const Tour = {
 
 		this.send_pdf()
 
-		this.rating()
+
+		this.share() // поделиться ссылкой
 
 		this.floating_anchors() // scroll in View
 
@@ -231,9 +232,32 @@ export const Tour = {
 		})
 	},
 	
-	rating(){
+	async share(){
+
+
+		let wrap = qs('.tour-page .share .wrap')
+		let button = qs('.button', wrap)
+		
+		button?.listen("click",e => {
+			wrap.classList.toggle('open')
+		})
+
+		// close by outside click
+		document.listen("click", e => {
+			if(e.target == button) return
+			if(qs('.body',wrap).contains(e.target)) return
+			wrap.classList.remove('open')
+		})
+
+		// close by swipedown
+
+		await this.load_swiped_events()
+
+		qs('.box', wrap).listen("swiped-down", _ =>  wrap.classList.remove('open'))
+		
 		// copy url in share button
 		let link = qs('.rating .share li.copy')
+		qs('a',link).listen("click", e=>e.preventDefault())
 		if(link){
 			link.listen("click", _ => {
 				navigator.clipboard.writeText(window.location.href)
@@ -241,20 +265,24 @@ export const Tour = {
 			})
 			
 		}
+		
 
-		// открыть попап
+	},
+	async load_swiped_events(){
+		return new Promise((resolve) => {
 
-		qs('.tour-page .share .wrap .button')?.listen("click",e => {
-			e.target.closest('.wrap').classList.toggle('open')
+			let script = document.createElement("script")
+			script.src = "/vendors/swiped-events.min.js"
+			script.setAttribute('se', '')
+			qs(".scripts-area").appendChild(script)
+
+
+			script.onload = () => resolve(true)
+
 		})
+	},
 
-		document.listen("click", e => {
-			if(e.target == qs('.tour-page .share .wrap .button')) return
-			if(qs('.tour-page .share .wrap .body').contains(e.target)) return
-			qs('.tour-page .share .wrap').classList.remove('open')
-		})
-
-	}
+	
 
 }
 
