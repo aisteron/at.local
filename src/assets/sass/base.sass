@@ -621,3 +621,109 @@ dialog#modalResponse
 			transition: background-color 0.3s ease
 			&:hover
 				background-color: darken($green, 5%)
+
+#share_icon.wrap
+	position: relative
+	@media(hover: hover)
+		&:hover
+			.button
+				background-color: #ccc
+	&.open
+		.button
+			background-color: #ccc
+	@media(max-width: 480px)
+		.under
+			position: fixed
+			inset: 0
+			background-color: #00000047
+			width: 100%
+			height: 100%
+			z-index: 11
+	&.open
+		.under
+			display: block !important
+		.box
+			display: flex
+			@media(max-width: 480px)
+				bottom: 0
+
+	.button
+		padding: 7px
+		border-radius: 50%
+		cursor: pointer
+		min-width: 34px
+		>*
+			pointer-events: none
+		svg
+			min-width: 18px
+			//transform: translateX(-1px)
+	.box
+		display: none
+		box-shadow: 0 1px 4px 0 rgba(33, 33, 38, 0.16)
+		background: #fff
+		border-radius: 12px
+		padding: 8px 22px
+		top: -4px
+		right: 40px
+		z-index: 10
+		width: fit-content
+		flex-direction: column
+		position: absolute
+		z-index: 12
+		@media(max-width: 480px)
+			display: flex
+			position: fixed
+			bottom: -418px
+			width: 100%
+			top: auto
+			right: 0
+			border-bottom-left-radius: 0
+			border-bottom-right-radius: 0
+			transition: all 0.3s ease
+			ul.body
+				justify-content: space-between
+				gap: auto
+
+		.head
+			display: none
+			flex-direction: column
+			gap: 12px
+			align-items: center
+			justify-content: center
+			padding-bottom: 1rem
+			border-bottom: 1px solid #ccc
+			margin: 0 -22px
+			margin-bottom: 1rem
+			@media(max-width: 480px)
+				display: flex
+			.drag
+				background-color: #d9d9d9
+				width: 40px
+				height: 5px
+				border-radius: 4px
+	ul.body
+		line-height: 180%
+		font-size: 14px
+		flex-direction: row
+		gap: 1.5rem
+		display: flex
+		margin-top: 0.5rem
+		>*
+			min-width: fit-content
+		li
+			a
+				display: flex
+				align-items: center
+				flex-direction: column
+				justify-content: center
+				gap: 4px
+			svg
+				&:hover
+					opacity: 0.8
+		a
+			color: #000
+			text-decoration: none
+			&:hover
+				text-decoration: underline
+		input
+			display: none
