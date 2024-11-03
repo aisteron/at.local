@@ -41,7 +41,7 @@ export const DateSelect = () => {
 		</div>
 	)
 }
-
+// dispatch select_date to redux
 const DateItem = ({ el, open, setOpen, setIsSelected }) => {
 
 
