@@ -7,19 +7,17 @@ const slice = createSlice({
 	},
 
 	reducers: {
-		set_path: (state, action) => {
+		set_tourist_count: (state, action) => {
 
-			let p = action.payload.path
-			p == null
-				? state.fields.path.pop() // кнопка назад
-				: state.fields.path = [...state.fields.path, p]
+			const { count, type } = action.payload
+			state[type] = count
 
 		}
 	}
 })
 
 export const {
-	set_path
+	set_tourist_count
 } = slice.actions
 
 

@@ -1,7 +1,8 @@
 import React from "react";
 import "./App.sass"
-import { icon_chevron, icon_close, icon_minus, icon_plus } from "./icons.jsx";
+import { icon_close } from "./icons.jsx";
 import { DateSelect } from "./components/DateSelect.jsx";
+import { TouristCounter } from "./components/TouristCounter.jsx";
 
 export const App = () => {
 	return (
@@ -17,26 +18,9 @@ export const App = () => {
 					<div className="col col-1">
 
 						<DateSelect />
+						<TouristCounter />
 
-						<div className="counter">
-							<div className="row a">
-								<span className="title">Взрослых</span>
-								<div className="wrap">
-									<button className="down" type="button">{icon_minus}</button>
-									<input type="number" defaultValue="1" />
-									<button className="up" type="button">{icon_plus}</button>
-								</div>
-							</div>
 
-							<div className="row c">
-								<span className="title">Детей</span>
-								<div className="wrap">
-									<button className="down" type="button">{icon_minus}</button>
-									<input type="number" defaultValue="0" />
-									<button className="up" type="button">{icon_plus}</button>
-								</div>
-							</div>
-						</div>
 					</div>
 					<div className="col col-2">
 						<input type="text" placeholder="Ваше имя" name="name" required />
