@@ -3,6 +3,7 @@ import "./App.sass"
 import { icon_close } from "./icons.jsx";
 import { DateSelect } from "./components/DateSelect.jsx";
 import { TouristCounter } from "./components/TouristCounter.jsx";
+import { Phone } from "./components/Phone.jsx";
 
 export const App = () => {
 	return (
@@ -14,7 +15,7 @@ export const App = () => {
 			</div>
 			<div className="body">
 				<span className="title">Киты, вулканы</span>
-				<form className="columns">
+				<div className="columns">
 					<div className="col col-1">
 
 						<DateSelect />
@@ -33,10 +34,7 @@ export const App = () => {
 								<span className="l">Да</span>
 							</div>
 						</label>
-						<div className="phone">
-							<input type="tel" placeholder="+7" required />
-							<button className="send_code">Получить код из СМС</button>
-						</div>
+						<Phone />
 					</div>
 					<div className="col col-3">
 						<textarea placeholder="Ваш вопрос или комментарий для менеджера тура"></textarea>
@@ -49,7 +47,7 @@ export const App = () => {
 						<button type="submit" disabled>Отправить</button>
 
 					</div>
-				</form>
+				</div>
 			</div>
 		</dialog>
 	)

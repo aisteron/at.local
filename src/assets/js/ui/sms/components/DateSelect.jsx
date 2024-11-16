@@ -25,6 +25,20 @@ export const DateSelect = () => {
 	}, [])
 
 
+
+	// слушать внешний custom event
+	useEffect(() => {
+		function handler(event) {
+			let obj = { ...event.detail.tour, currency: event.detail.cur }
+			setIsSelected(obj)
+		}
+		document.addEventListener("update_for_dialog", handler)
+		return () => document.removeEventListener("update_for_dialog", handler)
+	}, [])
+
+
+
+
 	return (
 		<div className="select">
 			{loading ? 'Загрузка..' : ''}
@@ -34,7 +48,7 @@ export const DateSelect = () => {
 				{list.length ? <DateItem el={isSelected || list[0]} setOpen={setOpen} open={open} /> : null}
 			</div>
 			<div className={`body ${open ? 'open' : ''}`}>
-				{list.map(el => <DateItem el={el} key={el.MIGX_id} setIsSelected={setIsSelected} setOpen={setOpen} />)}
+				{list.map(el => <DateItem el={el} key={el.MIGX_id} setIsSelected={setIsSelected} setOpen={setOpen} isSelected={isSelected} />)}
 			</div>
 
 
@@ -42,7 +56,7 @@ export const DateSelect = () => {
 	)
 }
 // dispatch select_date to redux
-const DateItem = ({ el, open, setOpen, setIsSelected }) => {
+const DateItem = ({ el, open, setOpen, setIsSelected, isSelected }) => {
 
 
 	let start = new Date(el.start).toLocaleDateString()
@@ -62,7 +76,7 @@ const DateItem = ({ el, open, setOpen, setIsSelected }) => {
 	}
 
 	return (
-		<div className={`item ${!+seats ? ' disabled' : ''}`} onClick={() => expand()}>
+		<div className={`item ${!+seats ? ' disabled' : ''} ${isSelected?.MIGX_id == el.MIGX_id ? 'isSelected' : ''}`} onClick={() => expand()}>
 			<div className="head">
 				<span className="date">{start} - {finish}</span>
 				<button type="button " className={open ? 'open' : null}>{icon_chevron}</button>
