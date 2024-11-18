@@ -10,7 +10,7 @@ export const DateSelect = () => {
 	const [error, setError] = useState(false)
 	const [open, setOpen] = useState(false)
 	const date = useSelector(state => state.date)
-	const [isSelected, setIsSelected] = useState(date)
+	//const [isSelected, setIsSelected] = useState(date)
 	
 	const dispatch = useDispatch()
 
@@ -34,13 +34,11 @@ export const DateSelect = () => {
 			})
 	}, [])
 
-
-
 	// слушать внешний custom event
 	useEffect(() => {
 		function handler(event) {
 			let obj = { ...event.detail.tour, currency: event.detail.cur }
-			setIsSelected(obj)
+			//setIsSelected(obj)
 			dispatch(set_date(obj))
 		}
 		document.addEventListener("update_for_dialog", handler)
@@ -56,10 +54,10 @@ export const DateSelect = () => {
 			{error ? 'Ошибка' : ''}
 
 			<div className="selected">
-				{list.length ? <DateItem el={isSelected || list[0]} setOpen={setOpen} open={open} /> : null}
+				{list.length ? <DateItem el={date} setOpen={setOpen} open={open} /> : null}
 			</div>
 			<div className={`body ${open ? 'open' : ''}`}>
-				{list.map(el => <DateItem el={el} key={el.MIGX_id} setIsSelected={setIsSelected} setOpen={setOpen} isSelected={isSelected} />)}
+				{list.map(el => <DateItem el={el} key={el.MIGX_id} setOpen={setOpen} />)}
 			</div>
 
 
@@ -68,7 +66,9 @@ export const DateSelect = () => {
 }
 
 // dispatch select_date to redux
-const DateItem = ({ el, open, setOpen, setIsSelected, isSelected }) => {
+const DateItem = ({ el, open, setOpen }) => {
+
+	const date = useSelector(state => state.date)
 
 	const dispatch = useDispatch()
 
@@ -80,7 +80,7 @@ const DateItem = ({ el, open, setOpen, setIsSelected, isSelected }) => {
 
 	const expand = () => {
 		if (open == undefined) {
-			setIsSelected(el)
+			//setIsSelected(el)
 			setOpen(false)
 			dispatch(set_date(el))
 			return
@@ -90,7 +90,7 @@ const DateItem = ({ el, open, setOpen, setIsSelected, isSelected }) => {
 	}
 
 	return (
-		<div className={`item ${!+seats ? ' disabled' : ''} ${isSelected?.MIGX_id == el.MIGX_id ? 'isSelected' : ''}`} onClick={() => expand()}>
+		<div className={`item ${!+seats ? ' disabled' : ''} ${date?.MIGX_id == el.MIGX_id ? 'isSelected' : ''}`} onClick={() => expand()}>
 			<div className="head">
 				<span className="date">{start} - {finish}</span>
 				<button type="button " className={open ? 'open' : null}>{icon_chevron}</button>
