@@ -410,10 +410,10 @@ export const aside_form = {
 		qs('form#aside_order')?.listen("submit", e => e.preventDefault())
 
 		qs('form#aside_order button[type="submit"]')?.listen("click", e => {
-			
-			!qs('form#aside_order').classList.contains('use_sms')
-			&& qs('#tourOrderPopup')?.showModal()
-			// 
+
+
+			if (!qs('form#aside_order').classList.contains('use_sms')) qs('#tourOrderPopup')?.showModal()
+
 
 			// актуализация выбранной даты в попап
 
@@ -423,7 +423,8 @@ export const aside_form = {
 				detail: {
 					tour: tour,
 					count: +qs('.arrows input').value,
-					cur: this.cfg.currency == "RUB" ? "₽" : this.cfg.currency
+					cur: this.cfg.currency == "RUB" ? "₽" : this.cfg.currency,
+					sms: qs('form#aside_order').classList.contains('use_sms')
 				},
 			});
 

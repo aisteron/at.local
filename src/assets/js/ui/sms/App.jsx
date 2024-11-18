@@ -12,7 +12,7 @@ import { GKEY } from "../../../../../deploy/recaptcha.js";
 
 export const App = () => {
 
-	store.subscribe(_ => console.log(store.getState()))
+	process.env.NODE_ENV == 'development' && store.subscribe(_ => console.log(store.getState()))
 	const show = useSelector(state => state.show)
 	const dispatch = useDispatch()
 	return (
@@ -20,12 +20,12 @@ export const App = () => {
 
 			<div className="head">
 				<span>Заявка</span>
-				<button className="close" onClick={_=> dispatch(set_show(false))}>{icon_close}</button>
+				<button className="close" onClick={_ => dispatch(set_show(false))}>{icon_close}</button>
 			</div>
 
 			<div className="body">
 				<span className="title">{qs('h1').innerHTML}</span>
-				<Columns />	
+				<Columns />
 			</div>
 		</dialog>
 	)
@@ -43,14 +43,14 @@ const Columns = () => {
 	const dispatch = useDispatch()
 
 	const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm()
+		register,
+		handleSubmit,
+		watch,
+		formState: { errors },
+	} = useForm()
 
 	const onSubmit = async (data) => {
-		
+
 		let obj = {
 			name: data.name,
 			email: data.email,
@@ -64,22 +64,22 @@ const Columns = () => {
 			tour_name: qs('h1').innerHTML,
 			tour_date: date.start,
 			seats: date.seats,
-			price: date.price+ ' '+ date.currency,
-			
+			price: date.price + ' ' + date.currency,
+
 			action: "order_receive_sms"
 
 		}
 
-		if(!await google_check()) return
+		if (!await google_check()) return
 
 		try {
 			var res = await Fetch('order_receive_sms', obj, '/api')
-		} catch(e){
+		} catch (e) {
 			console.log(e)
 			return new Snackbar('❌ Сервер: ошибка отправки')
 		}
-		
-		if(!res?.success){
+
+		if (!res?.success) {
 			return new Snackbar('❌ Клиент: ошибка отправки заказа')
 		}
 
@@ -92,12 +92,12 @@ const Columns = () => {
 			txt: 'Мы свяжемся с вами в ближайшее время'
 		}
 
-		let ev = new CustomEvent("modalResponse_open",{detail:modalObj})
+		let ev = new CustomEvent("modalResponse_open", { detail: modalObj })
 		document.dispatchEvent(ev)
 
 		// кастомный инвент, чтобы метрика в libs.js услышала
 		const catFound = new CustomEvent("tourOrderPopup_send", {
-			detail: { name: "cat"},
+			detail: { name: "cat" },
 		});
 
 		document.dispatchEvent(catFound)
@@ -106,30 +106,30 @@ const Columns = () => {
 
 	return verified
 		? <form className="columns" onSubmit={handleSubmit(onSubmit)}>
-				<ColumnsContent
-					register={register}
-					verified={verified}
-					errors={errors}
-				/>
-			</form>
+			<ColumnsContent
+				register={register}
+				verified={verified}
+				errors={errors}
+			/>
+		</form>
 		: <div className="columns">
-				<ColumnsContent
-					register={register}
-					verified={verified}
-					errors={errors}
-				/>
-			</div>
+			<ColumnsContent
+				register={register}
+				verified={verified}
+				errors={errors}
+			/>
+		</div>
 
-		// замена <div> на <form> потому что не может быть 2х вложенных <form>
-	
+	// замена <div> на <form> потому что не может быть 2х вложенных <form>
+
 
 
 }
 
-const ColumnsContent = ({register, verified, errors}) =>{
+const ColumnsContent = ({ register, verified, errors }) => {
 
 
-	return(
+	return (
 		<>
 			<div className="col col-1">
 
@@ -140,54 +140,54 @@ const ColumnsContent = ({register, verified, errors}) =>{
 
 			<div className="col col-2">
 
-			<input type="text" placeholder="Ваше имя" name="name" {...register("name", { required: true })}/>
-				{errors?.name ? <span className="name_error">Введите имя</span>: "" }
+				<input type="text" placeholder="Ваше имя" name="name" {...register("name", { required: true })} />
+				{errors?.name ? <span className="name_error">Введите имя</span> : ""}
 
-			<input type="email" placeholder="Ваша электронная почта" name="email" {...register("email", { required: true })}/>
-			{errors?.email ? <span className="email_error">Не может быть пустым</span>: "" }
-			<label>
-				<span className="label">Нужен звонок менеджера</span>
-				<div className="wrap">
-					<input type="checkbox" defaultChecked="true" {...register('cb')}/>
-					<span className="s"></span>
-					<span className="l">Да</span>
-				</div>
-			</label>
+				<input type="email" placeholder="Ваша электронная почта" name="email" {...register("email", { required: true })} />
+				{errors?.email ? <span className="email_error">Не может быть пустым</span> : ""}
+				<label>
+					<span className="label">Нужен звонок менеджера</span>
+					<div className="wrap">
+						<input type="checkbox" defaultChecked="true" {...register('cb')} />
+						<span className="s"></span>
+						<span className="l">Да</span>
+					</div>
+				</label>
 
-			<Phone />
+				<Phone />
 
 			</div>
 			<div className="col col-3">
-			<textarea placeholder="Ваш вопрос или комментарий для менеджера тура" {...register("comment")}></textarea>
-			<div className="policy">
-				<input type="checkbox" defaultChecked="true" />
-				<span className="s"></span>
-				<span className="l">Я согласен с <a href="/assets/policy.pdf" target="_blank">политикой обработки персональных данных</a></span>
+				<textarea placeholder="Ваш вопрос или комментарий для менеджера тура" {...register("comment")}></textarea>
+				<div className="policy">
+					<input type="checkbox" defaultChecked="true" />
+					<span className="s"></span>
+					<span className="l">Я согласен с <a href="/assets/policy.pdf" target="_blank">политикой обработки персональных данных</a></span>
+				</div>
+
+				<button type="submit" disabled={!verified}>Отправить</button>
+
 			</div>
-
-			<button type="submit" disabled={!verified}>Отправить</button>
-
-			</div>		
 		</>
 	)
 }
 
-async function google_check(){
+async function google_check() {
 	return new Promise(resolve => {
-		grecaptcha.ready(function() {
-			grecaptcha.execute(GKEY.public, {action: 'submit'})
-			.then(async function(token) {
-					let res = await Fetch("verify_recaptcha", {token:token}, '/api')
+		grecaptcha.ready(function () {
+			grecaptcha.execute(GKEY.public, { action: 'submit' })
+				.then(async function (token) {
+					let res = await Fetch("verify_recaptcha", { token: token }, '/api')
 
-					if(res.score < 0.5){
+					if (res.score < 0.5) {
 						resolve(false)
 						return new Snackbar("Ошибка проверки recaptcha. Пожалуйста, попробуйте позже");
-					} else{
+					} else {
 						resolve(true)
 					}
-					
-					
-			});
+
+
+				});
 		});
 	})
 }

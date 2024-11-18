@@ -19,29 +19,29 @@ export const TouristCounter = () => {
 			case "adult":
 				if (action == "minus") {
 					if (adultCount == 1) return
-					dispatch(set_tourist_count({type:"adult", count: adultCount - 1}))
+					dispatch(set_tourist_count({ type: "adult", count: adultCount - 1 }))
 
 				}
-				if (action == "plus"){
-					dispatch(set_tourist_count({type:"adult", count: adultCount + 1}))
+				if (action == "plus") {
+					dispatch(set_tourist_count({ type: "adult", count: adultCount + 1 }))
 				}
 
-				if (action?.value){
-					dispatch(set_tourist_count({type:"adult", count: action.value}))
+				if (action?.value) {
+					dispatch(set_tourist_count({ type: "adult", count: action.value }))
 				}
 				break;
 
 			case "child":
 				if (action == "minus") {
 					if (childCount == 0) return
-					dispatch(set_tourist_count({type:"child", count: childCount - 1}))
+					dispatch(set_tourist_count({ type: "child", count: childCount - 1 }))
 
 				}
-				if (action == "plus"){
-					dispatch(set_tourist_count({type:"child", count: childCount + 1}))
+				if (action == "plus") {
+					dispatch(set_tourist_count({ type: "child", count: childCount + 1 }))
 				}
-				if (action?.value){
-					dispatch(set_tourist_count({type:"child", count: action.value}))
+				if (action?.value) {
+					dispatch(set_tourist_count({ type: "child", count: action.value }))
 				}
 				break;
 		}
@@ -49,11 +49,13 @@ export const TouristCounter = () => {
 
 	// слушать внешний custom event
 	useEffect(() => {
+
 		function handler(event) {
-			
+			if (!event.detail.sms) return // если в форме aside нет класса use_sms
 			let obj = { ...event.detail.tour, currency: event.detail.cur }
-			dispatch(set_tourist_count({type:"adult", count: event.detail.count, obj}))
+			dispatch(set_tourist_count({ type: "adult", count: event.detail.count, obj }))
 		}
+
 		document.addEventListener("update_for_dialog", handler)
 		return () => document.removeEventListener("update_for_dialog", handler)
 	}, [])
