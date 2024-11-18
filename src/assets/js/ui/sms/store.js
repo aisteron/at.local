@@ -6,7 +6,10 @@ const slice = createSlice({
 		smsid: null,
 		code: null,
 		verified: false,
-		num: null
+		num: null,
+		date: null,
+		adult: 1,
+		child: 0
 	},
 
 	reducers: {
@@ -19,6 +22,15 @@ const slice = createSlice({
 
 		set_num:(state,action)=>{
 			state.num = action.payload
+		},
+
+		set_date:(state, action) => {
+			state.date = action.payload
+		},
+
+		set_tourist_count:(state, action) => {
+			const{type, count} = action.payload
+			state[type] = count
 		}
 
 	}
@@ -26,7 +38,9 @@ const slice = createSlice({
 
 export const {
 	set_verified,
-	set_num
+	set_num,
+	set_date,
+	set_tourist_count
 } = slice.actions
 
 

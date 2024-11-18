@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { icon_minus, icon_plus } from "../icons.jsx";
+import { useDispatch, useSelector } from "react-redux";
+import { set_tourist_count } from "../store.js";
 
 
 
 export const TouristCounter = () => {
 
-	const [childCount, setChildCount] = useState(0)
-	const [adultCount, setAdultCount] = useState(1)
+
+	const childCount = useSelector(state => state.child)
+	const adultCount = useSelector(state => state.adult)
+	const dispatch = useDispatch()
 
 	const count = (arr) => {
 		const [age, action] = arr;
@@ -15,19 +19,30 @@ export const TouristCounter = () => {
 			case "adult":
 				if (action == "minus") {
 					if (adultCount == 1) return
-					setAdultCount(adultCount - 1)
+					dispatch(set_tourist_count({type:"adult", count: adultCount - 1}))
+
 				}
-				if (action == "plus") setAdultCount(adultCount + 1)
-				if (action?.value) setAdultCount(action.value)
+				if (action == "plus"){
+					dispatch(set_tourist_count({type:"adult", count: adultCount + 1}))
+				}
+
+				if (action?.value){
+					dispatch(set_tourist_count({type:"adult", count: action.value}))
+				}
 				break;
 
 			case "child":
 				if (action == "minus") {
 					if (childCount == 0) return
-					setChildCount(childCount - 1)
+					dispatch(set_tourist_count({type:"child", count: childCount - 1}))
+
 				}
-				if (action == "plus") setChildCount(childCount + 1)
-				if (action?.value) setChildCount(action.value)
+				if (action == "plus"){
+					dispatch(set_tourist_count({type:"child", count: childCount + 1}))
+				}
+				if (action?.value){
+					dispatch(set_tourist_count({type:"child", count: action.value}))
+				}
 				break;
 		}
 	}
@@ -35,7 +50,7 @@ export const TouristCounter = () => {
 	// слушать внешний custom event
 	useEffect(() => {
 		function handler(event) {
-			setAdultCount(event.detail.count)
+			dispatch(set_tourist_count({type:"adult", count: adultCount - 1}))
 		}
 		document.addEventListener("update_for_dialog", handler)
 		return () => document.removeEventListener("update_for_dialog", handler)

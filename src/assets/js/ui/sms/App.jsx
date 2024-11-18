@@ -29,6 +29,12 @@ export const App = () => {
 
 const Columns = () => {
 	const verified = useSelector(state => state.verified)
+	const code = useSelector(state => state.code)
+	const smsid = useSelector(state => state.smsid)
+	const num = useSelector(state => state.num)
+	const date = useSelector(state => state.date)
+	const adult = useSelector(state => state.adult)
+	const child = useSelector(state => state.child)
 
 	const {
     register,
@@ -37,7 +43,24 @@ const Columns = () => {
     formState: { errors },
   } = useForm()
 
-	const onSubmit = (data) => console.log(data)
+	const onSubmit = async (data) => {
+		
+		let obj = {
+			name: data.name,
+			email: data.email,
+			code,
+			smsid,
+			num,
+			date,
+			adult,
+			child,
+			need_callback: data.cb,
+			comment: data.comment
+		}
+
+		console.log(obj)
+
+	}
 
 	return verified
 		? <form className="columns" onSubmit={handleSubmit(onSubmit)}>
@@ -83,7 +106,7 @@ const ColumnsContent = ({register, verified, errors}) =>{
 			<label>
 				<span className="label">Нужен звонок менеджера</span>
 				<div className="wrap">
-					<input type="checkbox" defaultChecked="true" />
+					<input type="checkbox" defaultChecked="true" {...register('cb')}/>
 					<span className="s"></span>
 					<span className="l">Да</span>
 				</div>
@@ -93,7 +116,7 @@ const ColumnsContent = ({register, verified, errors}) =>{
 
 			</div>
 			<div className="col col-3">
-			<textarea placeholder="Ваш вопрос или комментарий для менеджера тура"></textarea>
+			<textarea placeholder="Ваш вопрос или комментарий для менеджера тура" {...register("comment")}></textarea>
 			<div className="policy">
 				<input type="checkbox" defaultChecked="true" />
 				<span className="s"></span>
