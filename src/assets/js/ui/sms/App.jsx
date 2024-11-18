@@ -7,12 +7,14 @@ import { Phone } from "./components/Phone.jsx";
 import { store } from "./store.js";
 import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
+
 export const App = () => {
 
 	store.subscribe(_ => console.log(store.getState()))
+	const show = useSelector(state => state.show)
 	
 	return (
-		<dialog open>
+		<dialog open={show}>
 
 			<div className="head">
 				<span>Заявка</span>

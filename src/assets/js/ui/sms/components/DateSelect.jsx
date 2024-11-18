@@ -10,7 +10,7 @@ export const DateSelect = () => {
 	const [error, setError] = useState(false)
 	const [open, setOpen] = useState(false)
 	const date = useSelector(state => state.date)
-	//const [isSelected, setIsSelected] = useState(date)
+
 	
 	const dispatch = useDispatch()
 
@@ -29,7 +29,7 @@ export const DateSelect = () => {
 				}
 
 				setList(r)
-				dispatch(set_date(r[0]))
+				!date && dispatch(set_date(r[0]))
 
 			})
 	}, [])
@@ -38,7 +38,6 @@ export const DateSelect = () => {
 	useEffect(() => {
 		function handler(event) {
 			let obj = { ...event.detail.tour, currency: event.detail.cur }
-			//setIsSelected(obj)
 			dispatch(set_date(obj))
 		}
 		document.addEventListener("update_for_dialog", handler)
@@ -80,7 +79,6 @@ const DateItem = ({ el, open, setOpen }) => {
 
 	const expand = () => {
 		if (open == undefined) {
-			//setIsSelected(el)
 			setOpen(false)
 			dispatch(set_date(el))
 			return
