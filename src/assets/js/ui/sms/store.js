@@ -3,21 +3,30 @@ import { createSlice, configureStore } from '@reduxjs/toolkit'
 const slice = createSlice({
 	name: 'sms',
 	initialState: {
-		goods_loading: true,
+		smsid: null,
+		code: null,
+		verified: false,
+		num: null
 	},
 
 	reducers: {
-		set_tourist_count: (state, action) => {
+		set_verified: (state, action) => {
+			const{verified, code, smsid} = action.payload
+			state.verified = verified
+			state.code = code
+			state.smsid = smsid
+		},
 
-			const { count, type } = action.payload
-			state[type] = count
-
+		set_num:(state,action)=>{
+			state.num = action.payload
 		}
+
 	}
 })
 
 export const {
-	set_tourist_count
+	set_verified,
+	set_num
 } = slice.actions
 
 

@@ -1,5 +1,0 @@
-- order form drop down languages
-  - tune inputmask.js
-	- tune recaptcha
-
-- life up review form

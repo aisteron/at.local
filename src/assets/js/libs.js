@@ -127,6 +127,9 @@ export function runMetrika(number){
 	// страница тура. программа. отправка формы на почту
 	document.listen("email_send", e => reach('otpravil_pochtu'))
 
+	// страница тура. программа. отправка формы на почту
+	document.listen("sms_ok", e => reach('SMS_OK'))
+
 
 }
 

@@ -3,29 +3,39 @@ import { Fetch } from "../../../libs";
 import { InputMask } from '@react-input/mask';
 import { Controller, useForm } from "react-hook-form";
 import Countdown from 'react-countdown';
+import { useDispatch, useSelector } from "react-redux";
+import { set_num, set_verified } from "../store";
 
 export const Phone = () => {
 
 	const [smsId, setSmsId] = useState(null)
-	const [num, setNum] = useState(null)
 	const [sent, setSent] = useState(false)
-	const [verified, setVerified] = useState(false)
+	const verified = useSelector(state => state.verified)
+	
+
+	if(verified) return <VerifiedInput />
 
 	return sent
-		? <SendCodeForm setSent={setSent} smsId={smsId} setVerified={setVerified} />
-		: <SendPhoneForm setSent={setSent} setSmsId={setSmsId} num={num} setNum={setNum} />
+		? <SendCodeForm setSent={setSent} smsId={smsId}/>
+		: <SendPhoneForm setSent={setSent} setSmsId={setSmsId}/>
 
 
 
 }
 
-const SendPhoneForm = ({ setSent, setSmsId, num, setNum }) => {
+const SendPhoneForm = ({ setSent, setSmsId}) => {
 
-
-	const { handleSubmit, control, setError, formState: { errors, isValid, isSubmitting }, watch } = useForm()
+	const num = useSelector(state => state.num)
+	const dispatch = useDispatch()
+	const { handleSubmit, control, setError, formState: { errors, isValid, isSubmitting }, watch } = useForm({
+		defaultValues:{
+			phone_number: num || ''
+		}
+	})
 
 	const onSubmit = async (data) => {
-		setNum(data.phone_number)
+		
+		dispatch(set_num(data.phone_number))
 
 		let num = data.phone_number.replaceAll("-", "").replaceAll(" ", "").replace(")", "").replace("(", "").replace("+", "")
 		let res = await Fetch('send_sms', { phone_number: num }, "/assets/sms/")
@@ -41,7 +51,7 @@ const SendPhoneForm = ({ setSent, setSmsId, num, setNum }) => {
 	}
 
 	const PhoneError = () => {
-		console.log(errors)
+		
 		if (isEmpty(errors)) return
 
 		switch (errors.phone_number.type) {
@@ -96,20 +106,19 @@ const SendPhoneForm = ({ setSent, setSmsId, num, setNum }) => {
 
 }
 
-const SendCodeForm = ({ setSent, smsId, setVerified }) => {
-	const [sentCode, setSentCode] = useState(false)
+const SendCodeForm = ({ setSent, smsId }) => {
+
 	const [timerExpired, setTimerExpired] = useState(false)
 
 	const formRef = useRef(null)
 	const { handleSubmit, control, setError, formState: { errors, isValid, isSubmitting }, watch } = useForm()
+	const dispatch = useDispatch()
 
 	useEffect(() => {
 		const { unsubscribe } = watch((input) => {
 
 			if (input.code.match(/\d\s\d\s\d\s\d/)) {
-
-				//formRef.current.submit()
-
+				// при вводе 4х цифр срабатывает автоотправка формы
 				onSubmit(input)
 			}
 		})
@@ -117,13 +126,17 @@ const SendCodeForm = ({ setSent, smsId, setVerified }) => {
 	}, [watch])
 
 	const onSubmit = async (data) => {
-		await new Promise(resolve => setTimeout(() => resolve(true), 2000))
+		//await new Promise(resolve => setTimeout(() => resolve(true), 2000))
 		console.log(data)
 
 		let code = data.code.replaceAll(' ', '');
 		let res = await Fetch("verify_code", { code, smsid: smsId }, '/assets/sms/')
 		if (res.success) {
-			setVerified(res.success)
+			dispatch(set_verified({verified: true, code, smsid: smsId}))
+			
+			const sms_ok_event = new CustomEvent("sms_ok", { detail: { name: "cat"} });
+
+			document.dispatchEvent(sms_ok_event)
 
 		} else {
 			setError("code", { type: "custom", message: "Ошибка проверки" })
@@ -183,8 +196,6 @@ const Timer = ({ setTimerExpired }) => {
 	const renderer = ({ minutes, seconds, completed }) => {
 
 		if (completed) {
-			// Render a completed state
-			//
 			setTimeout(() => setTimerExpired(true), 100)
 			return ('');
 		} else {
@@ -193,10 +204,11 @@ const Timer = ({ setTimerExpired }) => {
 		}
 	};
 
+	let timer = process.env.NODE_ENV == 'development' ? 5000 : 59000
+
 	return (
-		// <div className="timer">00:59</div>
 		<Countdown
-			date={Date.now() + 5000}
+			date={Date.now() + timer}
 			renderer={renderer}
 		/>
 	)
@@ -210,4 +222,14 @@ function isEmpty(obj) {
 	}
 
 	return true;
+}
+
+const VerifiedInput = () => {
+	const num = useSelector(store => store.num)
+	return(
+		<section className="verified_num">
+			<input type="text" className="verified" disabled defaultValue={num}/>
+			<span>Номер проверен</span>
+		</section>
+	)
 }
