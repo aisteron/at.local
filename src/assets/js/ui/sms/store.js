@@ -30,8 +30,15 @@ const slice = createSlice({
 		},
 
 		set_tourist_count:(state, action) => {
-			const{type, count} = action.payload
+			const{type, count, obj} = action.payload
 			state[type] = count
+			state.show = true
+			
+			obj && (state.date = obj)
+		},
+
+		set_show:(state, action)=>{
+			state.show = action.payload
 		}
 
 	}
@@ -41,7 +48,8 @@ export const {
 	set_verified,
 	set_num,
 	set_date,
-	set_tourist_count
+	set_tourist_count,
+	set_show
 } = slice.actions
 
 

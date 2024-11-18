@@ -34,18 +34,6 @@ export const DateSelect = () => {
 			})
 	}, [])
 
-	// слушать внешний custom event
-	useEffect(() => {
-		function handler(event) {
-			let obj = { ...event.detail.tour, currency: event.detail.cur }
-			dispatch(set_date(obj))
-		}
-		document.addEventListener("update_for_dialog", handler)
-		return () => document.removeEventListener("update_for_dialog", handler)
-	}, [])
-
-
-
 
 	return (
 		<div className="select">

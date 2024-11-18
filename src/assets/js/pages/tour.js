@@ -410,7 +410,10 @@ export const aside_form = {
 		qs('form#aside_order')?.listen("submit", e => e.preventDefault())
 
 		qs('form#aside_order button[type="submit"]')?.listen("click", e => {
-			qs('#tourOrderPopup')?.showModal()
+			
+			!qs('form#aside_order').classList.contains('use_sms')
+			&& qs('#tourOrderPopup')?.showModal()
+			// 
 
 			// актуализация выбранной даты в попап
 

@@ -4,25 +4,27 @@ import { icon_close } from "./icons.jsx";
 import { DateSelect } from "./components/DateSelect.jsx";
 import { TouristCounter } from "./components/TouristCounter.jsx";
 import { Phone } from "./components/Phone.jsx";
-import { store } from "./store.js";
-import { useSelector } from "react-redux";
+import { store, set_show } from "./store.js";
+import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
+import { Fetch, qs } from "../../libs.js";
+import { GKEY } from "../../../../../deploy/recaptcha.js";
 
 export const App = () => {
 
 	store.subscribe(_ => console.log(store.getState()))
 	const show = useSelector(state => state.show)
-	
+	const dispatch = useDispatch()
 	return (
 		<dialog open={show}>
 
 			<div className="head">
 				<span>Заявка</span>
-				<button className="close">{icon_close}</button>
+				<button className="close" onClick={_=> dispatch(set_show(false))}>{icon_close}</button>
 			</div>
 
 			<div className="body">
-				<span className="title">Киты, вулканы</span>
+				<span className="title">{qs('h1').innerHTML}</span>
 				<Columns />	
 			</div>
 		</dialog>
@@ -30,6 +32,7 @@ export const App = () => {
 }
 
 const Columns = () => {
+
 	const verified = useSelector(state => state.verified)
 	const code = useSelector(state => state.code)
 	const smsid = useSelector(state => state.smsid)
@@ -37,6 +40,7 @@ const Columns = () => {
 	const date = useSelector(state => state.date)
 	const adult = useSelector(state => state.adult)
 	const child = useSelector(state => state.child)
+	const dispatch = useDispatch()
 
 	const {
     register,
@@ -50,17 +54,53 @@ const Columns = () => {
 		let obj = {
 			name: data.name,
 			email: data.email,
-			code,
-			smsid,
-			num,
-			date,
+			phone: num,
 			adult,
 			child,
-			need_callback: data.cb,
-			comment: data.comment
+			code,
+			smsid,
+			ncb: data.cb,
+			comment: data.comment,
+			tour_name: qs('h1').innerHTML,
+			tour_date: date.start,
+			seats: date.seats,
+			price: date.price+ ' '+ date.currency,
+			
+			action: "order_receive_sms"
+
 		}
 
-		console.log(obj)
+		if(!await google_check()) return
+
+		try {
+			var res = await Fetch('order_receive_sms', obj, '/api')
+		} catch(e){
+			console.log(e)
+			return new Snackbar('❌ Сервер: ошибка отправки')
+		}
+		
+		if(!res?.success){
+			return new Snackbar('❌ Клиент: ошибка отправки заказа')
+		}
+
+		dispatch(set_show(false))
+
+		let modalObj = {
+			success: true,
+			title: 'Заявка',
+			header: 'Ваша заявка получена',
+			txt: 'Мы свяжемся с вами в ближайшее время'
+		}
+
+		let ev = new CustomEvent("modalResponse_open",{detail:modalObj})
+		document.dispatchEvent(ev)
+
+		// кастомный инвент, чтобы метрика в libs.js услышала
+		const catFound = new CustomEvent("tourOrderPopup_send", {
+			detail: { name: "cat"},
+		});
+
+		document.dispatchEvent(catFound)
 
 	}
 
@@ -132,4 +172,22 @@ const ColumnsContent = ({register, verified, errors}) =>{
 	)
 }
 
+async function google_check(){
+	return new Promise(resolve => {
+		grecaptcha.ready(function() {
+			grecaptcha.execute(GKEY.public, {action: 'submit'})
+			.then(async function(token) {
+					let res = await Fetch("verify_recaptcha", {token:token}, '/api')
 
+					if(res.score < 0.5){
+						resolve(false)
+						return new Snackbar("Ошибка проверки recaptcha. Пожалуйста, попробуйте позже");
+					} else{
+						resolve(true)
+					}
+					
+					
+			});
+		});
+	})
+}

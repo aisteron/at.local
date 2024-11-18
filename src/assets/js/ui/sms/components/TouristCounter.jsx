@@ -50,7 +50,9 @@ export const TouristCounter = () => {
 	// слушать внешний custom event
 	useEffect(() => {
 		function handler(event) {
-			dispatch(set_tourist_count({type:"adult", count: adultCount - 1}))
+			
+			let obj = { ...event.detail.tour, currency: event.detail.cur }
+			dispatch(set_tourist_count({type:"adult", count: event.detail.count, obj}))
 		}
 		document.addEventListener("update_for_dialog", handler)
 		return () => document.removeEventListener("update_for_dialog", handler)
