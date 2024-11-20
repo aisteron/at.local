@@ -145,7 +145,7 @@ const SendCodeForm = ({ setSent, smsId }) => {
 
 	}
 
-	console.log(timerExpired, attempt)
+	//console.log(timerExpired, attempt)
 
 	let expired =
 		!attempt
@@ -208,7 +208,7 @@ const Timer = ({ setTimerExpired }) => {
 		}
 	};
 
-	let timer = process.env.NODE_ENV == 'development' ? 5000 : 59000
+	let timer = process.env.NODE_ENV == 'development' ? 50000 : 59000
 
 	return (
 		<Countdown

@@ -46,10 +46,12 @@ const Columns = () => {
 		register,
 		handleSubmit,
 		watch,
-		formState: { errors },
+		formState: { errors, isSubmitting },
 	} = useForm()
 
 	const onSubmit = async (data) => {
+
+		let tour_date = new Date(date.start).toLocaleDateString() + " - " + new Date(date.finish).toLocaleDateString()
 
 		let obj = {
 			name: data.name,
@@ -62,13 +64,14 @@ const Columns = () => {
 			ncb: data.cb,
 			comment: data.comment,
 			tour_name: qs('h1').innerHTML,
-			tour_date: date.start,
+			tour_date: tour_date,
 			seats: date.seats,
 			price: date.price + ' ' + date.currency,
 
 			action: "order_receive_sms"
 
 		}
+
 
 		if (!await google_check()) return
 
@@ -110,6 +113,7 @@ const Columns = () => {
 				register={register}
 				verified={verified}
 				errors={errors}
+				isSubmitting={isSubmitting}
 			/>
 		</form>
 		: <div className="columns">
@@ -117,6 +121,7 @@ const Columns = () => {
 				register={register}
 				verified={verified}
 				errors={errors}
+				isSubmitting={isSubmitting}
 			/>
 		</div>
 
@@ -126,7 +131,7 @@ const Columns = () => {
 
 }
 
-const ColumnsContent = ({ register, verified, errors }) => {
+const ColumnsContent = ({ register, verified, errors, isSubmitting }) => {
 
 
 	return (
@@ -165,7 +170,7 @@ const ColumnsContent = ({ register, verified, errors }) => {
 					<span className="l">Я согласен с <a href="/assets/policy.pdf" target="_blank">политикой обработки персональных данных</a></span>
 				</div>
 
-				<button type="submit" disabled={!verified}>Отправить</button>
+				<button type="submit" disabled={!verified || isSubmitting}>Отправить</button>
 
 			</div>
 		</>
