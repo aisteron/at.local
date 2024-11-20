@@ -7,8 +7,9 @@ export const Dialog = {
 		this.select_date(),
 			this.pick_count()
 		this.open_select_flag()
-		await this.load_inputmask_plugin()
-		this.apply_inputmask()
+		this.load_inputmask_plugin()
+			.then(_ => this.apply_inputmask())
+
 		this.listeners()
 		this.to_server()
 
@@ -118,7 +119,7 @@ export const Dialog = {
 			script.src = "/vendors/inputmask.min.js"
 			script.setAttribute("im", '')
 			qs('.scripts-area').appendChild(script)
-			script.onload = () => resolve()
+			script.onload = () => resolve(true)
 		})
 
 	},
