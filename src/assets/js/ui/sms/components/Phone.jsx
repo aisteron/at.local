@@ -149,40 +149,40 @@ const SendCodeForm = ({ setSent, smsId }) => {
 
 	let expired =
 		!attempt
-			? <p className="expired"><span className="again" onClick={() => { setSent(false); dispatch(set_attempt(1)) }}>Отправить повторно</span> или написать администратору через <a href="https://api.whatsapp.com/send?phone=79857737282" target="_blank">WhatsApp</a></p>
-			: <p className="expired">Не приходит код? Написать администратору через <a href="https://api.whatsapp.com/send?phone=79857737282" target="_blank">WhatsApp</a></p>
+			? <p className="expired"><span className="again" onClick={() => { setSent(false); dispatch(set_attempt(1)) }}>Отправить повторно</span> или написать в отдел бронирования через <a href="https://api.whatsapp.com/send?phone=79857737282" target="_blank">WhatsApp</a></p>
+			: <p className="expired">Не приходит код? Напишите в отдел бронирования через <a href="https://api.whatsapp.com/send?phone=79857737282" target="_blank">WhatsApp</a></p>
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className="formCode" ref={formRef}>
 
-			{(!timerExpired && !attempt) || (!timerExpired && attempt)
-				?
-				<Controller
-					control={control}
-					name="code"
-					rules={{
-						required: true,
-						pattern: {
-							value: /\d\s\d\s\d\s\d/,
-							message: "Должно быть 4 цифры"
-						}
-					}}
-					render={({ field: { onChange, onBlur, value, ref } }) => (
+			{/* {(!timerExpired && !attempt) || (!timerExpired && attempt) */}
+			{/* ? */}
+			<Controller
+				control={control}
+				name="code"
+				rules={{
+					required: true,
+					pattern: {
+						value: /\d\s\d\s\d\s\d/,
+						message: "Должно быть 4 цифры"
+					}
+				}}
+				render={({ field: { onChange, onBlur, value, ref } }) => (
 
-						<InputMask
-							mask="_ _ _ _"
-							replacement={{ _: /\d/ }}
-							type="tel"
-							onChange={onChange}
-							onBlur={onBlur}
-							showMask="1"
-							className="inputCode"
-							disabled={isSubmitting}
-						/>
-					)}
-				/>
+					<InputMask
+						mask="_ _ _ _"
+						replacement={{ _: /\d/ }}
+						type="tel"
+						onChange={onChange}
+						onBlur={onBlur}
+						showMask="1"
+						className="inputCode"
+						disabled={isSubmitting}
+					/>
+				)}
+			/>
 
-				: null}
+			{/* : null} */}
 
 			{errors.code ? <span className="error">{errors.code.message} {errors.code.type == 'required' ? 'Введите код' : ''}</span> : ''}
 
@@ -208,7 +208,7 @@ const Timer = ({ setTimerExpired }) => {
 		}
 	};
 
-	let timer = process.env.NODE_ENV == 'development' ? 50000 : 59000
+	let timer = process.env.NODE_ENV == 'development' ? 5000 : 300000
 
 	return (
 		<Countdown
