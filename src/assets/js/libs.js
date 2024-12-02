@@ -1,21 +1,21 @@
 import "regenerator-runtime/runtime.js";
 Node.prototype.listen = Node.prototype.addEventListener;
-export let doc=document,
-    qsa=(s,o=doc)=>o?.querySelectorAll(s),
-    qs=(s,o=doc)=>o?.querySelector(s);
+export let doc = document,
+	qsa = (s, o = doc) => o?.querySelectorAll(s),
+	qs = (s, o = doc) => o?.querySelector(s);
 
 export const cfg = {
-	host: process.env.NODE_ENV == 'development' ? 'http://at.ashaev.by':''
+	host: process.env.NODE_ENV == 'development' ? 'http://at.ashaev.by' : ''
 }
-export function loadCSS(n,e,o,d){"use strict";var t=window.document.createElement("link"),i=e||window.document.getElementsByTagName("script")[0],l=window.document.styleSheets;return t.rel="stylesheet",t.href=n,t.media="only x",d&&(t.onload=d),i.parentNode.insertBefore(t,i),t.onloadcssdefined=function(n){for(var e,o=0;o<l.length;o++)l[o].href&&l[o].href===t.href&&(e=!0);e?n():setTimeout(function(){t.onloadcssdefined(n)})},t.onloadcssdefined(function(){t.media=o||"all"}),t}
+export function loadCSS(n, e, o, d) { "use strict"; var t = window.document.createElement("link"), i = e || window.document.getElementsByTagName("script")[0], l = window.document.styleSheets; return t.rel = "stylesheet", t.href = n, t.media = "only x", d && (t.onload = d), i.parentNode.insertBefore(t, i), t.onloadcssdefined = function (n) { for (var e, o = 0; o < l.length; o++)l[o].href && l[o].href === t.href && (e = !0); e ? n() : setTimeout(function () { t.onloadcssdefined(n) }) }, t.onloadcssdefined(function () { t.media = o || "all" }), t }
 
-export function onloadCSS(n,e){
-	n.onload=function(){
-		n.onload=null,e&&e.call(n)
-	},"isApplicationInstalled"in navigator&&"onloadcssdefined"in n&&n.onloadcssdefined(e);
+export function onloadCSS(n, e) {
+	n.onload = function () {
+		n.onload = null, e && e.call(n)
+	}, "isApplicationInstalled" in navigator && "onloadcssdefined" in n && n.onloadcssdefined(e);
 }
 
-export async function load_toast(){
+export async function load_toast() {
 
 	// https://github.com/joostlawerman/SnackbarLightjs
 
@@ -34,18 +34,18 @@ export async function load_toast(){
 	})
 }
 
-export async function xml(action, data, path){
-  
-  data && (data = JSON.stringify(data))
+export async function xml(action, data, path) {
+
+	data && (data = JSON.stringify(data))
 
 
-  return new Promise(resolve => {
+	return new Promise(resolve => {
 
 		let xhr = new XMLHttpRequest();
-		let body = `action=${action}${data ? `&data=`+data : ""}`
+		let body = `action=${action}${data ? `&data=` + data : ""}`
 
 		//process.env.NODE_ENV == 'production' && (cfg.host = '')
-    
+
 
 
 		xhr.open("POST", path, true);
@@ -62,15 +62,15 @@ export async function xml(action, data, path){
 }
 
 export const sw = {
-	async load(){
-		
-		return new Promise(resolve =>{
-			if(qs(['swiper'])){resolve(true); return}
+	async load() {
+
+		return new Promise(resolve => {
+			if (qs(['swiper'])) { resolve(true); return }
 			let script = document.createElement("script")
-			script.src="/vendors/swiper/swiper-bundle.min.js"
-			script.setAttribute("swiper","")
+			script.src = "/vendors/swiper/swiper-bundle.min.js"
+			script.setAttribute("swiper", "")
 			qs(".scripts-area").appendChild(script)
-			
+
 			script.onload = () => {
 				let style = loadCSS("/vendors/swiper/swiper-bundle.min.css")
 				onloadCSS(style, () => resolve(true))
@@ -78,18 +78,18 @@ export const sw = {
 		})
 	},
 
-	init(el,options){ new Swiper(el, options) }
+	init(el, options) { new Swiper(el, options) }
 }
 
-export function runMetrika(number){
-	if(process.env.NODE_ENV == 'development') return;
+export function runMetrika(number) {
+	if (process.env.NODE_ENV == 'development') return;
 	//if(qs('#edit_panel')) return;
 
 	// (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)}; m[i].l=1*new Date(); for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }} k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
 	// (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 	// ym(number, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true });
 
-	
+
 	// слушатели метрики
 
 	// страница тура. aside. отдельно плавающие тг и вацап
@@ -97,8 +97,8 @@ export function runMetrika(number){
 		el.listen("click", e => {
 			//e.preventDefault()
 			e.target.classList.value == 'tg'
-			? reach('telegram')
-			: reach('whatsapp')
+				? reach('telegram')
+				: reach('whatsapp')
 		})
 	});
 
@@ -106,8 +106,8 @@ export function runMetrika(number){
 	[...qsa('#aside_questions a.wa'), ...qsa('#aside_questions a.tg')].forEach(el => {
 		el.listen("click", e => {
 			e.target.classList.value == 'tg'
-			? reach('telegram')
-			: reach('whatsapp')
+				? reach('telegram')
+				: reach('whatsapp')
 		})
 	})
 
@@ -133,23 +133,23 @@ export function runMetrika(number){
 
 }
 
-export function reach(target_name){
+export function reach(target_name) {
 
 	try {
 		ym(28209561, 'reachGoal', target_name)
-	} catch(e){
+	} catch (e) {
 		console.log(e)
 	}
-	
+
 }
 
 export const fancy = {
-	async load(){
+	async load() {
 		return new Promise((resolve) => {
 
-			if(!qs('.reviews-list li')) resolve(false)
+			if (!qs('.reviews-list li')) resolve(false)
 
-			if(qs('[fancy]')) resolve(true)
+			if (qs('[fancy]')) resolve(true)
 
 			let script = document.createElement("script")
 			script.src = "/vendors/fancy/fancybox.umd.js"
@@ -164,7 +164,7 @@ export const fancy = {
 
 		})
 	},
-	init(){
+	init() {
 		Fancybox.bind("[data-fancybox]", {
 			// Your custom options
 			hideScrollbar: false
@@ -174,23 +174,23 @@ export const fancy = {
 
 
 
-export async function Fetch(action, data, path){
+export async function Fetch(action, data, path) {
 
 	data = JSON.stringify(data)
 
-	let host = process.env.NODE_ENV == 'development' ? 'https://adventuretime.pro':''
+	let host = process.env.NODE_ENV == 'development' ? 'https://adventuretime.pro' : ''
 	let body = `action=${action}&data=${data}`
 	process.env.NODE_ENV == 'development' ? body += `&mode=dev` : ''
 
-	
-	
-	let response = await fetch(host+path, {
+
+
+	let response = await fetch(host + path, {
 		method: 'POST',
-		headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+		headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 		body: body
 	});
-	
-	if(!response.ok){
+
+	if (!response.ok) {
 		throw new Error('Ошибка сервера')
 	}
 
@@ -227,5 +227,12 @@ export function declension(oneNominative, severalGenitive, severalNominative, nu
 						? severalGenitive
 						: severalNominative//number === 2
 			: severalGenitive
-	;
+		;
 };
+
+
+export function utm() {
+	const searchParams = new URLSearchParams(window.location.search);
+	let c = searchParams.has('utm_campaign')
+	c && sessionStorage.setItem('campaign', searchParams.get("utm_campaign"))
+}

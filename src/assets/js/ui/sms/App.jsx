@@ -72,6 +72,9 @@ const Columns = () => {
 
 		}
 
+		if (sessionStorage.getItem("campaign")) obj.campaign = sessionStorage.getItem("campaign")
+
+
 
 		if (!await google_check()) return
 
