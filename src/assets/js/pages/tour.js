@@ -304,13 +304,13 @@ export const aside_form = {
 		// ближайший тур с кол-вом мест > 0
 
 		let closest_tour = this.schedule.filter(el => new Date(el.start).getTime() - new Date().getTime() > 0 && +el.seats)
-		
+
 		if (!closest_tour.length) { return console.log('Блишайший тур не обнаружен') }
 		closest_tour = closest_tour[0]
 
 		// делаем его активным в списке
 		//qs(`#aside_order li[data-id='${closest_tour.MIGX_id}']`)?.classList.add('active')
-		console.log(0)
+		//console.log(0)
 
 		// выпадающий список с датами
 
@@ -420,6 +420,7 @@ export const aside_form = {
 
 			let tour = this.schedule.find(el => el.MIGX_id == +qs('.head[data-id]').dataset.id)
 
+
 			const dogFound = new CustomEvent("update_for_dialog", {
 				detail: {
 					tour: tour,
@@ -431,6 +432,31 @@ export const aside_form = {
 
 			document.dispatchEvent(dogFound);
 		})
+
+		// content, section dates
+		// клик по зеленым плашкам с датой тура
+
+		qsa('section#dates [data-id]').forEach(el => {
+
+			el.listen("click", e => {
+
+				let tour = this.schedule.find(el => el.MIGX_id == +e.target.dataset.id)
+
+
+				const dogFound = new CustomEvent("update_for_dialog", {
+					detail: {
+						tour: tour,
+						count: 1,
+						cur: this.cfg.currency == "RUB" ? "₽" : this.cfg.currency,
+						sms: true
+					},
+				});
+
+				document.dispatchEvent(dogFound);
+			})
+
+		})
+
 	}
 
 }

@@ -1741,6 +1741,79 @@ body.tour-page
 						font-size: 1rem
 						color: #4E4E4E
 						font-weight: 500
+				span.month
+					font-size: 1.5rem
+					font-weight: 600
+					text-transform: uppercase
+					margin-bottom: 8px
+					display: block
+				div.body
+					display: flex
+					flex-wrap: wrap
+					gap: 12px
+					&:not(:last-child)
+						margin-bottom: 1rem
+					.item
+						width: 138px
+						height: 75px
+						border: 1px solid #32A95E
+						border-radius: 6px
+						display: grid
+						grid-template-columns: 1fr 14px
+						padding: 1rem
+						background-color: #EAFAF2
+						cursor: pointer
+						row-gap: 9px
+						padding-top: 6px
+						>*
+							pointer-events: none
+						&:has(.label)
+							row-gap: 2px
+							.label
+								margin-bottom: 3px
+						&:hover
+							background-color: darken(#EAFAF2, 5%)
+						&.disabled
+							background-color: #F8F8F8
+							border-color: #D7D7D7
+							cursor: not-allowed
+							.date
+								color: #999999
+						.label
+							grid-row: 1
+							grid-column: 1/3
+							background-color: rgba(50, 169, 94, 0.3)
+							font-size: 12px
+							margin-top: -7px
+							margin-left: -1rem
+							margin-right: -1rem
+							padding: 3px
+							padding-left: 1rem
+							margin-bottom: -6px
+							color: $green
+							border-top-left-radius: 6px
+							border-top-right-radius: 6px
+						.date
+							grid-row: 2
+							grid-column: 1/3
+							font-size: 1rem
+							font-weight: 500
+							color: $green
+							//margin-bottom: 9px
+						.seats
+							grid-column: 1
+							grid-row: 3
+							font-size: 14px
+							color: #828483
+
+						.cart
+							grid-row: 3
+							grid-column: 2
+							width: 14px
+							height: 14px
+							display: block
+							background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNCIgaGVpZ2h0PSIxNCIgZmlsbD0ibm9uZSIgdmlld0JveD0iMCAwIDE0IDE0Ij48cGF0aCBmaWxsPSIjMzJBOTVFIiBkPSJNNS40ODkuNDNhLjcyOS43MjkgMCAwIDAtLjI5NS4yMSAzOC45NCAzOC45NCAwIDAgMC0uNzA2IDEuNTA4bC0uNDYzIDEuMDA0Yy0uMjE4LjQ2Ny0uNDQ0Ljk2MS0uNTAzIDEuMDk3YTQuMjk1IDQuMjk1IDAgMCAxLS4xNDIuMjk3Yy0uMDg0LjExNy0uMDYxLjEyLjY5LjExNGwuNzMtLjAwOS4xNjMtLjM1NWMuMTQyLS4zMDYuMi0uNDM2LjM3My0uODJhNC4yMDYgNC4yMDYgMCAwIDAgLjIwNi0uNDMzYy4wNjktLjE1NC4yMTktLjQ4NC4zMzgtLjczOC4zOTYtLjg1My40MzctLjk2LjQzNy0xLjE1IDAtLjItLjA0LS4zMzMtLjE1LS40ODUtLjEzLS4xNzktLjIzNC0uMjQtLjQyNy0uMjUzYS44NjMuODYzIDAgMCAwLS4yNTEuMDEyWk04LjEuNDNjLS4wOTguMDMtLjIzNi4xNi0uMzQyLjMyLS4wNjQuMDkzLS4wNzcuMTUtLjA5LjMyOC0uMDE0LjI2LS4wMTcuMjUuNDM4IDEuMjM3LjM1NS43NjMuNDMuOTI0LjYxNSAxLjMzMi4wNy4xNi4yMDUuNDU0LjI5Ny42NDlsLjE2My4zNTUuNzI5LjAxYy43NTIuMDA1Ljc3Ny4wMDIuNjktLjExNWEzLjIyOSAzLjIyOSAwIDAgMS0uMTI0LS4yNSA1NS4yMiA1NS4yMiAwIDAgMC0uNTg0LTEuMjgzbC0uMzk5LS44NjVjLS4xOS0uNDI0LS4yNTEtLjU1Ny0uNDM3LS45NTJDOC44MDcuNjU4IDguNzk0LjY0IDguNjUuNTI2Yy0uMDk1LS4wNzgtLjE1My0uMS0uMjkzLS4xMDlhMS4wNCAxLjA0IDAgMCAwLS4yNTYuMDEyWk0uNDQgNS40ODJhLjc0Ljc0IDAgMCAwLS40MjcuNTYzLjgyMi44MjIgMCAwIDAgLjE1OC42NDNjLjE0Ny4yLjMyOC4yNjUuNzUuMjY1aC4zMTJsLjAzOC4xNjFjLjA1My4yMzUuMzMgMS41MDIuNDQ3IDIuMDUuMTE0LjUzNy4yMzkgMS4xMTIuMzU2IDEuNjM3LjEzNy42MjcuMzI4IDEuNTA4LjQ3IDIuMTg4LjExNC41MjkuMTU3LjY1NS4yODIuNzk3LjIwMy4yMy0uMTI1LjIxNCA0LjE3Mi4yMTQgMy44MjEgMCAzLjg1NC0uMDAzIDMuOTY5LS4wNjUuMjMzLS4xMjcuMzM1LS4zMS40My0uNzY0LjAyNy0uMTMuMDctLjM0Mi4xLS40Ny4wMjktLjEyNi4wODUtLjM5Mi4xMjgtLjU4Ni4wNzktLjM3Ny4yMzQtMS4wODUuMzA3LTEuNDIybC4yMDEtLjk0M2MuMDg2LS40MDguMTgzLS44NDYuMjEtLjk3My4xMDItLjQ1MS4yNTgtMS4xNjIuMzI0LTEuNDg0bC4wNjYtLjMyNC4zNTUtLjAxOWMuNDQ4LS4wMjEuNTgyLS4wNy43MjUtLjI2NWEuODMxLjgzMSAwIDAgMCAuMTU3LS42My43NTkuNzU5IDAgMCAwLS40My0uNTczYy0uMTQ0LS4wNjEtMTIuOTU1LS4wNjEtMTMuMSAwWm00LjA4OCAxLjQ4NGEuNjcuNjcgMCAwIDEgLjQ0Mi40MmwuMDU5LjE0LjAwMiAyLjE5M3YyLjE5NWwtLjA1OC4xMzZhLjgzLjgzIDAgMCAxLS4zMTUuMzhjLS4xNDguMDk2LS40MTQuMDk2LS41OCAwYS43ODMuNzgzIDAgMCAxLS4zNS0uNTA0Yy0uMDM4LS4yMTYtLjAzOC00LjI0NiAwLTQuNDI5LjA1LS4yNDcuMjU3LS40NzYuNDgzLS41MzcuMTU1LS4wNDQuMTctLjA0NC4zMTcuMDA2Wm0yLjY4LjAyMWMuMTkxLjA2LjM2Ny4yNzUuNDI4LjUyNi4wMi4wNzcuMDI4Ljc5MS4wMjUgMi4yMjUgMCAxLjk0NC0uMDA1IDIuMTI2LS4wNDYgMi4yNDctLjA5OS4zMDMtLjMxNS40OTQtLjU4Ny41MjItLjI4Ny4wMzQtLjU5Mi0uMjItLjY3My0uNTYtLjA1Ni0uMjI4LS4wNTYtNC4yMjcgMC00LjQ1Ni4wNjktLjI3OC4yMjQtLjQ0OC40ODMtLjUyNS4xMjQtLjAzNy4xOTMtLjAzNC4zNy4wMjFabTIuNTQ0LS4wM2EuNzIxLjcyMSAwIDAgMSAuNS41NGMuMDM5LjE4OS4wMzkgNC4yNiAwIDQuNDQ4YS44NDYuODQ2IDAgMCAxLS4zNDcuNDg1Yy0uMTY4LjA5My0uNDM1LjA5Ni0uNTguMDAzYS44OTQuODk0IDAgMCAxLS4zMjItLjM5M2wtLjA1Ni0uMTI2VjcuNTI1bC4wNi0uMTM5Yy4wOTctLjIyNi4yNDItLjM1OC40NDgtLjQyLjE2NS0uMDUuMTQyLS4wNS4yOTctLjAxWiIvPjwvc3ZnPg==)
+
 				ul.body
 					>li
 						display: flex
