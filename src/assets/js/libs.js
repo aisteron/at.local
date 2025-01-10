@@ -235,4 +235,7 @@ export function utm() {
 	const searchParams = new URLSearchParams(window.location.search);
 	let c = searchParams.has('utm_campaign')
 	c && sessionStorage.setItem('campaign', searchParams.get("utm_campaign"))
+
+	let s = searchParams.has('utm_source')
+	s && sessionStorage.setItem('source', searchParams.get("utm_source"))
 }
