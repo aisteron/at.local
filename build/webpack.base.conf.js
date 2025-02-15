@@ -27,8 +27,8 @@ module.exports = {
 	},
 	entry: {
 		app: PATHS.src,
-		// module: `${PATHS.src}/your-module.js`,
 		sms: `${PATHS.src}/sms.jsx`,
+		orders: `${PATHS.src}/orders.jsx`,
 	},
 	output: {
 		filename: `${PATHS.assets}js/[name].[hash].js`,

@@ -51,10 +51,14 @@ const Columns = () => {
 
 	const onSubmit = async (data) => {
 
+		let is_dev = process.env.NODE_ENV == 'development'
 		let tour_date = new Date(date.start).toLocaleDateString() + " - " + new Date(date.finish).toLocaleDateString()
+
 
 		let obj = {
 			name: data.name,
+			surname: data.surname,
+			thirdname: data.thirdname,
 			email: data.email,
 			phone: num,
 			adult,
@@ -76,8 +80,9 @@ const Columns = () => {
 		if (sessionStorage.getItem("source")) obj.source = sessionStorage.getItem("source")
 
 
-
-		if (!await google_check()) return
+		if (!is_dev) {
+			if (!await google_check()) return console.log('google check failed')
+		}
 
 		try {
 			var res = await Fetch('order_receive_sms', obj, '/api')
@@ -149,11 +154,27 @@ const ColumnsContent = ({ register, verified, errors, isSubmitting }) => {
 
 			<div className="col col-2">
 
-				<input type="text" placeholder="Ваше имя" name="name" {...register("name", { required: true })} />
-				{errors?.name ? <span className="name_error">Введите имя</span> : ""}
+				<div className="fio">
 
-				<input type="email" placeholder="Ваша электронная почта" name="email" {...register("email", { required: true })} />
-				{errors?.email ? <span className="email_error">Не может быть пустым</span> : ""}
+					<div className="surname">
+						<input type="text" placeholder="Фамилия" {...register("surname", { required: true })} />
+						{errors?.surname ? <span className="name_error">Введите фамилию</span> : ""}
+					</div>
+
+					<div className="name">
+						<input type="text" placeholder="Имя" {...register("name", { required: true })} />
+						{errors?.name ? <span className="name_error">Введите имя</span> : ""}
+					</div>
+					<div className="thirdname">
+						<input type="text" placeholder="Отчество" {...register("thirdname")} />
+						{errors?.thirdname ? <span className="name_error">Введите отчество</span> : ""}
+					</div>
+
+				</div>
+
+
+
+
 				<label>
 					<span className="label">Нужен звонок менеджера</span>
 					<div className="wrap">
@@ -167,6 +188,8 @@ const ColumnsContent = ({ register, verified, errors, isSubmitting }) => {
 
 			</div>
 			<div className="col col-3">
+				<input type="email" placeholder="Ваша электронная почта" name="email" {...register("email", { required: true })} />
+				{errors?.email ? <span className="email_error">Не может быть пустым</span> : ""}
 				<textarea placeholder="Ваш вопрос или комментарий для менеджера тура" {...register("comment")}></textarea>
 				<div className="policy">
 					<input type="checkbox" defaultChecked="true" />

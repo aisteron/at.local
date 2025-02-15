@@ -3,6 +3,9 @@ import { Fetch, declension, qs, qsa } from "../libs"
 
 export const Dialog = {
 	async init() {
+
+		if (!qs('#tourOrderPopup')) return
+
 		this.close()
 		this.select_date(),
 			this.pick_count()
