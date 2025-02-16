@@ -72,6 +72,8 @@ const Columns = () => {
 			seats: date.seats,
 			price: date.price + ' ' + date.currency,
 
+			clientid: get_cookies()['_ym_uid'],
+			tour_start: date.start,
 			action: "order_receive_sms"
 
 		}
@@ -222,4 +224,8 @@ async function google_check() {
 				});
 		});
 	})
+}
+
+function get_cookies() {
+	return document.cookie.split(';').reduce((ac, str) => Object.assign(ac, { [str.split('=')[0].trim()]: str.split('=')[1] }), {});
 }

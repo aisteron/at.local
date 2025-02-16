@@ -9,6 +9,7 @@ export const App = () => {
 	useEffect(() => {
 		async function fetchData() {
 			let res = await Fetch("get_orders", {}, "/assets/php/orders/")
+			res.sort(function (a, b) { return new Date(b.createdat) - new Date(a.createdat); });
 			setOrders(res)
 			load_toast()
 		}
