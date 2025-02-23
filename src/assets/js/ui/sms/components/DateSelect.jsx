@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { icon_chevron } from "../icons.jsx";
 import { declension, Fetch, qs } from "../../../libs.js";
 import { useDispatch, useSelector } from "react-redux";
-import { set_date } from "../store.js";
+import { set_currency, set_date } from "../store.js";
 
 export const DateSelect = () => {
 	const [loading, setLoading] = useState(true)
@@ -11,7 +11,7 @@ export const DateSelect = () => {
 	const [open, setOpen] = useState(false)
 	const date = useSelector(state => state.date)
 
-	
+
 	const dispatch = useDispatch()
 
 	// fetch
@@ -30,6 +30,7 @@ export const DateSelect = () => {
 
 				setList(r)
 				!date && dispatch(set_date(r[0]))
+				dispatch(set_currency(r[0].currency))
 
 			})
 	}, [])
@@ -83,7 +84,7 @@ const DateItem = ({ el, open, setOpen }) => {
 			</div>
 			<div className="dsc">
 				<span className="seats">{seats} {declension("место", "мест", "мест", seats)}</span>
-				<span className="price">{price.replace(/\B(?=(\d{3})+(?!\d))/g, " ")} {cur}</span>
+				<span className="price">{price.replace(/\B(?=(\d{3})+(?!\d))/g, " ")} {cur} за место</span>
 			</div>
 
 		</div>

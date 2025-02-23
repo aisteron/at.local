@@ -10,6 +10,9 @@ export const TouristCounter = () => {
 
 	const childCount = useSelector(state => state.child)
 	const adultCount = useSelector(state => state.adult)
+	const total = useSelector(state => state.total)
+
+	const currency = useSelector(state => state.currency)
 	const dispatch = useDispatch()
 
 	const count = (arr) => {
@@ -73,12 +76,17 @@ export const TouristCounter = () => {
 			</div>
 
 			<div className="row c">
-				<span className="title">Детей</span>
+				<span className="title">Детей до 14 лет</span>
 				<div className="wrap">
 					<button className="down" type="button" onClick={_ => count(["child", "minus"])}>{icon_minus}</button>
 					<input type="number" value={childCount} onChange={e => count(["child", { value: +e.target.value }])} />
 					<button className="up" type="button" onClick={_ => count(["child", "plus"])}>{icon_plus}</button>
 				</div>
+			</div>
+
+			<div className="total">
+				<span>Итого:</span>
+				<span className="t"> {total.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ')} {currency}</span>
 			</div>
 		</div>
 	)

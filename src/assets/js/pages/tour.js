@@ -301,12 +301,6 @@ export const aside_form = {
 		await this.aside_form_fetch_schedule()
 		await this.aside_form_fetch_tour_config()
 
-		// ближайший тур с кол-вом мест > 0
-
-		let closest_tour = this.schedule.filter(el => new Date(el.start).getTime() - new Date().getTime() > 0 && +el.seats)
-
-		if (!closest_tour.length) { return console.log('Блишайший тур не обнаружен') }
-		closest_tour = closest_tour[0]
 
 		// делаем его активным в списке
 		//qs(`#aside_order li[data-id='${closest_tour.MIGX_id}']`)?.classList.add('active')
@@ -323,6 +317,7 @@ export const aside_form = {
 				if (e.target.classList.contains('disabled')) return
 				let dateid = +e.target.dataset.id
 				let selected = this.schedule.find(el => el.MIGX_id == dateid)
+
 
 				let cur = this.cfg.currency == "RUB" ? "₽" : this.cfg.currency
 				if (qs('#aside_order .old_price'))
@@ -360,6 +355,11 @@ export const aside_form = {
 
 				e.target.closest('.select').classList.remove('open')
 
+				// установить max для input участников
+				let inp = qs('#aside_order .arrows input');
+				inp.max = selected.seats
+				if (+inp.value > selected.seats) inp.value = selected.seats
+
 
 			})
 		});
@@ -371,6 +371,8 @@ export const aside_form = {
 			el.listen("click", e => {
 				let act = e.target.classList.contains('up') ? 'up' : 'down'
 				if (+inp.value <= +inp.min && act == 'down') return
+				if (+inp.value >= +inp.max && act == 'up' && inp.hasAttribute('max')) return
+
 				inp.value = act == 'up' ? +inp.value + 1 : +inp.value - 1
 			})
 		})
