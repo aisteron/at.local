@@ -56,7 +56,7 @@ export const TouristCounter = () => {
 		function handler(event) {
 			if (!event.detail.sms) return // если в форме aside нет класса use_sms
 			let obj = { ...event.detail.tour, currency: event.detail.cur }
-			dispatch(set_tourist_count({ type: "adult", count: event.detail.count, obj }))
+			dispatch(set_tourist_count({ type: "adult", just_open: true, count: event.detail.count, obj }))
 		}
 
 		document.addEventListener("update_for_dialog", handler)

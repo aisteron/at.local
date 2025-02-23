@@ -1,10 +1,10 @@
 import { createSlice, configureStore } from '@reduxjs/toolkit'
-const is_dev = process.env.NODE_ENV == 'development'
+//const is_dev = process.env.NODE_ENV == 'development'
 
 const slice = createSlice({
 	name: 'sms',
 	initialState: {
-		show: is_dev,
+		show: false,
 		smsid: null,
 		code: null,
 		verified: false,
@@ -34,19 +34,25 @@ const slice = createSlice({
 		},
 
 		set_tourist_count: (state, action) => {
-			const { type, count, obj } = action.payload
+			const { type, count, obj, just_open } = action.payload
 
+
+
+			state.show = true
 
 			let rest = type == 'adult' ? state.child : state.adult
 
-
-			if (count + rest > +state.date.seats) {
-				new Snackbar(`Свободных мест - ${state.date.seats}`)
-				return;
+			if (!just_open) {
+				// при открытии попапа не нужно пересчитывать цену
+				if (count + rest > +state.date.seats) {
+					new Snackbar(`Свободных мест - ${state.date.seats}`)
+					return;
+				}
 			}
 
+
 			state[type] = count
-			state.show = true
+
 
 			obj && (state.date = obj)
 			state.total = recount(state)
