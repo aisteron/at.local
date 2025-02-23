@@ -1,6 +1,6 @@
 import { qs, qsa, sw } from "../libs"
 
-export function swipers(){
+export function swipers() {
 
 	// страница article (запись в блоге)
 	article_swiper()
@@ -23,41 +23,41 @@ export function swipers(){
 
 }
 
-async function article_swiper(){
-	if(!qs('.article-swiper')) return
+async function article_swiper() {
+	if (!qs('.article-swiper')) return
 	await sw.load()
 
 	qsa('.article-swiper').forEach(el => {
-		
+
 		let options_thumb = {
-      spaceBetween: 10,
-      slidesPerView: 4,
-      freeMode: true,
-      watchSlidesProgress: true,
-    }
+			spaceBetween: 10,
+			slidesPerView: 4,
+			freeMode: true,
+			watchSlidesProgress: true,
+		}
 
 		let swiper_thumb = new Swiper(qs('.swiper.thumbs', el), options_thumb)
 
 		let options_main = {
-      spaceBetween: 10,
-      navigation: {
-        nextEl: qs('svg.next', el),
-        prevEl: qs('svg.prev', el),
-      },
-      thumbs: {
-        swiper: swiper_thumb,
-      },
+			spaceBetween: 10,
+			navigation: {
+				nextEl: qs('svg.next', el),
+				prevEl: qs('svg.prev', el),
+			},
+			thumbs: {
+				swiper: swiper_thumb,
+			},
 		}
-		
+
 		new Swiper(qs('.swiper.main', el), options_main)
 
 
 	})
 }
 
-async function home_page_hero_swiper(){
+async function home_page_hero_swiper() {
 	const home_swiper = qs('.home.swiper')
-	if(!home_swiper) return
+	if (!home_swiper) return
 	await sw.load()
 
 	let options = {
@@ -66,24 +66,24 @@ async function home_page_hero_swiper(){
 		},
 	}
 	new Swiper(home_swiper, options)
-	
+
 	// data-src → src
 	qsa('.home.swiper [data-srcset]').forEach(el => el.srcset = el.dataset.srcset)
-	qsa('.home.swiper [data-src]').forEach(el => {el.src = el.dataset.src; el.classList.add('h250')})
+	qsa('.home.swiper [data-src]').forEach(el => { el.src = el.dataset.src; window.innerWidth <= 480 && el.classList.add('h250') })
 }
 
 async function home_page_tours_swiper() {
 	const tours_swiper = qs('.swiper-tours .swiper')
-	if(!tours_swiper) return
+	if (!tours_swiper) return
 
 	await sw.load()
 
 	let options = {
-		
+
 		navigation: {
 			nextEl: qs(".swiper-tours .next"),
 		},
-		breakpoints:{
+		breakpoints: {
 
 			0: {
 				slidesPerView: 1,
@@ -102,9 +102,9 @@ async function home_page_tours_swiper() {
 	new Swiper(tours_swiper, options)
 }
 
-async function tour_page_expert(){
+async function tour_page_expert() {
 	const swiper = qs('.tour-page .swiper.expert')
-	if(!swiper) return
+	if (!swiper) return
 
 	await sw.load()
 
@@ -115,14 +115,14 @@ async function tour_page_expert(){
 		},
 	}
 
-	new Swiper(swiper,options)
+	new Swiper(swiper, options)
 }
 
 
-async function tour_page_hotels(){
-	if(!qs('.hotels-swiper')) return
+async function tour_page_hotels() {
+	if (!qs('.hotels-swiper')) return
 	await sw.load()
-	
+
 	qsa('.hotels-swiper .swiper').forEach(el => {
 
 		const opts = {
@@ -130,19 +130,19 @@ async function tour_page_hotels(){
 			pagination: {
 				el: qs(".swiper-pagination", el.parentNode),
 			},
-			}
+		}
 
-		new Swiper(el,opts)	
+		new Swiper(el, opts)
 
 	})
 
 }
 
-async function tour_page_cnt_gallery(){
+async function tour_page_cnt_gallery() {
 	const cnt_swiper = qs('.cnt-swiper')
-	if(!cnt_swiper) return
+	if (!cnt_swiper) return
 	await sw.load()
-	
+
 	const opts = {
 		spaceBetween: 16,
 		pagination: {
@@ -150,17 +150,17 @@ async function tour_page_cnt_gallery(){
 		},
 	}
 
-new Swiper(qs('.swiper', cnt_swiper),opts)
+	new Swiper(qs('.swiper', cnt_swiper), opts)
 }
 
-async function about_page_swiper(){
+async function about_page_swiper() {
 	let swiper = qs('.about-page .hero.swiper')
-	if(!swiper) return
+	if (!swiper) return
 
 
 
 	await sw.load()
-	
+
 	const opts = {
 		spaceBetween: 16,
 		pagination: {
@@ -168,7 +168,7 @@ async function about_page_swiper(){
 		},
 	}
 
-	new Swiper(swiper,opts)
+	new Swiper(swiper, opts)
 
 	// custom lazy
 	qsa('.swiper-slide [data-srcset]').forEach(el => el.srcset = el.dataset.srcset)
