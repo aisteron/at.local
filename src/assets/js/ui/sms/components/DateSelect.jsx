@@ -35,7 +35,7 @@ export const DateSelect = () => {
 			})
 	}, [])
 
-
+	
 	return (
 		<div className="select">
 			{loading ? 'Загрузка..' : ''}

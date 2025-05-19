@@ -29,6 +29,7 @@ const slice = createSlice({
 		},
 
 		set_date: (state, action) => {
+			if(action.payload.seats < state.adult) state.adult = action.payload.seats
 			state.date = action.payload
 			state.total = action.payload.price
 		},
