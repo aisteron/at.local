@@ -4,7 +4,7 @@ import { createSlice, configureStore } from '@reduxjs/toolkit'
 const slice = createSlice({
 	name: 'sms',
 	initialState: {
-		show: true,
+		show: false,
 		smsid: null,
 		code: null,
 		verified: false,
