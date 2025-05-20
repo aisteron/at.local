@@ -4,7 +4,7 @@ import { createSlice, configureStore } from '@reduxjs/toolkit'
 const slice = createSlice({
 	name: 'sms',
 	initialState: {
-		show: false,
+		show: true,
 		smsid: null,
 		code: null,
 		verified: false,
@@ -30,7 +30,7 @@ const slice = createSlice({
 
 		set_date: (state, action) => {
 			if(action.payload.seats < state.adult){
-				state.adult = action.payload.seats
+				state.adult = +action.payload.seats
 				state.child = 0
 			}
 			state.date = action.payload
@@ -40,11 +40,10 @@ const slice = createSlice({
 		set_tourist_count: (state, action) => {
 			const { type, count, obj, just_open } = action.payload
 
-
-
 			state.show = true
 
 			let rest = type == 'adult' ? state.child : state.adult
+			
 
 			if (!just_open) {
 				// при открытии попапа не нужно пересчитывать цену
