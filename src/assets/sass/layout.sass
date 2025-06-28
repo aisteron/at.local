@@ -2028,18 +2028,6 @@ body.tour-page
 					color: $green
 					font-size: 1.5rem
 					font-weight: 600
-				a
-					display: flex
-					align-items: center
-					gap: 12px
-					color: #4E4E4E
-					text-decoration: none
-					&:hover
-						text-decoration: underline
-						color: $green
-						svg
-							path
-								fill: $green
 
 			ul
 				box-shadow: 0 1px 4px 0 rgba(33, 33, 38, 0.16)
@@ -2049,7 +2037,6 @@ body.tour-page
 				flex-direction: column
 				gap: 2rem
 				padding: 38px 30px
-
 				li
 					display: flex
 					justify-content: space-between
@@ -2064,6 +2051,11 @@ body.tour-page
 						width: 69px
 						max-width: 69px
 						align-self: baseline
+						span.from
+							font-size: 14px
+							display: inline-block
+							margin-top: -0.5rem
+							color: #666
 						img
 							min-width: 69px
 							border-radius: 100%
@@ -2074,6 +2066,24 @@ body.tour-page
 						flex-grow: 1
 						>:first-child
 							margin-top: 0
+			a.all
+				display: flex
+				align-items: center
+				color: #fff
+				background-color: $green
+				padding: 1rem
+				border-radius: 4px
+				margin-top: 1rem
+				width: fit-content
+				gap: 1rem
+				text-decoration: none
+				&:hover
+					background-color: darken($green, 5%)
+				svg
+					path
+						fill: #fff
+
+
 		section#faq
 			scroll-margin-top: 45px
 			@media(max-width: 480px)
