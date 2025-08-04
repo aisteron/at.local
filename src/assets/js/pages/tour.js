@@ -317,11 +317,13 @@ export const aside_form = {
 				if (e.target.classList.contains('disabled')) return
 				let dateid = +e.target.dataset.id
 				let selected = this.schedule.find(el => el.MIGX_id == dateid)
-
+				if(!selected)	return new Snackbar("invalid dateid")
 
 				let cur = this.cfg.currency == "RUB" ? "₽" : this.cfg.currency
-				if (qs('#aside_order .old_price'))
+				if (qs('#aside_order .old_price')){
 					qs('#aside_order .old_price').innerHTML = selected.old_price.replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+				}
+
 				qs('#aside_order .price').innerHTML = selected.price.replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " " + cur
 
 				if (selected.old_price) {
@@ -333,7 +335,7 @@ export const aside_form = {
 				// progress
 
 				let total = this.cfg.group_size
-				let seats = +selected.seats
+				let seats = +selected.seats.replace(/\D+/g, '');
 				let p = Math.ceil(100 - (seats / total) * 100)
 
 				qs('.grad .filled').style.setProperty('--prog', `${p}%`)
